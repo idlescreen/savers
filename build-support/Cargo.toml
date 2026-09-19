@@ -12,4 +12,3 @@ repository.workspace = true
 path = "src/lib.rs"
 
 [dependencies]
-embed-resource = "2"

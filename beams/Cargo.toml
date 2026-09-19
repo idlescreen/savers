@@ -48,9 +48,6 @@ assets = [
 [package.metadata.generate-rpm.requires]
 idle-daemon = "*"
 
-[dev-dependencies]
-proptest.workspace = true
-
 [package.metadata.generate-rpm.provides]
 
 [package.metadata.generate-rpm.obsoletes]

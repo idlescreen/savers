@@ -28,7 +28,43 @@ pub fn embed_brand_icon(icon_file_path: &str, product_name: &str) {
         COMPANY_NAME,
         LEGAL_COPYRIGHT,
     );
-    embed_resource::compile(&resource_script_path, embed_resource::NONE);
+    compile_rc(&resource_script_path);
+}
+
+/// Compile the generated `.rc` and link the result — the two things
+/// `embed-resource` did, invoked directly. MSVC targets use `rc.exe`;
+/// everything else uses `windres` (target-prefixed when cross-compiling).
+fn compile_rc(rc_path: &str) {
+    use std::process::Command;
+
+    let target_env = std::env::var("CARGO_CFG_TARGET_ENV").unwrap_or_default();
+    let out_dir = std::env::var("OUT_DIR").unwrap_or_else(|_| ".".into());
+
+    if target_env == "msvc" {
+        let res = format!("{out_dir}/windows_resource.res");
+        let status = Command::new("rc")
+            .args(["/fo", &res, rc_path])
+            .status()
+            .expect("failed to run rc.exe — install the Windows SDK");
+        assert!(status.success(), "rc.exe failed on {rc_path}");
+        println!("cargo:rustc-link-arg={res}");
+    } else {
+        let obj = format!("{out_dir}/windows_resource.o");
+        let target = std::env::var("TARGET").unwrap_or_default();
+        let windres = format!("{target}-windres");
+        let status = Command::new(&windres)
+            .args(["-i", rc_path, "-o", &obj, "--output-format=coff"])
+            .status()
+            .or_else(|_| {
+                Command::new("windres")
+                    .args(["-i", rc_path, "-o", &obj, "--output-format=coff"])
+                    .status()
+            })
+            .expect("failed to run windres — install binutils-mingw-w64");
+        assert!(status.success(), "windres failed on {rc_path}");
+        println!("cargo:rustc-link-arg={obj}");
+    }
+    println!("cargo:rustc-link-search=native={out_dir}");
 }
 
 /// Generate a `windows_resource.rc` file that declares the ICO and a
