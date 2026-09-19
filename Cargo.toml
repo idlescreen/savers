@@ -19,7 +19,7 @@ members = [
 exclude = ["runtime"]
 
 [workspace.package]
-version = "2.4.1"
+version = "2.4.2"
 edition = "2024"
 authors = ["idlescreen developers"]
 license = "Apache-2.0"
