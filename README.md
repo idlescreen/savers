@@ -1,6 +1,6 @@
 # savers
 
-[![studio2201 Suite](https://img.shields.io/badge/studio2201-5%2F5%20Verified-2f6f5e?logo=shield)](https://studio2201.com/agents#badges)
+[![studio2201 gate](https://github.com/idlescreen/savers/actions/workflows/studio2201.yml/badge.svg)](https://github.com/idlescreen/savers/actions/workflows/studio2201.yml)
 
 All eleven official IdleScreen screensaver plugins in one workspace, plus
 the `idle-savers` bundle (`meta/`). Part of
