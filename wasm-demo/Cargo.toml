@@ -11,6 +11,10 @@ publish = false
 [lib]
 crate-type = ["cdylib"]
 
+[package.metadata.cargo-machete]
+# `beams` is used via its lib name `screensaver_beams` — machete can't see it.
+ignored = ["beams"]
+
 [dependencies]
 beams = { path = "../beams" }
 idle-api.workspace = true

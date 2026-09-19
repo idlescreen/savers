@@ -1,3 +1,10 @@
+idle-savers (3.3.3-1) unstable; urgency=medium
+
+  * Drop proptest/tempfile dev-deps for deterministic in-tree test
+    helpers; drop a stale runtime symlink from the checkout.
+
+ -- IdleScreen <jerydleuck@gmail.com>  Sun, 14 Sep 2026 10:00:00 +0000
+
 idle-savers (3.3.1-1) unstable; urgency=medium
 
   * Moved into the savers workspace as meta/ — the bundle now versions
