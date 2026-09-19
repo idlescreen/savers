@@ -1,7 +1,5 @@
 # savers
 
-[![secured by studio2201](https://img.shields.io/badge/secured%20by-studio2201-2f6f5e?logo=shield)](https://studio2201.com) [![snip](https://img.shields.io/github/actions/workflow/status/idlescreen/savers/snip.yml?label=snip&logo=shield)](https://github.com/idlescreen/savers/actions/workflows/snip.yml) [![vigil](https://img.shields.io/github/actions/workflow/status/idlescreen/savers/vigil.yml?label=vigil&logo=shield)](https://github.com/idlescreen/savers/actions/workflows/vigil.yml) [![aegis](https://img.shields.io/github/actions/workflow/status/idlescreen/savers/aegis.yml?label=aegis&logo=shield)](https://github.com/idlescreen/savers/actions/workflows/aegis.yml) [![proven](https://img.shields.io/github/actions/workflow/status/idlescreen/savers/proven.yml?label=proven&logo=shield)](https://github.com/idlescreen/savers/actions/workflows/proven.yml) [![boneyard](https://img.shields.io/github/actions/workflow/status/idlescreen/savers/boneyard.yml?label=boneyard&logo=shield)](https://github.com/idlescreen/savers/actions/workflows/boneyard.yml)
-
 All eleven official IdleScreen screensaver plugins in one workspace, plus
 the `idle-savers` bundle (`meta/`). Part of
 [IdleScreen](https://idlescreen.github.io) — modular Wayland screensavers
