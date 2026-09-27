@@ -32,5 +32,11 @@ idle-api = { version = "3.3.0", path = "runtime/idle-api" }
 build-support = { path = "build-support" }
 
 [profile.release]
-opt-level = "z"
+# Speed, not size. These crates are the render hot path: every saver runs
+# per-pixel loops for hours on battery, and `opt-level = "z"` disables loop
+# vectorization and most inlining in exactly that code. The other six repos
+# declare no release profile at all, so cargo's default (3) already applied
+# there — the code that burns the most CPU was the only code compiled for the
+# smallest binary.
+opt-level = 3
 lto = true
