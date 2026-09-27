@@ -8,10 +8,6 @@ pub fn particle_budget(eff: &Cosmos) -> usize {
     (580.0 * eff.quality_scale * bat).max(floor) as usize
 }
 
-pub fn can_spawn(eff: &Cosmos, count: usize) -> bool {
-    eff.particles.len().saturating_add(count) <= particle_budget(eff)
-}
-
 /// Drop lowest-energy particles when over budget.
 pub fn trim_particles(eff: &mut Cosmos) {
     let budget = particle_budget(eff);

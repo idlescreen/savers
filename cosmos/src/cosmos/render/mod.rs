@@ -13,12 +13,7 @@ mod particles;
 mod seeds;
 mod star_corona;
 
-pub use big_bang_shell::draw_big_bang_shell;
-pub use black_hole_disk::bh_radius_from_mass;
-pub use grav_wave::draw_grav_wave;
 pub use life::draw_life;
-pub use particles::draw_particles_and_trails;
-pub use seeds::draw_seeds;
 
 // Re-export surface kept intentionally small: callers use `render::draw_life` and
 // helper draw fns only where physics or tests need direct access. Internal

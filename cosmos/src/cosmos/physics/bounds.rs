@@ -37,11 +37,6 @@ pub fn clamp_particle(p: &mut Particle, bounds: SpaceBounds, restitution: f32) {
     bounce_axis(&mut p.y, &mut p.vy, bounds.min_y, bounds.max_y, restitution);
 }
 
-pub fn clamp_seed(s: &mut GravityCenter, bounds: SpaceBounds, restitution: f32) {
-    bounce_axis(&mut s.x, &mut s.vx, bounds.min_x, bounds.max_x, restitution);
-    bounce_axis(&mut s.y, &mut s.vy, bounds.min_y, bounds.max_y, restitution);
-}
-
 pub fn clamp_all_particles(eff: &mut Cosmos, cols: usize, rows: usize, restitution: f32) {
     let b = SpaceBounds::for_particles(eff, cols, rows);
     for p in &mut eff.particles {
@@ -49,11 +44,3 @@ pub fn clamp_all_particles(eff: &mut Cosmos, cols: usize, rows: usize, restituti
     }
 }
 
-pub fn clamp_all_seeds(eff: &mut Cosmos, cols: usize, rows: usize, restitution: f32) {
-    let b = SpaceBounds::for_particles(eff, cols, rows);
-    for s in &mut eff.seeds {
-        if s.active {
-            clamp_seed(s, b, restitution);
-        }
-    }
-}

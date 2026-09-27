@@ -4,7 +4,6 @@ pub mod bounds;
 pub mod collapse;
 pub mod drift;
 pub mod expansion;
-pub mod gravity;
 pub mod history;
 pub mod ignition;
 #[path = "physics/logo/build.rs"]
@@ -74,27 +73,6 @@ pub fn logo_to_screen_fast(
     (sx.round() as i32, sy.round() as i32)
 }
 
-pub fn to_screen(
-    ux: f32,
-    uy: f32,
-    universe_cx: f32,
-    universe_cy: f32,
-    zoom: f32,
-    cols: usize,
-    rows: usize,
-) -> (i32, i32) {
-    let (cx, cy) = if crate::runner::is_secondary_monitor() {
-        (cols as f32 / 2.0, rows as f32 / 2.0)
-    } else {
-        let primary = crate::runner::get_primary_monitor_bounds(cols, rows);
-        (
-            (primary.start_col + primary.width() / 2) as f32,
-            (primary.start_row + primary.height() / 2) as f32,
-        )
-    };
-    to_screen_fast(ux, uy, universe_cx, universe_cy, cx, cy, zoom)
-}
-
 pub fn to_screen_fast(
     ux: f32,
     uy: f32,
@@ -109,25 +87,3 @@ pub fn to_screen_fast(
     (sx.round() as i32, sy.round() as i32)
 }
 
-pub fn to_universe(
-    sx: f32,
-    sy: f32,
-    universe_cx: f32,
-    universe_cy: f32,
-    zoom: f32,
-    cols: usize,
-    rows: usize,
-) -> (f32, f32) {
-    let (cx, cy) = if crate::runner::is_secondary_monitor() {
-        (cols as f32 / 2.0, rows as f32 / 2.0)
-    } else {
-        let primary = crate::runner::get_primary_monitor_bounds(cols, rows);
-        (
-            (primary.start_col + primary.width() / 2) as f32,
-            (primary.start_row + primary.height() / 2) as f32,
-        )
-    };
-    let ux = universe_cx + (sx - cx) / zoom;
-    let uy = universe_cy + (sy - cy) / zoom;
-    (ux, uy)
-}
