@@ -119,6 +119,26 @@ impl Cosmos {
         }
     }
 
+    /// Pin the saver into the `Accretion` state with a fully-populated
+    /// particle field, for deterministic bench harness measurements.
+    ///
+    /// The public `Screensaver` trait only exposes `init/update/draw`;
+    /// warm-up cycles via `update()` reach Accretion eventually but with
+    /// jitter from the state-machine timer. `bench_exports::Cosmos`
+    /// (the `pub use` re-export in `lib.rs`) lets the bench target poke
+    /// private fields directly, but the convention here is one named
+    /// method instead of N `pub` field annotations.
+    ///
+    /// `sys_refresh_timer = -1000.0` matches the skip used by
+    /// `tests_perf::test_screensaver_perf_benchmark` — it suppresses
+    /// the slow system-info probe inside `update()`.
+    pub fn prepare_for_bench(&mut self, cols: usize, rows: usize) {
+        self.sys_refresh_timer = -1000.0;
+        self.refresh_screen_cache(cols, rows);
+        self.state = UniverseState::Accretion;
+        self.state_timer = 2.0;
+    }
+
     pub(crate) fn refresh_screen_cache(&mut self, cols: usize, rows: usize) {
         let (cx, cy) = if crate::runner::is_secondary_monitor() {
             (cols as f32 / 2.0, rows as f32 / 2.0)

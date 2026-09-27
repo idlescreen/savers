@@ -30,6 +30,11 @@ repository = "https://github.com/idlescreen/savers"
 # the repo root; locally bootstrap.sh symlinks it.
 idle-api = { version = "3.5.0", path = "runtime/idle-api" }
 build-support = { path = "build-support" }
+# Bench harness. `default-features = false` drops the `rayon` parallel
+# runner (we use the default single-thread runner — bench numbers stay
+# deterministic across CI runner hosts). `html_reports` keeps the option
+# open for maintainers who want a graph artifact.
+criterion = { version = "0.5", default-features = false, features = ["html_reports"] }
 
 [profile.release]
 # Speed, not size. These crates are the render hot path: every saver runs

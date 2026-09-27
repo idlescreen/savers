@@ -16,6 +16,17 @@ pub extern "C" fn idle_api_version() -> u32 {
 
 mod cosmos;
 
+// Re-exports for `cosmos/benches/tick.rs`. The `cosmos` module stays
+// private (the cdylib only exposes the `ScreensaverInstance` FFI), but
+// the bench needs to construct `Cosmos` directly + set internal state
+// (e.g. `state = UniverseState::Accretion` for a deterministic warm-up).
+// `pub use` is the standard escape hatch: keeps the internal module
+// boundary intact and surfaces only the bench-relevant items.
+#[doc(hidden)]
+pub mod bench_exports {
+    pub use crate::cosmos::{Cosmos, UniverseState};
+}
+
 #[cfg(test)]
 mod tests_perf;
 
