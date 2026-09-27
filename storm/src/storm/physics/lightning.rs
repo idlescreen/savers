@@ -1,5 +1,5 @@
 use crate::storm::Storm;
-use crate::storm::types::{AnimalState, AnimalType, BirdState, LogoCell, Splash};
+use crate::storm::types::{AnimalState, AnimalType, BirdState, Splash};
 
 impl Storm {
     pub fn update_lightning(&mut self, delta: f32, cols: usize, rows: usize) {

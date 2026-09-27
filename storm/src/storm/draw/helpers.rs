@@ -1,6 +1,5 @@
 use crate::runner::TerminalCell;
 use crate::storm::Storm;
-use crate::storm::types::Star;
 
 impl Storm {
     pub(crate) fn draw_stars(

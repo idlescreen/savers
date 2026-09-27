@@ -7,7 +7,7 @@ mod physics_star;
 mod sys;
 mod types;
 
-pub use types::{DustParticle, Spotlight, Star, default_spotlights, smoothstep};
+pub use types::{DustParticle, Spotlight, Star, smoothstep};
 
 use crate::runner::Screensaver;
 use crate::runner::{LcgRng, TerminalCell};

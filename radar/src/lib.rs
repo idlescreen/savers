@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: MIT
 
-#![allow(dead_code)]
-#![allow(unused_imports)]
 #![cfg_attr(
     all(not(debug_assertions), target_os = "windows"),
     windows_subsystem = "windows"

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-use super::particle_helpers::{spawn_explosion, spawn_failure_puff, spawn_massive_explosion};
+use super::particle_helpers::{spawn_explosion, spawn_failure_puff};
 use super::types::{EnemyShip, ExplosionParticle, GoodShip, RadarJet};
 use crate::runner::LcgRng;
 
