@@ -75,7 +75,6 @@ pub fn enter_big_bang(eff: &mut Cosmos, cols: usize, rows: usize) {
                 '.'
             },
             history: Vec::new(),
-            logo_letter: None,
         });
     }
 
@@ -104,7 +103,6 @@ pub fn enter_big_bang(eff: &mut Cosmos, cols: usize, rows: usize) {
             color,
             ch: '*',
             history: Vec::new(),
-            logo_letter: None,
         });
     }
 }

@@ -52,8 +52,6 @@ pub struct Cosmos {
     pub(crate) screen_cx: f32,
     pub(crate) screen_cy: f32,
     pub(crate) cached_accent: (u8, u8, u8),
-    /// Zoom at Expansion entry (eased outward during expansion).
-    pub(crate) zoom_phase_start: f32,
     pub(crate) inv_mass_scratch: Vec<f32>,
     pub(crate) particle_screen_scratch: Vec<(i32, i32)>,
 
@@ -110,7 +108,6 @@ impl Cosmos {
             screen_cx: 0.0,
             screen_cy: 0.0,
             cached_accent: (0, 191, 255),
-            zoom_phase_start: 0.58,
             inv_mass_scratch: Vec::new(),
             particle_screen_scratch: Vec::new(),
             intro_fade: 0.0,

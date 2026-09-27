@@ -52,7 +52,6 @@ pub fn enter_accretion(eff: &mut Cosmos, cols: usize) {
                 color: (255, 220, 130),
                 ch: '+',
                 history: Vec::new(),
-                logo_letter: None,
             });
         }
     }

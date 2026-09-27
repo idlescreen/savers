@@ -161,27 +161,6 @@ pub fn blend_explosion_flare_h_color(
     )
 }
 
-pub fn blend_explosion_flare_v_color(
-    current_fg: (u8, u8, u8),
-    fade: u8,
-    color: (u8, u8, u8),
-) -> (u8, u8, u8) {
-    let er = color.0;
-    let eg = color.1;
-    let eb = color.2;
-    (
-        current_fg
-            .0
-            .saturating_add((er as f32 * (fade as f32 / 255.0)) as u8),
-        current_fg
-            .1
-            .saturating_add((eg as f32 * (fade as f32 / 255.0)) as u8),
-        current_fg.2.saturating_add(
-            (eb as f32 * (fade as f32 / 255.0) + 20.0 * (fade as f32 / 255.0)) as u8,
-        ),
-    )
-}
-
 pub fn calculate_star_color_and_sparkle(
     time_elapsed: f32,
     star: &Star,

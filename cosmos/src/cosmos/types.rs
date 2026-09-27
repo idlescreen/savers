@@ -21,8 +21,6 @@ pub struct Particle {
     pub color: (u8, u8, u8),
     pub ch: char,
     pub history: Vec<(i32, i32)>,
-    /// When set, this shard belongs to a caption letter and reforms toward it.
-    pub logo_letter: Option<usize>,
 }
 
 /// A gravity center (star or black hole).
@@ -46,12 +44,6 @@ pub struct LogoPixel {
     pub vy: f32,
     pub origin_x: f32,
     pub origin_y: f32,
-    /// Fixed grid cell — stable readable position (OMARCHY / sysc-walls style).
-    pub screen_col: usize,
-    pub screen_row: usize,
-    pub is_subline: bool,
-    /// Index within the caption line (for staggered reform wave).
-    pub char_idx: usize,
     pub ch: char,
     pub exc: f32,
     pub active: bool,

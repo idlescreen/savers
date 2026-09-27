@@ -79,6 +79,10 @@ impl Ripple {
         }
     }
 
+    /// Inject a ripple at a grid coordinate. Public API for plugin callers
+    /// (and the unit tests); `cargo check --all-targets` counts tests as uses
+    /// so this is reachable, but `cargo check` alone flags it as a warning.
+    #[allow(dead_code)]
     pub fn impact(&mut self, x: f32, y: f32, strength: f32, cols: usize, rows: usize) {
         types::impact(
             &mut self.rings,
@@ -205,7 +209,6 @@ impl Screensaver for Ripple {
             delayed: &mut self.delayed,
             wind: &mut self.wind,
             weather: &mut self.weather,
-            weather_timer: &mut self.weather_timer,
             weather_intensity: &mut self.weather_intensity,
             rain_timer: &mut self.rain_timer,
         };

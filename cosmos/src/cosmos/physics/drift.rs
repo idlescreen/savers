@@ -104,7 +104,6 @@ pub fn handle_logo_character_drift(
                                 ),
                                 ch: lp.ch,
                                 history: Vec::new(),
-                                logo_letter: None,
                             });
                         }
                     }

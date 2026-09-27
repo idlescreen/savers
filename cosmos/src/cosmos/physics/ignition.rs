@@ -106,7 +106,6 @@ pub fn handle_nebular_stellar_ignition(eff: &mut Cosmos, dir: f32) {
             color: spark_color,
             ch: '+',
             history: Vec::new(),
-            logo_letter: None,
         });
     }
 }

@@ -57,7 +57,6 @@ pub fn rebuild_logo_pixels(eff: &mut Cosmos, cols: usize, rows: usize) {
 
     for (r_offset, line) in lines.iter().enumerate() {
         let gy = y + r_offset;
-        let is_subline = r_offset > 0;
         for (c_offset, ch) in line.chars().enumerate() {
             let gx = x + c_offset;
             let (ux, uy) = screen_to_logo_universe(
@@ -75,10 +74,6 @@ pub fn rebuild_logo_pixels(eff: &mut Cosmos, cols: usize, rows: usize) {
                 vy: 0.0,
                 origin_x: ux,
                 origin_y: uy,
-                screen_col: gx,
-                screen_row: gy,
-                is_subline,
-                char_idx: c_offset,
                 ch,
                 exc: 0.0,
                 active: false,

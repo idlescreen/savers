@@ -126,7 +126,6 @@ fn trim_particles_keeps_highest_energy() {
             color: (255, 255, 255),
             ch: '*',
             history: Vec::new(),
-            logo_letter: None,
         });
     }
     physics::particle_cap::trim_particles(&mut eff);
@@ -156,7 +155,6 @@ fn update_frame_time_enforces_particle_budget() {
             color: (255, 255, 255),
             ch: '*',
             history: Vec::new(),
-            logo_letter: None,
         });
     }
     assert!(
@@ -194,7 +192,6 @@ fn ignition_consumes_cluster_and_spawns_seed() {
             color: (200, 200, 200),
             ch: '*',
             history: Vec::new(),
-            logo_letter: None,
         });
     }
     for _ in 0..500 {

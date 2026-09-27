@@ -41,7 +41,6 @@ fn enter_collapse(eff: &mut Cosmos) {
             color: (255, 255, 255),
             ch: '░',
             history: Vec::new(),
-            logo_letter: None,
         });
     }
 }

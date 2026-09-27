@@ -5,7 +5,6 @@ pub struct Rocket {
     pub y: f32,
     pub vx: f32,
     pub vy: f32,
-    pub target_y: f32,
     pub color: (u8, u8, u8),
 }
 

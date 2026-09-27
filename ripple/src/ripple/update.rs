@@ -10,7 +10,6 @@ pub struct RippleState<'a> {
     pub delayed: &'a mut Vec<DelayedRing>,
     pub wind: &'a mut f32,
     pub weather: &'a mut Weather,
-    pub weather_timer: &'a mut f32,
     pub weather_intensity: &'a mut f32,
     pub rain_timer: &'a mut f32,
 }

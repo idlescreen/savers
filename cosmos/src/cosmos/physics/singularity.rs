@@ -97,7 +97,6 @@ pub fn update_singularity(eff: &mut Cosmos, delta: f32, cols: usize, rows: usize
             color: (160, 80, 255),
             ch: if eff.rng.next_bool(0.5) { '·' } else { '.' },
             history: Vec::new(),
-            logo_letter: None,
         });
     }
 }

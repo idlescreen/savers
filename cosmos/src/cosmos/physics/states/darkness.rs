@@ -32,7 +32,6 @@ pub fn enter_darkness(eff: &mut Cosmos, cols: usize, rows: usize) {
             color: (100, 100, 100),
             ch: '·',
             history: Vec::new(),
-            logo_letter: None,
         });
     }
 }

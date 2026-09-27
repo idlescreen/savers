@@ -13,7 +13,7 @@ mod update_helpers;
 pub use types::{Attractor, Firefly, KillSpark, Star};
 
 use crate::runner::Screensaver;
-use crate::runner::{LcgRng, TerminalCell, hsl_to_rgb, rgb_to_hsl};
+use crate::runner::{LcgRng, TerminalCell};
 use crate::runner::{get_system_info, query_current_palette};
 use std::time::Duration;
 

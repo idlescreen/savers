@@ -121,7 +121,6 @@ impl Bursts {
                 y: start_y,
                 vx,
                 vy,
-                target_y: 0.0,
                 color,
             });
 

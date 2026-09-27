@@ -102,7 +102,6 @@ pub fn gravitate_and_accrete_particles(
                             ),
                             ch: if eff.rng.next_bool(0.5) { '*' } else { '+' },
                             history: Vec::new(),
-                            logo_letter: None,
                         });
                     }
                 }
@@ -133,7 +132,6 @@ pub fn gravitate_and_accrete_particles(
                                     color: (180, 100, 255),
                                     ch: if eff.rng.next_bool(0.5) { '+' } else { '·' },
                                     history: Vec::new(),
-                                    logo_letter: None,
                                 });
                             }
                         }
@@ -157,7 +155,6 @@ pub fn gravitate_and_accrete_particles(
                                 color: (255, 230, 150),
                                 ch: '·',
                                 history: Vec::new(),
-                                logo_letter: None,
                             });
                         }
                         return false;
@@ -202,7 +199,6 @@ pub fn gravitate_and_accrete_particles(
                     color: p_color,
                     ch: if eff.rng.next_bool(0.5) { '·' } else { '.' },
                     history: Vec::new(),
-                    logo_letter: None,
                 });
             }
         }

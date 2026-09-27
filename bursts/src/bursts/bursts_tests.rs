@@ -67,7 +67,6 @@ fn test_rocket_trajectory() {
         y: 23.0,
         vx: 5.0,
         vy: -15.0,
-        target_y: 0.0,
         color: (255, 0, 0),
     });
 

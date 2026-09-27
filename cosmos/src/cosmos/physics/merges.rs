@@ -83,7 +83,6 @@ pub fn handle_seed_merges(eff: &mut Cosmos, _delta: f32, _dir: f32, seeds_len: u
                         color: (255, 235, 180),
                         ch: if eff.rng.next_bool(0.5) { '*' } else { '+' },
                         history: Vec::new(),
-                        logo_letter: None,
                     });
                 }
             }
@@ -111,7 +110,6 @@ pub fn handle_seed_merges(eff: &mut Cosmos, _delta: f32, _dir: f32, seeds_len: u
                         color: (255, 120, 50),
                         ch: '░',
                         history: Vec::new(),
-                        logo_letter: None,
                     });
                 }
                 for _ in 0..25 {
@@ -126,7 +124,6 @@ pub fn handle_seed_merges(eff: &mut Cosmos, _delta: f32, _dir: f32, seeds_len: u
                         color: (255, 255, 255),
                         ch: '*',
                         history: Vec::new(),
-                        logo_letter: None,
                     });
                 }
             }
@@ -144,7 +141,6 @@ pub fn handle_seed_merges(eff: &mut Cosmos, _delta: f32, _dir: f32, seeds_len: u
                         color: flare_color,
                         ch: if eff.rng.next_bool(0.5) { '+' } else { '·' },
                         history: Vec::new(),
-                        logo_letter: None,
                     });
                 }
             }
@@ -178,7 +174,6 @@ pub fn handle_seed_merges(eff: &mut Cosmos, _delta: f32, _dir: f32, seeds_len: u
                             '─'
                         },
                         history: Vec::new(),
-                        logo_letter: None,
                     });
                 }
             }

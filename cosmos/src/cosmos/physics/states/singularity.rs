@@ -64,7 +64,6 @@ pub fn enter_singularity(eff: &mut Cosmos, cols: usize, rows: usize) {
             color: flash_color,
             ch: '╬',
             history: Vec::new(),
-            logo_letter: None,
         });
     }
 }
