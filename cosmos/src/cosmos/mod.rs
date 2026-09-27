@@ -108,8 +108,12 @@ impl Cosmos {
             screen_cx: 0.0,
             screen_cy: 0.0,
             cached_accent: (0, 191, 255),
-            inv_mass_scratch: Vec::new(),
-            particle_screen_scratch: Vec::new(),
+            // Particle-budget cap is 580 × quality_scale × battery-factor
+            // (see physics/particle_cap.rs). Pre-allocate the scratch buffers
+            // so `clear(); reserve(particles.len());` at the hot path doesn't
+            // grow past the typical size once per saver session.
+            inv_mass_scratch: Vec::with_capacity(580),
+            particle_screen_scratch: Vec::with_capacity(580),
             intro_fade: 0.0,
             state_fade: 1.0,
         }
