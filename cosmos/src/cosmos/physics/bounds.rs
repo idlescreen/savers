@@ -1,5 +1,5 @@
 use crate::cosmos::Cosmos;
-use crate::cosmos::types::{GravityCenter, Particle};
+use crate::cosmos::types::Particle;
 
 /// Playable universe extent in universe coordinates (grid edges = monitor walls).
 #[derive(Clone, Copy, Debug)]

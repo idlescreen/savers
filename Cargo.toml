@@ -28,7 +28,7 @@ repository = "https://github.com/idlescreen/savers"
 [workspace.dependencies]
 # `idle/` is a sibling checkout of the engine repo — CI fetches it into
 # the repo root; locally bootstrap.sh symlinks it.
-idle-api = { version = "3.3.0", path = "runtime/idle-api" }
+idle-api = { version = "3.5.0", path = "runtime/idle-api" }
 build-support = { path = "build-support" }
 
 [profile.release]
