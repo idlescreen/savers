@@ -49,3 +49,35 @@ jobs:
           cargo audit
       - name: cargo test
         run: cargo test --workspace
+
+  bootstrap:
+    # Guards the `runtime/` path-dep link in bootstrap.sh. The `test` job
+    # checks the engine out into `runtime/` itself, so it cannot catch a
+    # bootstrap that never creates that link — which is exactly how a symlink
+    # named `idle` survived next to a Cargo.toml asking for `runtime/idle-api`
+    # and broke every fresh clone. This job checks out savers ONLY and runs
+    # the real script.
+    name: bootstrap on a clean checkout
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Install Rust
+        run: |
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain none
+          echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
+          rustup show || true
+      - name: No pre-existing engine checkout
+        run: |
+          if [ -e runtime ]; then
+            echo "::error::runtime/ already exists — this job must start from a bare savers checkout"
+            exit 1
+          fi
+      - name: Run bootstrap.sh
+        run: ./bootstrap.sh
+      - name: The link exists where Cargo.toml expects it
+        run: |
+          test -e runtime/idle-api/Cargo.toml \
+            || { echo "::error::bootstrap.sh did not produce runtime/idle-api"; exit 1; }
+          cargo metadata --format-version 1 >/dev/null
+          echo "bootstrap produced a resolvable runtime/ path dep"
