@@ -43,4 +43,3 @@ pub fn clamp_all_particles(eff: &mut Cosmos, cols: usize, rows: usize, restituti
         clamp_particle(p, b, restitution);
     }
 }
-

@@ -86,4 +86,3 @@ pub fn to_screen_fast(
     let sy = screen_cy + (uy - universe_cy) * zoom;
     (sx.round() as i32, sy.round() as i32)
 }
-
