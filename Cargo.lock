@@ -60,6 +60,7 @@ name = "bursts"
 version = "2.4.2"
 dependencies = [
  "build-support",
+ "criterion",
  "idle-api",
 ]
 
@@ -235,6 +236,7 @@ name = "gnats"
 version = "2.4.2"
 dependencies = [
  "build-support",
+ "criterion",
  "idle-api",
 ]
 
@@ -382,6 +384,7 @@ name = "radar"
 version = "2.4.2"
 dependencies = [
  "build-support",
+ "criterion",
  "idle-api",
 ]
 

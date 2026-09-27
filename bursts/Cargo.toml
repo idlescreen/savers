@@ -12,13 +12,24 @@ autobins = false
 [lib]
 name = "screensaver_bursts"
 path = "src/lib.rs"
-crate-type = ["cdylib"]
+# Both `cdylib` (runtime loads via dlopen) and `rlib` (so
+# `cargo bench --bench tick` can link the bench target against this
+# crate's API). Same pair as `cosmos`, `beams`, `gnats`. The rlib is
+# internal — not installed by `make install`.
+crate-type = ["cdylib", "rlib"]
 
 [dependencies]
 idle-api.workspace = true
 
 [build-dependencies]
 build-support.workspace = true
+
+[dev-dependencies]
+criterion = { workspace = true }
+
+[[bench]]
+name = "tick"
+harness = false
 
 [package.metadata.deb]
 name = "idle-saver-bursts"

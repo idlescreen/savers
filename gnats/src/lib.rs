@@ -16,6 +16,17 @@ pub extern "C" fn idle_api_version() -> u32 {
 
 mod gnats;
 
+// Re-exports for `gnats/benches/tick.rs`. See the matching note in
+// `cosmos/src/lib.rs::bench_exports` for the rationale: the `gnats`
+// module stays private (the cdylib only exposes the `ScreensaverInstance`
+// FFI), but the bench target needs to construct `Gnats` directly +
+// pin internal state (`sys_refresh_timer`, `last_cols`, `last_rows`)
+// for deterministic measurements.
+#[doc(hidden)]
+pub mod bench_exports {
+    pub use crate::gnats::Gnats;
+}
+
 #[cfg(test)]
 mod tests_perf;
 
