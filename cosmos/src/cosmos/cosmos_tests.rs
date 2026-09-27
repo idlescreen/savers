@@ -135,6 +135,46 @@ fn trim_particles_keeps_highest_energy() {
     assert_eq!(hot, 10, "highest-energy particles must survive the trim");
 }
 
+/// Regression: the particle budget used to be dead code. `trim_particles` was
+/// correct but only ever called from a test, while `merges` and
+/// `accretion_helpers` pushed particles with no cap at all — so a long idle
+/// run grew `particles` without bound. `update_frame_time` is now the
+/// per-frame choke point that calls it.
+#[test]
+fn update_frame_time_enforces_particle_budget() {
+    let mut eff = Cosmos::new();
+    eff.on_battery = true;
+    eff.quality_scale = 0.2; // budget = max(580*0.2*0.55, 120) = 120
+    for i in 0..500usize {
+        let hot = i >= 480;
+        eff.particles.push(Particle {
+            x: 0.0,
+            y: 0.0,
+            vx: if hot { 100.0 } else { 0.01 },
+            vy: 0.0,
+            mass: 1.0,
+            color: (255, 255, 255),
+            ch: '*',
+            history: Vec::new(),
+            logo_letter: None,
+        });
+    }
+    assert!(
+        eff.particles.len() > physics::particle_cap::particle_budget(&eff),
+        "precondition: well over budget before the frame runs"
+    );
+
+    physics::update::update_frame_time(&mut eff, Duration::from_millis(16));
+
+    assert!(
+        eff.particles.len() <= physics::particle_cap::particle_budget(&eff),
+        "update_frame_time must enforce the particle budget: {} > {}",
+        eff.particles.len(),
+        physics::particle_cap::particle_budget(&eff)
+    );
+    assert_eq!(eff.particles.len(), 120);
+}
+
 #[test]
 fn ignition_consumes_cluster_and_spawns_seed() {
     // 50 particles stacked at one point: every pick sees the same dense

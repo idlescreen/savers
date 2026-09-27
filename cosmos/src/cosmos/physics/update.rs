@@ -39,6 +39,13 @@ pub fn update_frame_time(eff: &mut Cosmos, dt: Duration) {
         }
         eff.quality_scale = eff.quality_scale.min(grid_cap);
     }
+
+    // Enforce the particle budget every frame, after quality_scale has settled
+    // so the budget reflects the current frame cost. Merges push 25+ particles
+    // per event and accretion adds more, so without this the sim grows without
+    // limit over a multi-hour idle run while every frame re-iterates the whole
+    // list in `gravity`. `trim_particles` short-circuits when under budget.
+    super::particle_cap::trim_particles(eff);
 }
 
 pub fn update_life(eff: &mut Cosmos, dt: Duration, cols: usize, rows: usize) {
