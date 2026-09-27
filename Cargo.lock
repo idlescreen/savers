@@ -28,6 +28,7 @@ name = "aurora"
 version = "2.4.2"
 dependencies = [
  "build-support",
+ "criterion",
  "idle-api",
 ]
 
@@ -42,6 +43,7 @@ name = "beams"
 version = "2.4.2"
 dependencies = [
  "build-support",
+ "criterion",
  "idle-api",
 ]
 
@@ -91,6 +93,7 @@ name = "chaos"
 version = "2.4.2"
 dependencies = [
  "build-support",
+ "criterion",
  "idle-api",
 ]
 
@@ -228,6 +231,7 @@ name = "glyphs"
 version = "2.4.2"
 dependencies = [
  "build-support",
+ "criterion",
  "idle-api",
 ]
 
@@ -256,6 +260,7 @@ name = "hearth"
 version = "2.4.2"
 dependencies = [
  "build-support",
+ "criterion",
  "idle-api",
 ]
 
@@ -422,6 +427,7 @@ name = "ripple"
 version = "2.4.2"
 dependencies = [
  "build-support",
+ "criterion",
  "idle-api",
 ]
 
@@ -507,6 +513,7 @@ name = "storm"
 version = "2.4.2"
 dependencies = [
  "build-support",
+ "criterion",
  "idle-api",
 ]
 

@@ -16,6 +16,13 @@ pub extern "C" fn idle_api_version() -> u32 {
 
 mod hearth;
 
+// Re-exports for `hearth/benches/tick.rs`. See the matching
+// note in `cosmos/src/lib.rs::bench_exports` for the rationale.
+#[doc(hidden)]
+pub mod bench_exports {
+    pub use crate::hearth::Hearth;
+}
+
 #[cfg(test)]
 mod tests_perf;
 

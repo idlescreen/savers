@@ -12,13 +12,20 @@ autobins = false
 [lib]
 name = "screensaver_hearth"
 path = "src/lib.rs"
-crate-type = ["cdylib"]
+crate-type = ["cdylib", "rlib"]
 
 [dependencies]
 idle-api.workspace = true
 
 [build-dependencies]
 build-support.workspace = true
+
+[dev-dependencies]
+criterion = { workspace = true }
+
+[[bench]]
+name = "tick"
+harness = false
 
 [package.metadata.deb]
 name = "idle-saver-hearth"

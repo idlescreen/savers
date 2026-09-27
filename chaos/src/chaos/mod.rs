@@ -100,6 +100,16 @@ impl Chaos {
         }
     }
 
+    /// Pin the saver into a stable state for bench harness measurements.
+    /// See `cosmos::Cosmos::prepare_for_bench` for the rationale; the
+    /// important bit is `sys_refresh_timer = -1000.0` to suppress the
+    /// slow system-info probe inside `update()`.
+    pub fn prepare_for_bench(&mut self, cols: usize, rows: usize) {
+        self.sys_refresh_timer = -1000.0;
+        self.last_cols = cols;
+        self.last_rows = rows;
+    }
+
     pub(crate) fn refresh_screen_cache(&mut self, cols: usize, rows: usize) {
         let primary = crate::runner::get_primary_monitor_bounds(cols, rows);
         self.center_x = (primary.start_col + primary.width() / 2) as f32;

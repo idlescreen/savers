@@ -16,6 +16,13 @@ pub extern "C" fn idle_api_version() -> u32 {
 
 mod beams;
 
+// Re-exports for `beams/benches/tick.rs`. See the matching
+// note in `cosmos/src/lib.rs::bench_exports` for the rationale.
+#[doc(hidden)]
+pub mod bench_exports {
+    pub use crate::beams::Beams;
+}
+
 #[cfg(test)]
 mod tests_perf;
 

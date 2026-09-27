@@ -99,6 +99,16 @@ impl Aurora {
         }
     }
 
+    /// Pin the saver into a stable state for bench harness measurements.
+    /// See `cosmos::Cosmos::prepare_for_bench` for the rationale; the
+    /// important bit is `sys_refresh_timer = -1000.0` to suppress the
+    /// slow system-info probe inside `update()`.
+    pub fn prepare_for_bench(&mut self, cols: usize, rows: usize) {
+        self.sys_refresh_timer = -1000.0;
+        self.last_cols = cols;
+        self.last_rows = rows;
+    }
+
     fn update_frame_time_impl(&mut self, dt: Duration) {
         let dt_secs = dt.as_secs_f32();
         if self.time_elapsed < 2.0 && dt_secs > 0.001 && dt_secs < self.target_frame_time - 0.001 {
