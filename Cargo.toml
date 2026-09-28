@@ -19,7 +19,19 @@ members = [
 exclude = ["runtime"]
 
 [workspace.package]
-version = "2.4.2"
+# Bumped to 2.4.3 so the saver plugin .debs get new filenames.
+#
+# `meta` carries the repo's release version, but the artifacts that
+# actually reach the apt pool are built from the plugin crates, and
+# those inherit this one. Releasing without moving it rebuilds
+# byte-identical .debs under a name the pool already holds, and
+# `import-release.yml`'s no-clobber guard correctly refuses them:
+#
+#     pool already has idle-saver-aurora_2.4.2-1_amd64.deb; refusing clobber
+#
+# That guard is right and stays. A repo that releases must move the
+# version its shipped artifacts are named after.
+version = "2.4.3"
 edition = "2024"
 authors = ["idlescreen developers"]
 license = "Apache-2.0"
