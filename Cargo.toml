@@ -47,6 +47,10 @@ build-support = { path = "build-support" }
 # deterministic across CI runner hosts). `html_reports` keeps the option
 # open for maintainers who want a graph artifact.
 criterion = { version = "0.5", default-features = false, features = ["html_reports"] }
+# Allocation invariants. Lives in the engine repo (a sibling checkout,
+# symlinked locally and fetched by CI) so one counting allocator
+# serves both workspaces instead of being forked per repo.
+perf-test-support = { path = "runtime/crates/perf-test-support" }
 
 [profile.release]
 # Speed, not size. These crates are the render hot path: every saver runs

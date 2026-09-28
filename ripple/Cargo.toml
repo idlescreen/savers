@@ -22,6 +22,7 @@ build-support.workspace = true
 
 [dev-dependencies]
 criterion = { workspace = true }
+perf-test-support = { workspace = true }
 
 [[bench]]
 name = "tick"

@@ -1,4 +1,4 @@
-// perf: T3 · metric: iterative; cost scales with its input, not with a fixed bound · check: review
+// perf: T3 · metric: iterative over the ring slice; zero allocations on the steady path, asserted by physics_tests.rs · check: test
 //! Physics simulation and displacement helpers for Ripple.
 
 use super::types::Ring;
@@ -138,3 +138,7 @@ pub fn plot_line(
         }
     }
 }
+
+#[cfg(test)]
+#[path = "physics_tests.rs"]
+mod tests;
