@@ -1,3 +1,16 @@
+idle-savers (3.3.5-1) unstable; urgency=medium
+
+  * All 11 savers' `tick` benches are now gated against a real baseline
+  * (66 entries read from criterion's estimates.json), replacing a
+  * perf.yml that ran 4 savers, swallowed every failure with `|| true`,
+  * and compared nothing.
+  * `scripts/check-perf-labels.sh` fails CI on a false T1 claim.
+  * Fixes: `cargo bench -p bursts --bench tick` panicked on every grid
+  * because prepare_for_bench pre-stamped the size that resize_if_needed
+  * uses as its init guard, leaving skyline empty.
+
+ -- IdleScreen Maintainers <maintainers@idlescreen.dev>  Mon, 28 Sep 2026 18:02:57 -0000
+
 idle-savers (3.3.4-1) unstable; urgency=medium
 
   * studio2201 security-gate workflow + suite badge in README.
