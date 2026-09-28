@@ -38,6 +38,18 @@ jobs:
           if [ -f rust-toolchain.toml ]; then rustup show; else rustup default stable; fi
       - name: cargo fmt
         run: cargo fmt --all -- --check
+      - name: file length cap (16-256 lines per page)
+        # Org-wide rule from .github/RULES.md. The cross-cut excludes
+        # runtime/* (engine has its own gate in idlescreen/runtime).
+        run: |
+          over=$(find . -name '*.rs' -not -path './target/*' -not -path './runtime/*' \
+              | xargs wc -l \
+              | awk '$1 > 256 || $1 < 16')
+          if [ -n "$over" ]; then
+            echo "Files outside 16-256 line range:"
+            echo "$over"
+            exit 1
+          fi
       - name: cargo clippy
         run: cargo clippy --workspace --all-targets -- -D warnings
       - name: cargo audit (advisories)
