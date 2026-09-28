@@ -5,6 +5,11 @@
 pub mod draw;
 pub mod physics;
 pub(crate) mod screensaver_impl;
+// `storm::storm` is not inception in the sense clippy means: RULES.md §2
+// names a page after the function or type it implements, and this one
+// holds the `Storm` constructor and helpers. The Screensaver trait impl
+// lives in the sibling `screensaver_impl.rs`.
+#[allow(clippy::module_inception)]
 pub(crate) mod storm;
 pub mod types;
 
