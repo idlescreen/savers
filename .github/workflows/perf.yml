@@ -14,7 +14,15 @@ jobs:
   bench:
     name: criterion benches
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    # Raised from 30 when this job went from 4 savers to all 11.
+    # Arithmetic: the 11-saver run takes ~7 min on a 12-vCPU box.
+    # `ubuntu-latest` standard runners are 4 vCPU, so bench time alone
+    # lands near 21 min, and a cold workspace compile on top of that
+    # (runtime path dep + 11 crates) is another ~10. Thirty was
+    # therefore a coin flip that would have failed as an opaque
+    # "job exceeded maximum execution time" rather than as a perf
+    # result. Raise this if the job ever grows again.
+    timeout-minutes: 45
     env:
       # Every saver is T1, so the gate covers all of them. Keep this
       # list in sync with the `SAVERS` array in
