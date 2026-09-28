@@ -1,0 +1,272 @@
+{
+  "benches": {
+    "aurora_draw/draw_160x48": {
+      "median_abs_dev_ns": 9199.279288798894,
+      "median_ns": 236627.88581669226
+    },
+    "aurora_draw/draw_210x57": {
+      "median_abs_dev_ns": 20334.73669031831,
+      "median_ns": 349348.8586309524
+    },
+    "aurora_draw/draw_80x24": {
+      "median_abs_dev_ns": 5165.271712995069,
+      "median_ns": 56872.09090909091
+    },
+    "aurora_update/update_160x48": {
+      "median_abs_dev_ns": 0.8824671385865215,
+      "median_ns": 143.34746081354967
+    },
+    "aurora_update/update_210x57": {
+      "median_abs_dev_ns": 0.6304658245856395,
+      "median_ns": 142.20354690577648
+    },
+    "aurora_update/update_80x24": {
+      "median_abs_dev_ns": 3.423387347054073,
+      "median_ns": 145.44771285140564
+    },
+    "beams_draw/draw_160x48": {
+      "median_abs_dev_ns": 3688.83228451015,
+      "median_ns": 317866.9895233107
+    },
+    "beams_draw/draw_210x57": {
+      "median_abs_dev_ns": 5783.7506806543715,
+      "median_ns": 466766.3895249609
+    },
+    "beams_draw/draw_80x24": {
+      "median_abs_dev_ns": 1193.869573722757,
+      "median_ns": 94294.95185185186
+    },
+    "beams_update/update_160x48": {
+      "median_abs_dev_ns": 455.0413081080171,
+      "median_ns": 41511.53333333333
+    },
+    "beams_update/update_210x57": {
+      "median_abs_dev_ns": 664.3408108722608,
+      "median_ns": 40897.0700877193
+    },
+    "beams_update/update_80x24": {
+      "median_abs_dev_ns": 633.0804921727345,
+      "median_ns": 29440.333732057417
+    },
+    "bursts_draw/draw_160x48": {
+      "median_abs_dev_ns": 238.67604953938968,
+      "median_ns": 17810.31512532848
+    },
+    "bursts_draw/draw_210x57": {
+      "median_abs_dev_ns": 325.2493248723736,
+      "median_ns": 26224.116114561766
+    },
+    "bursts_draw/draw_80x24": {
+      "median_abs_dev_ns": 137.52561816154784,
+      "median_ns": 8006.6621621621625
+    },
+    "bursts_update/update_160x48": {
+      "median_abs_dev_ns": 715.7721426744445,
+      "median_ns": 37568.46614583333
+    },
+    "bursts_update/update_210x57": {
+      "median_abs_dev_ns": 671.390858374152,
+      "median_ns": 53870.711570247935
+    },
+    "bursts_update/update_80x24": {
+      "median_abs_dev_ns": 197.42908808105497,
+      "median_ns": 10832.353593007701
+    },
+    "chaos_draw/draw_160x48": {
+      "median_abs_dev_ns": 106.33132594955153,
+      "median_ns": 8303.566454475309
+    },
+    "chaos_draw/draw_210x57": {
+      "median_abs_dev_ns": 204.21824296834018,
+      "median_ns": 12047.124023505876
+    },
+    "chaos_draw/draw_80x24": {
+      "median_abs_dev_ns": 26.156993213306674,
+      "median_ns": 3355.991779657369
+    },
+    "chaos_update/update_160x48": {
+      "median_abs_dev_ns": 0.8638923950916229,
+      "median_ns": 72.21136345333011
+    },
+    "chaos_update/update_210x57": {
+      "median_abs_dev_ns": 0.7116546056950764,
+      "median_ns": 71.93596789206575
+    },
+    "chaos_update/update_80x24": {
+      "median_abs_dev_ns": 0.9316320677262704,
+      "median_ns": 72.40980679931819
+    },
+    "cosmos_draw/draw_160x48": {
+      "median_abs_dev_ns": 101.9354033157331,
+      "median_ns": 6634.501714691558
+    },
+    "cosmos_draw/draw_210x57": {
+      "median_abs_dev_ns": 158.16419870079517,
+      "median_ns": 10554.308947368421
+    },
+    "cosmos_draw/draw_80x24": {
+      "median_abs_dev_ns": 22.895746366810766,
+      "median_ns": 1673.9693020218979
+    },
+    "cosmos_update/update_160x48": {
+      "median_abs_dev_ns": 13220.642229458448,
+      "median_ns": 29512.442307692305
+    },
+    "cosmos_update/update_210x57": {
+      "median_abs_dev_ns": 6841.250241011384,
+      "median_ns": 20783.81676600239
+    },
+    "cosmos_update/update_80x24": {
+      "median_abs_dev_ns": 13352.678513437811,
+      "median_ns": 24762.474645454546
+    },
+    "glyphs_draw/draw_160x48": {
+      "median_abs_dev_ns": 155.7982520308023,
+      "median_ns": 12329.36070261438
+    },
+    "glyphs_draw/draw_210x57": {
+      "median_abs_dev_ns": 235.35723460627287,
+      "median_ns": 15588.265513505437
+    },
+    "glyphs_draw/draw_80x24": {
+      "median_abs_dev_ns": 100.24130472202438,
+      "median_ns": 6481.732790473738
+    },
+    "glyphs_update/update_160x48": {
+      "median_abs_dev_ns": 21.880479017167787,
+      "median_ns": 1717.4936035584515
+    },
+    "glyphs_update/update_210x57": {
+      "median_abs_dev_ns": 24.497690378926674,
+      "median_ns": 2242.6984269344034
+    },
+    "glyphs_update/update_80x24": {
+      "median_abs_dev_ns": 13.442946967469794,
+      "median_ns": 894.5315517402694
+    },
+    "gnats_draw/draw_160x48": {
+      "median_abs_dev_ns": 326.89660222570404,
+      "median_ns": 25457.61736111111
+    },
+    "gnats_draw/draw_210x57": {
+      "median_abs_dev_ns": 440.04865563454683,
+      "median_ns": 25737.444015522877
+    },
+    "gnats_draw/draw_80x24": {
+      "median_abs_dev_ns": 169.35800083150494,
+      "median_ns": 17550.705156383206
+    },
+    "gnats_update/update_160x48": {
+      "median_abs_dev_ns": 348.2283986887465,
+      "median_ns": 12157.498562937064
+    },
+    "gnats_update/update_210x57": {
+      "median_abs_dev_ns": 472.1408696855894,
+      "median_ns": 12144.022959183672
+    },
+    "gnats_update/update_80x24": {
+      "median_abs_dev_ns": 133.67970874596756,
+      "median_ns": 6496.6820522624075
+    },
+    "hearth_draw/draw_160x48": {
+      "median_abs_dev_ns": 1447.6776105897038,
+      "median_ns": 116449.9330088921
+    },
+    "hearth_draw/draw_210x57": {
+      "median_abs_dev_ns": 2169.0908189360744,
+      "median_ns": 178715.115234375
+    },
+    "hearth_draw/draw_80x24": {
+      "median_abs_dev_ns": 449.2101842098955,
+      "median_ns": 31109.877856882074
+    },
+    "hearth_update/update_160x48": {
+      "median_abs_dev_ns": 7.812869820767055,
+      "median_ns": 608.4691857474697
+    },
+    "hearth_update/update_210x57": {
+      "median_abs_dev_ns": 7.176679158608743,
+      "median_ns": 604.271998982706
+    },
+    "hearth_update/update_80x24": {
+      "median_abs_dev_ns": 6.090196200344665,
+      "median_ns": 605.6214774453379
+    },
+    "radar_draw/draw_160x48": {
+      "median_abs_dev_ns": 3009.5709959742157,
+      "median_ns": 263619.99988179666
+    },
+    "radar_draw/draw_210x57": {
+      "median_abs_dev_ns": 4999.887219262802,
+      "median_ns": 412959.6337719298
+    },
+    "radar_draw/draw_80x24": {
+      "median_abs_dev_ns": 888.3270485710864,
+      "median_ns": 68564.485887063
+    },
+    "radar_update/update_160x48": {
+      "median_abs_dev_ns": 18.197434033500915,
+      "median_ns": 638.9584863851284
+    },
+    "radar_update/update_210x57": {
+      "median_abs_dev_ns": 30.764382962594947,
+      "median_ns": 692.3233071611538
+    },
+    "radar_update/update_80x24": {
+      "median_abs_dev_ns": 13.903699803803425,
+      "median_ns": 535.7871411640352
+    },
+    "ripple_draw/draw_160x48": {
+      "median_abs_dev_ns": 2656.5213305825687,
+      "median_ns": 143017.87192297683
+    },
+    "ripple_draw/draw_210x57": {
+      "median_abs_dev_ns": 5609.689578564222,
+      "median_ns": 312545.97455357143
+    },
+    "ripple_draw/draw_80x24": {
+      "median_abs_dev_ns": 455.16211501427176,
+      "median_ns": 38237.34593653251
+    },
+    "ripple_update/update_160x48": {
+      "median_abs_dev_ns": 5.91233516348797,
+      "median_ns": 214.01159466755044
+    },
+    "ripple_update/update_210x57": {
+      "median_abs_dev_ns": 6.42820639757665,
+      "median_ns": 217.64389770204986
+    },
+    "ripple_update/update_80x24": {
+      "median_abs_dev_ns": 7.25230048990526,
+      "median_ns": 211.5493618710813
+    },
+    "storm_draw/draw_160x48": {
+      "median_abs_dev_ns": 50.56284120210675,
+      "median_ns": 6986.601606524962
+    },
+    "storm_draw/draw_210x57": {
+      "median_abs_dev_ns": 125.2055344686465,
+      "median_ns": 10182.602699309478
+    },
+    "storm_draw/draw_80x24": {
+      "median_abs_dev_ns": 69.22773311151228,
+      "median_ns": 2880.530762470612
+    },
+    "storm_update/update_160x48": {
+      "median_abs_dev_ns": 47.542906824011915,
+      "median_ns": 5950.0302545621425
+    },
+    "storm_update/update_210x57": {
+      "median_abs_dev_ns": 43.73939084847075,
+      "median_ns": 7462.295755718955
+    },
+    "storm_update/update_80x24": {
+      "median_abs_dev_ns": 79.40046397090967,
+      "median_ns": 3447.319270676629
+    }
+  },
+  "captured_at": "2026-09-28",
+  "commit": "3c57cd7",
+  "note": "Captured by scripts/refresh-baseline.sh from criterion estimates.json",
+  "version": 2
+}

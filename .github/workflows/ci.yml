@@ -50,6 +50,12 @@ jobs:
             echo "$over"
             exit 1
           fi
+      - name: perf labels are backed by real benches
+        # Every `// perf: T1` page must name a bench target that exists
+        # and actually references the page, plus a baseline to regress
+        # against. The script excludes `runtime/` — the engine is
+        # checked out above as a path dep and has its own gate.
+        run: bash scripts/check-perf-labels.sh
       - name: cargo clippy
         run: cargo clippy --workspace --all-targets -- -D warnings
       - name: cargo audit (advisories)
