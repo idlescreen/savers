@@ -4,13 +4,9 @@
 
 pub mod draw;
 pub mod physics;
+pub(crate) mod screensaver_impl;
 pub mod types;
-
-use crate::runner::Screensaver;
-use crate::runner::{LcgRng, TerminalCell};
-use std::time::Duration;
-
-use crate::runner::{get_system_info, query_current_palette};
+pub(crate) mod storm;
 
 #[allow(unused_imports)]
 pub use self::types::{
@@ -18,7 +14,7 @@ pub use self::types::{
 };
 
 pub struct Storm {
-    pub(crate) rng: LcgRng,
+    pub(crate) rng: crate::runner::LcgRng,
     pub(crate) stars: Vec<Star>,
     pub(crate) logo_cells: Vec<LogoCell>,
     pub(crate) drops: Vec<Drop>,
@@ -84,188 +80,6 @@ pub struct Storm {
     pub(crate) intro_fade: f32,
     /// Smoothed wind target (actual wind eases toward this)
     pub(crate) wind_target: f32,
-}
-
-impl Default for Storm {
-    fn default() -> Self {
-        Self::new()
-    }
-}
-
-impl Storm {
-    pub fn new() -> Self {
-        // Pre-4.1 HKEY_CURRENT_USER registry reads (DropCount, AssembleSpeed)
-        // collapsed to defaults for the inline migration. Re-added in 4.2.
-        let drop_count_opt: u32 = 1;
-        let assemble_speed_opt: u32 = 1;
-
-        let sys = get_system_info();
-        let on_battery = sys.power_status.contains("Battery");
-
-        Self {
-            rng: LcgRng::from_env_or_random(),
-            // Each of these is `clear()`-and-rebuilt per frame
-            // (or per state transition). Pre-allocating to a
-            // comfortable ceiling removes ~4–5 first-ramp realloc
-            // cycles during saver warm-up. Caps were picked from
-            // observing hot-loop profiles at 1080p:
-            //   stars: 200 (clamp(15, 60) × cols/rows naturally
-            //     grows; 200 covers 99% of cases)
-            //   drops: 500 (drop_count_opt × quality × battery)
-            //   splashes: 200 (rain + bird landings)
-            //   logo_cells: 500 (small bitmap raster)
-            //   bg_cells / mid_scenery / fg_scenery: 200 each
-            //     (terminal-size placeholder set)
-            //   lightning_bolts: 16 (per flash burst)
-            //   perch_points: 16 (rare; trees + squirrels)
-            stars: Vec::with_capacity(200),
-            logo_cells: Vec::with_capacity(500),
-            drops: Vec::with_capacity(500),
-            splashes: Vec::with_capacity(200),
-            phase: Phase::Building,
-            phase_timer: 0.0,
-            last_cols: 0,
-            last_rows: 0,
-            drop_count_opt,
-            assemble_speed_opt,
-            sys_refresh_timer: 0.0,
-            mem_pressure: sys.mem_used_pct / 100.0,
-            cpu_load: (sys.cpu_usage_pct / 100.0).clamp(0.0, 1.0),
-            _host_bias: sys.hostname.chars().map(|c| c as u32).sum::<u32>() as f32 / 1000.0 % 1.0,
-            on_battery,
-            frame_time_ema: 0.01666667,
-            quality_scale: 1.0,
-            target_frame_time: 0.01666667,
-            // `puddle` is `vec![0.0; cols]` per cols refresh — its
-            // size is genuinely variable (terminal column count),
-            // so leave it as Vec::new() and let it grow.
-            puddle: Vec::new(),
-            puddle_color: Vec::new(),
-            wind: 0.0,
-            lightning_timer: 0.0,
-            lightning_flash: 0.0,
-            lightning_bolts: Vec::with_capacity(16),
-            lightning_is_background: false,
-            lightning_delay: 0.0,
-            bg_cells: Vec::with_capacity(200),
-            mid_scenery: Vec::with_capacity(200),
-            fg_scenery: Vec::with_capacity(200),
-            bird_x: 0.0,
-            bird_y: 0.0,
-            bird_state: BirdState::Sitting,
-            bird_timer: 0.0,
-            bird_wing_flap: false,
-            bird_vx: 0.0,
-            bird_vy: 0.0,
-            bird_perch_x: 0.0,
-            bird_perch_y: 0.0,
-            perch_points: Vec::with_capacity(16),
-            active_animal: None,
-            animal_spawn_timer: 28.0,
-            subtitle: String::new(),
-            subtitle_timer: 0.0,
-            time_elapsed: 0.0,
-            cached_accent: query_current_palette().accent,
-            intro_fade: 0.0,
-            wind_target: 0.0,
-        }
-    }
-
-    /// Pin the saver into a stable state for bench harness measurements.
-    /// See `cosmos::Cosmos::prepare_for_bench` for the rationale; the
-    /// important bit is `sys_refresh_timer = -1000.0` to suppress the
-    /// slow system-info probe inside `update()`.
-    pub fn prepare_for_bench(&mut self, cols: usize, rows: usize) {
-        self.sys_refresh_timer = -1000.0;
-        self.last_cols = cols;
-        self.last_rows = rows;
-    }
-}
-
-impl Screensaver for Storm {
-    fn update_frame_time(&mut self, dt: Duration) {
-        let dt_secs = dt.as_secs_f32();
-
-        // Auto-detect high refresh rates during the startup phase
-        if self.phase_timer < 2.0 && dt_secs > 0.001 && dt_secs < self.target_frame_time - 0.001 {
-            self.target_frame_time = dt_secs;
-        }
-
-        // Exponential moving average for frame time (alpha = 0.1)
-        self.frame_time_ema = self.frame_time_ema * 0.9 + dt_secs.min(0.2) * 0.1;
-
-        if self.phase_timer > 1.5 {
-            let speed_mult = if self.on_battery { 0.65 } else { 1.0 };
-            let delta = dt_secs * speed_mult;
-            if self.frame_time_ema > self.target_frame_time * 1.15 {
-                self.quality_scale = (self.quality_scale - 0.15 * delta).max(0.20);
-            } else if self.frame_time_ema < self.target_frame_time * 1.05 {
-                self.quality_scale = (self.quality_scale + 0.04 * delta).min(1.0);
-            }
-        }
-    }
-
-    fn init(&mut self, _cols: usize, _rows: usize) {
-        // Leave last_cols/last_rows so the next update's check_resize rebuilds scenery.
-        self.intro_fade = 0.0;
-        self.time_elapsed = 0.0;
-        self.phase_timer = 0.0;
-        self.drops.clear();
-        self.splashes.clear();
-        self.lightning_flash = 0.0;
-        self.lightning_bolts.clear();
-        self.last_cols = 0;
-        self.last_rows = 0;
-    }
-
-    fn update(&mut self, dt: Duration, cols: usize, rows: usize) {
-        let dt_secs = dt.as_secs_f32().min(0.1);
-        let speed_mult = if self.on_battery { 0.65 } else { 1.0 };
-        let delta = dt_secs * speed_mult;
-        self.phase_timer += delta;
-        self.time_elapsed += delta;
-
-        // Intro fade ~0.45s
-        if self.intro_fade < 1.0 {
-            self.intro_fade = (self.intro_fade + delta / 0.45).min(1.0);
-        }
-
-        // Wind target drifts with slow LFO; actual wind eases toward it (no snaps)
-        self.wind_target =
-            (self.phase_timer * 0.35).sin() * 9.0 + (self.phase_timer * 1.5).cos() * 2.0;
-        let wind_ease = 1.0 - (-delta * 1.4).exp();
-        self.wind += (self.wind_target - self.wind) * wind_ease;
-
-        self.sys_refresh_timer += delta;
-        if self.sys_refresh_timer >= 1.0 {
-            let sys = get_system_info();
-            self.mem_pressure = sys.mem_used_pct / 100.0;
-            self.cpu_load = (sys.cpu_usage_pct / 100.0).clamp(0.0, 1.0);
-            self.on_battery = sys.power_status.contains("Battery");
-            self.cached_accent = query_current_palette().accent;
-            self.sys_refresh_timer = 0.0;
-        }
-
-        self.check_resize(cols, rows);
-
-        let load_mult = 1.0 + self.cpu_load * 0.6 + self.mem_pressure * 0.3;
-        let speed_mult = match self.assemble_speed_opt {
-            0 => 0.6f32,
-            2 => 1.6f32,
-            _ => 1.0f32,
-        } * load_mult;
-
-        self.update_drops(delta, cols, rows, speed_mult);
-        if !crate::runner::is_secondary_monitor() {
-            self.update_bird(delta, cols, rows);
-            self.update_scenery_and_animals(delta, cols, rows);
-        }
-        self.update_lightning(delta, cols, rows);
-    }
-
-    fn draw(&self, grid: &mut [TerminalCell], cols: usize, rows: usize) {
-        self.draw_impl(grid, cols, rows);
-    }
 }
 
 #[cfg(test)]
