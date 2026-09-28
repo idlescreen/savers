@@ -145,19 +145,3 @@ mod tests {
     }
 }
 
-#[cfg(test)]
-mod benches {
-    use super::*;
-    use criterion::Criterion;
-
-    #[test]
-    fn bench_pick_weather() {
-        let mut c = Criterion::default().sample_size(10);
-        let mut r = Ripple::new();
-        c.bench_function("ripple_pick_weather", |b| {
-            b.iter(|| {
-                r.pick_weather();
-            });
-        });
-    }
-}

@@ -1,3 +1,11 @@
+// perf: T1 · bench: tick · sym: Screensaver · gate: perf-baseline.json
+//
+// `sym:` is the trait the `tick` target drives through its `bench_update` /
+// `bench_draw` functions. The filename cannot be used here: these pages hold
+// the `Screensaver` trait impl, which must stay co-located, so the file name
+// does not match a callable symbol. Every `tick` target imports `Screensaver`
+// from the crate's `runner` module, so the CI linter's grep finds it in both
+// the page and the bench source.
 use super::Glyphs;
 use super::physics;
 use crate::runner::Screensaver;

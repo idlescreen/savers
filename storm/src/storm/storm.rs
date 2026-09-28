@@ -155,18 +155,3 @@ mod tests {
     }
 }
 
-#[cfg(test)]
-mod benches {
-    use super::*;
-    use criterion::Criterion;
-
-    #[test]
-    fn bench_storm_new() {
-        let mut c = Criterion::default().sample_size(10);
-        c.bench_function("storm_new", |b| {
-            b.iter(|| {
-                let _ = Storm::new();
-            });
-        });
-    }
-}
