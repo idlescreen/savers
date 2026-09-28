@@ -41,13 +41,28 @@ jobs:
   capture:
     name: capture baseline on ubuntu-latest
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    # 45, not 30, for the same reason perf.yml uses 45: eleven savers on
+    # a 4-vCPU standard runner is ~21 min of bench time plus ~10 min of
+    # cold compile against the runtime path dep. Thirty is a coin flip
+    # here, and it would fail as an opaque timeout rather than as a perf
+    # result.
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      # Every saver depends on `runtime/idle-api` by path. Without this
+      # checkout, cargo fails to resolve the workspace and the refresh
+      # script correctly refuses to write an empty baseline -- which is
+      # how the first run of this workflow failed in 30 seconds.
+      - name: Checkout runtime engine (path deps)
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: idlescreen/runtime
+          path: runtime
       - name: rustup
         run: |
-          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain none
           echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
+          rustup show || true
           if [ -f rust-toolchain.toml ]; then rustup show; else rustup default stable; fi
       # Byte-for-byte the same package list as perf.yml. These savers are
       # all software-rasterised, so a different libwayland or an absent
