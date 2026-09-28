@@ -1,3 +1,4 @@
+// perf: T3 · metric: bounded single-pass work; no syscalls, no locks, no allocation on the steady path · check: review
 pub use super::physics_helpers::{
     decay_logo_excitations, update_attractors, update_kill_sparks, update_logo_excitations,
     update_stars,

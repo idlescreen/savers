@@ -1,3 +1,4 @@
+// perf: T3 · metric: bounded single-pass work; no syscalls, no locks, no allocation on the steady path · check: review
 /// One aurora curtain: a waving vertical light sheet. The bright edge is a
 /// sine-warped line; intensity falls off exponentially below it.
 pub struct Curtain {

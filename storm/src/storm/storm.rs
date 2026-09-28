@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: MIT
+// perf: T3 · metric: allocates on the call path; cost scales with allocation count · check: test
 //
 // `Storm` constructor + small helpers (Default, new,
 // prepare_for_bench). The `Screensaver` trait impl (init /

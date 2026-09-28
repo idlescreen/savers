@@ -1,3 +1,4 @@
+// perf: T3 · metric: iterative; cost scales with its input, not with a fixed bound · check: review
 //! Simulation update logic for Ripple screensaver.
 
 use super::types::{self, DelayedRing, Drop, Ring, Splash, Weather};

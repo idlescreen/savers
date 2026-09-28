@@ -1,3 +1,4 @@
+// perf: T3 · metric: bounded single-pass work; no syscalls, no locks, no allocation on the steady path · check: review
 //! Auxiliary structs and constants for the bursts screensaver.
 
 pub struct Rocket {

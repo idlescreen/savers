@@ -1,3 +1,4 @@
+// perf: T3 · metric: bounded single-pass work; no syscalls, no locks, no allocation on the steady path · check: review
 //! Rain on a still pond — continuous rings, interference, weather states.
 //! OS logo sits in the water and warps when rings pass through it.
 

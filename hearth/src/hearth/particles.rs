@@ -1,3 +1,4 @@
+// perf: T3 · metric: iterative; cost scales with its input, not with a fixed bound · check: review
 //! Ember and smoke particle updating logic for Hearth.
 
 use super::types::{Ember, Smoke};

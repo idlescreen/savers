@@ -1,3 +1,4 @@
+// perf: T3 · metric: bounded single-pass work; no syscalls, no locks, no allocation on the steady path · check: review
 //! System information polling and theme accent updates for Beams.
 
 use super::types::Spotlight;

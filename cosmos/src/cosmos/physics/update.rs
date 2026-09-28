@@ -1,3 +1,4 @@
+// perf: T3 · metric: iterative; cost scales with its input, not with a fixed bound · check: review
 use crate::cosmos::Cosmos;
 use crate::cosmos::types::UniverseState;
 use crate::runner::{get_system_info, query_current_palette};

@@ -1,3 +1,4 @@
+// perf: T3 · metric: iterative; cost scales with its input, not with a fixed bound · check: review
 use crate::runner::LcgRng;
 use crate::storm::Storm;
 use crate::storm::types::SceneryCell;

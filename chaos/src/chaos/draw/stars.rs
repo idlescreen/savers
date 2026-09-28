@@ -1,3 +1,4 @@
+// perf: T3 · metric: iterative; cost scales with its input, not with a fixed bound · check: review
 use super::spike::draw_spike;
 use crate::chaos::Chaos;
 use crate::runner::TerminalCell;

@@ -1,3 +1,4 @@
+// perf: T3 · metric: bounded single-pass work; no syscalls, no locks, no allocation on the steady path · check: review
 //! Light and spotlight calculations for the beams screensaver.
 
 use super::types::{Spotlight, smoothstep};

@@ -1,3 +1,4 @@
+// perf: T3 · metric: contains unsafe; cost depends on what the caller passes in · check: test
 #![cfg_attr(
     all(not(debug_assertions), target_os = "windows"),
     windows_subsystem = "windows"

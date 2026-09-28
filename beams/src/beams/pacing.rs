@@ -1,3 +1,4 @@
+// perf: T3 · metric: bounded single-pass work; no syscalls, no locks, no allocation on the steady path · check: review
 //! Frame time and quality scale pacing logic for Beams.
 
 use std::time::Duration;

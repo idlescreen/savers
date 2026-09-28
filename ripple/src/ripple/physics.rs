@@ -1,3 +1,4 @@
+// perf: T3 · metric: iterative; cost scales with its input, not with a fixed bound · check: review
 //! Physics simulation and displacement helpers for Ripple.
 
 use super::types::Ring;

@@ -1,6 +1,6 @@
 //! Aurora borealis — slow curtains of light over a twinkling starfield.
 
-// perf: T1 · bench: tick · sym: Screensaver · gate: perf-baseline.json
+// perf: T1 · bench: tick · sym: Screensaver · gate: perf-baseline.json · check: bench
 //
 // `sym:` is the trait the `tick` target drives through its `bench_update` /
 // `bench_draw` functions. The filename cannot be used here: these pages hold

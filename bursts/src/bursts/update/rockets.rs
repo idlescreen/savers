@@ -1,3 +1,4 @@
+// perf: T3 · metric: iterative; cost scales with its input, not with a fixed bound · check: review
 use crate::bursts::Bursts;
 use crate::bursts::types::{Explosion, FIREWORK_COLORS, Particle, Rocket, Star};
 

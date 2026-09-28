@@ -1,3 +1,4 @@
+// perf: T3 · metric: bounded single-pass work; no syscalls, no locks, no allocation on the steady path · check: review
 //! Terminal rendering for the cosmos universe lifecycle.
 //!
 //! Submodules cover particle trails, gravitational waves, the Big Bang shell,

@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: MIT
+// perf: T3 · metric: test-only page, not compiled into the shipped binary · check: test
 
 //! Property stress test: hostile `dt` and grid dimensions through
 //! the shared harness.

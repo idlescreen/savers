@@ -1,3 +1,4 @@
+// perf: T3 · metric: iterative; cost scales with its input, not with a fixed bound · check: review
 //! Consolidated bursts screensaver effect module — hero visual polish.
 //!
 //! **Taxonomy Classification**: System Role (Purpose - Application Software).

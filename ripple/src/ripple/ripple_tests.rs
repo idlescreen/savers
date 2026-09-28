@@ -1,3 +1,4 @@
+// perf: T3 · metric: test-only page, not compiled into the shipped binary · check: test
 //! Unit tests for Ripple screensaver.
 
 use super::Ripple;

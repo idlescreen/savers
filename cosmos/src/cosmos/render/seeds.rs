@@ -1,3 +1,4 @@
+// perf: T3 · metric: bounded single-pass work; no syscalls, no locks, no allocation on the steady path · check: review
 use super::black_hole_disk::draw_black_hole_disk;
 use super::star_corona::draw_star_corona;
 use crate::cosmos::Cosmos;

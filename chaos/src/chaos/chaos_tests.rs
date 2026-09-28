@@ -1,3 +1,4 @@
+// perf: T3 · metric: test-only page, not compiled into the shipped binary · check: test
 use super::*;
 use crate::runner::Screensaver;
 use crate::runner::{LcgRng, TerminalCell, hsl_to_rgb, lerp, percentage, rgb_to_hsl};

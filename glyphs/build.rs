@@ -1,3 +1,4 @@
+// perf: T3 · metric: build-time only; never runs at runtime · check: review
 // Build script: embed the saver's brand icon at compile time.
 //
 // `build_support::embed_brand_icon` reads

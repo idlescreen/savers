@@ -1,3 +1,4 @@
+// perf: T3 · metric: iterative; cost scales with its input, not with a fixed bound · check: review
 //! Star rendering for the beams screensaver (hero polish).
 
 use super::light::{LightContext, get_light_at};

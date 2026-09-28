@@ -1,3 +1,4 @@
+// perf: T3 · metric: bounded single-pass work; no syscalls, no locks, no allocation on the steady path · check: review
 use crate::cosmos::Cosmos;
 use crate::cosmos::types::{GravityCenter, Particle};
 use crate::runner::query_current_palette;
