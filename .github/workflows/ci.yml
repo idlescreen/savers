@@ -57,6 +57,7 @@ jobs:
         # checked out above as a path dep and has its own gate.
         run: bash scripts/check-perf-labels.sh
 
+      - name: bench labels are reachable
         # Same reachability gate as runtime: no page may claim
         # `check: bench` unless a bench entry point actually reaches
         # it through the module call graph.
