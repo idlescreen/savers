@@ -144,4 +144,3 @@ mod tests {
         assert_eq!(r.last_rows, 24);
     }
 }
-
