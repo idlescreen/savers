@@ -135,10 +135,20 @@ impl Bursts {
     /// See `cosmos::Cosmos::prepare_for_bench` for the rationale; the
     /// important bit is `sys_refresh_timer = -1000.0` to suppress the
     /// slow system-info probe inside `update()`.
-    pub fn prepare_for_bench(&mut self, cols: usize, rows: usize) {
+    pub fn prepare_for_bench(&mut self, _cols: usize, _rows: usize) {
         self.sys_refresh_timer = -1000.0;
-        self.last_cols = cols;
-        self.last_rows = rows;
+        // Do NOT stamp `last_cols`/`last_rows` here. `resize_if_needed`
+        // only re-initializes when the grid size actually changes, so
+        // pre-stamping the target size meant the first `update()` saw
+        // "nothing changed", skipped `generate_skyline`, and left
+        // `skyline` empty — the next `draw()` then indexed
+        // `skyline[sx]` and panicked. That panic was live in CI since
+        // the `tick` bench landed; `perf.yml` hid it behind `|| true`.
+        //
+        // Zeroing the cached size instead lets the first `update()`
+        // drive the real production init path.
+        self.last_cols = 0;
+        self.last_rows = 0;
     }
 }
 
