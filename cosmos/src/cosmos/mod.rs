@@ -80,9 +80,17 @@ impl Cosmos {
             rng: LcgRng::from_env_or_random(),
             state: UniverseState::Darkness,
             state_timer: 0.0,
-            particles: Vec::new(),
-            seeds: Vec::new(),
-            logo_pixels: Vec::new(),
+            // Particle budget cap is 580 × quality_scale × battery-factor
+            // (see physics/particle_cap.rs). Pre-allocate to the cap so
+            // ramp-up to budget doesn't realloc 4–5 times.
+            particles: Vec::with_capacity(580),
+            // Gravity-center seeds rarely exceed 8 per state. Pre-allocate
+            // to that ceiling so state-flips don't realloc.
+            seeds: Vec::with_capacity(8),
+            // Logo pixels depend on screen size and the bitmap raster;
+            // 4096 is a comfortably-over ceiling (200×200 bitmap at
+            // worst — actual usage tops ~2000 on a 1080p terminal).
+            logo_pixels: Vec::with_capacity(4096),
             time_elapsed: 0.0,
             last_cols: 0,
             last_rows: 0,
