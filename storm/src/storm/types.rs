@@ -29,7 +29,7 @@ pub struct Splash {
     pub is_background: bool,
 }
 
-#[derive(PartialEq, Eq, Clone, Copy)]
+#[derive(Debug, PartialEq, Eq, Clone, Copy)]
 pub enum Phase {
     Building,
     Complete,

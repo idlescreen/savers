@@ -5,8 +5,8 @@
 pub mod draw;
 pub mod physics;
 pub(crate) mod screensaver_impl;
-pub mod types;
 pub(crate) mod storm;
+pub mod types;
 
 #[allow(unused_imports)]
 pub use self::types::{

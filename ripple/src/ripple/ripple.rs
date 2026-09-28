@@ -116,10 +116,7 @@ mod tests {
     fn default_matches_new() {
         // `Default::default()` must produce the same struct as
         // `Ripple::new()` — both go through the same constructor.
-        assert_eq!(
-            Ripple::default().weather_timer,
-            Ripple::new().weather_timer
-        );
+        assert_eq!(Ripple::default().weather_timer, Ripple::new().weather_timer);
     }
 
     #[test]
