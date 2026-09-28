@@ -56,6 +56,11 @@ jobs:
         # against. The script excludes `runtime/` — the engine is
         # checked out above as a path dep and has its own gate.
         run: bash scripts/check-perf-labels.sh
+
+        # Same reachability gate as runtime: no page may claim
+        # `check: bench` unless a bench entry point actually reaches
+        # it through the module call graph.
+        run: python3 scripts/check-bench-reachability.py --gate savers
       - name: cargo clippy
         run: cargo clippy --workspace --all-targets -- -D warnings
       - name: cargo audit (advisories)
