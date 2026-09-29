@@ -1,4 +1,3 @@
-// perf: T3 · metric: iterative; cost scales with its input, not with a fixed bound · check: review
 //! Rain drop updates, collision handling, and splash/puddle updates.
 //! Math: dy += gravity*dt, wind effect, bounce on ground with 0.3 factor, random splash.
 //! Precision: f32 sufficient for screen coords; fixed dt in caller for determinism.

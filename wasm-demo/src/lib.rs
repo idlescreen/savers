@@ -1,4 +1,3 @@
-// perf: T3 · metric: contains unsafe; cost depends on what the caller passes in · check: review
 //! Browser host shim — runs an IdleScreen saver inside wasm32.
 //!
 //! Plain C ABI, no wasm-bindgen: JS drives time via rAF and reads the

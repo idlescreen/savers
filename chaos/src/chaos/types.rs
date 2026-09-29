@@ -1,4 +1,3 @@
-// perf: T3 · metric: bounded single-pass work; no syscalls, no locks, no allocation on the steady path · check: review
 pub struct Particle {
     pub home_x: f32,
     pub home_y: f32,

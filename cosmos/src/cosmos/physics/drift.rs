@@ -1,4 +1,3 @@
-// perf: T3 · metric: bounded single-pass work; no syscalls, no locks, no allocation on the steady path · check: review
 use crate::cosmos::Cosmos;
 use crate::cosmos::physics::{TERMINAL_ASPECT_Y, logo_to_screen_fast, to_screen_fast};
 use crate::cosmos::types::Particle;

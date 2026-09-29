@@ -91,7 +91,6 @@ GATE_PCT = 100.0
 
 
 # Criterion group names that are T1 — the only ones the gate may fail
-# the build on. See the tier table in .github/RULES.md §5.
 #
 # Everything else in the baseline (T2 groups such as `stretch_cache`,
 # `consume_events`, `power_watcher`) is measured and reported but never
@@ -136,7 +135,6 @@ MIN_GATED_MEDIAN_NS = 10.0
 # Per-group thresholds, matched left-to-right on the bench name prefix.
 # Every group above is T1 and shares the default threshold; the table
 # exists so a single noisy group (e.g. a particle-heavy saver) can be
-# loosened without loosening the rest. See .github/RULES.md §5.
 BENCH_THRESHOLDS = ()
 
 

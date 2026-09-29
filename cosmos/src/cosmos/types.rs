@@ -1,4 +1,3 @@
-// perf: T3 · metric: bounded single-pass work; no syscalls, no locks, no allocation on the steady path · check: review
 //! Types and definitions for the cosmos screensaver universe lifecycle.
 
 /// State of the universe.

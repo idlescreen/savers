@@ -1,4 +1,3 @@
-// perf: T3 · metric: iterative over the ring slice; zero allocations on the steady path, asserted by physics_tests.rs · check: test
 //! Physics simulation and displacement helpers for Ripple.
 
 use super::types::Ring;

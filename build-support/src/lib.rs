@@ -1,4 +1,3 @@
-// perf: T3 · metric: spawns a subprocess; cost is dominated by fork/exec, not by this page · check: review
 //! Shared build-script helpers for compiling brand icon resources into
 //! Windows binaries. Used as a build-dependency by every saver crate so
 //! the RC-generation logic lives in exactly one place.

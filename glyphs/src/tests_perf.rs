@@ -1,4 +1,3 @@
-// perf: T3 · metric: bounded single-pass work; no syscalls, no locks, no allocation on the steady path · check: test
 use crate::glyphs::Glyphs;
 use crate::runner::Screensaver;
 use crate::runner::TerminalCell;

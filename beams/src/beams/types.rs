@@ -1,4 +1,3 @@
-// perf: T3 · metric: iterative; cost scales with its input, not with a fixed bound · check: review
 //! Auxiliary types and defaults for the beams screensaver.
 
 use std::f32::consts::FRAC_PI_2;

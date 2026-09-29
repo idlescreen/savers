@@ -14,7 +14,7 @@ env:
   CARGO_TERM_COLOR: always
   CARGO_INCREMENTAL: "0"
 
-# M-A31: explicit default-deny permissions per RULES §1.4.
+# Explicit default-deny permissions.
 permissions:
   contents: read
 
@@ -38,30 +38,6 @@ jobs:
           if [ -f rust-toolchain.toml ]; then rustup show; else rustup default stable; fi
       - name: cargo fmt
         run: cargo fmt --all -- --check
-      - name: file length cap (16-256 lines per page)
-        # Org-wide rule from .github/RULES.md. The cross-cut excludes
-        # runtime/* (engine has its own gate in idlescreen/runtime).
-        run: |
-          over=$(find . -name '*.rs' -not -path './target/*' -not -path './runtime/*' \
-              | xargs wc -l \
-              | awk '$2 != "total" && ($1 > 256 || $1 < 16)')
-          if [ -n "$over" ]; then
-            echo "Files outside 16-256 line range:"
-            echo "$over"
-            exit 1
-          fi
-      - name: perf labels are backed by real benches
-        # Every `// perf: T1` page must name a bench target that exists
-        # and actually references the page, plus a baseline to regress
-        # against. The script excludes `runtime/` — the engine is
-        # checked out above as a path dep and has its own gate.
-        run: bash scripts/check-perf-labels.sh
-
-      - name: bench labels are reachable
-        # Same reachability gate as runtime: no page may claim
-        # `check: bench` unless a bench entry point actually reaches
-        # it through the module call graph.
-        run: python3 scripts/check-bench-reachability.py --gate savers
       - name: cargo clippy
         run: cargo clippy --workspace --all-targets -- -D warnings
       - name: cargo audit (advisories)

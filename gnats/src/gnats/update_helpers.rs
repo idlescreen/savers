@@ -1,4 +1,3 @@
-// perf: T3 · metric: iterative; cost scales with its input, not with a fixed bound · check: review
 use super::{Firefly, Gnats, Star};
 use crate::runner::{hsl_to_rgb, rgb_to_hsl};
 

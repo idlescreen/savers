@@ -1,4 +1,3 @@
-// perf: T3 · metric: lock-sensitive; cost depends on contention the caller creates · check: review
 use std::sync::Mutex;
 
 mod behavior;

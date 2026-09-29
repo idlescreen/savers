@@ -1,4 +1,3 @@
-// perf: T3 · metric: test-only page, not compiled into the shipped binary · check: test
 //! Unit tests for physics and math helper functions.
 
 use super::*;

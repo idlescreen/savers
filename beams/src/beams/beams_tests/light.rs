@@ -1,4 +1,3 @@
-// perf: T3 · metric: bounded single-pass work; no syscalls, no locks, no allocation on the steady path · check: test
 use super::super::Spotlight;
 use super::super::light::{LightContext, get_light_at};
 use super::with_primary_monitor;

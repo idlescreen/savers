@@ -1,4 +1,3 @@
-// perf: T3 · metric: build-time only; never runs at runtime · check: review
 // Build script: embed the saver's brand icon at compile time.
 //
 // `build_support::embed_brand_icon` reads
@@ -14,10 +13,6 @@
 // walks the dependency graph. Putting the embed in a script
 // (rather than a function on a regular source file) means the
 // bytes are pulled in before any test is even linked.
-//
-// RULES.md §1 (every page ≥ 16 lines): the doc comment above is
-// what brings this file above the 16-line floor; the actual
-// `fn main` is one line.
 
 fn main() {
     build_support::embed_brand_icon("assets/scene-chaos.ico", "idle-saver-chaos");

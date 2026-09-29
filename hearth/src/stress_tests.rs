@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: MIT
-// perf: T3 · metric: test-only page, not compiled into the shipped binary · check: test
 
 //! Property stress test: hostile `dt` and grid dimensions through
 //! the shared harness.
@@ -24,10 +23,6 @@
 //! If this test regresses, the saver likely needs a closer look
 //! at its `init`, `update`, or `draw_frame` paths before
 //! shipping.
-//!
-//! RULES.md §1 (every page ≥ 16 lines): the doc comment above is
-//! what brings this file above the 16-line floor; the actual
-//! test is one `#[test]` fn.
 //!
 //! The saver type lives under `crate::bench_exports` because the
 //! cdylib's only public surface is the `ScreensaverInstance` FFI;

@@ -1,4 +1,3 @@
-// perf: T3 · metric: bounded single-pass work; no syscalls, no locks, no allocation on the steady path · check: review
 //! Chaos screensaver drawing: stars, lens flares, particles, and phase effects.
 
 mod effects;

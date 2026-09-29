@@ -14,7 +14,7 @@
 # a bench that was renamed cannot leak into the baseline.
 #
 # All eleven savers are T1: each holds the `Screensaver` impl that the
-# `tick` bench drives, so each is gated. See .github/RULES.md §4.
+# `tick` bench drives, so each is gated.
 set -euo pipefail
 
 cd "$(dirname "$0")/.."

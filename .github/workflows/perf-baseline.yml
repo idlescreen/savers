@@ -109,7 +109,7 @@ jobs:
 
           The previous baseline was captured on a developer machine, so
           the gate was comparing two different CPUs -- swings of -38%
-          to +47% on savers whose only change was a `// perf:` label.
+          to +47% on savers without code changes.
           MSG
           git push origin HEAD:master
 

@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: MIT
-// perf: T3 · metric: bounded single-pass work; no syscalls, no locks, no allocation on the steady path · check: review
 
 use super::particle_helpers::{spawn_massive_explosion, spawn_nuke_explosion};
 use super::types::{EnemyShip, ExplosionParticle, LaserBeam, RadarJet};

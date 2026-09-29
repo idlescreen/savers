@@ -1,4 +1,3 @@
-// perf: T3 · metric: build-time only; never runs at runtime · check: test
 use crate::cosmos::Cosmos;
 use crate::cosmos::physics::screen_to_logo_universe;
 use crate::cosmos::types::LogoPixel;

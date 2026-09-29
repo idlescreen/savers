@@ -1,4 +1,3 @@
-// perf: T3 · metric: bounded single-pass work; no syscalls, no locks, no allocation on the steady path · check: review
 //! Helper functions and core calculations for the bursts screensaver.
 
 use super::types::{ActiveExplosion, Particle, Star};

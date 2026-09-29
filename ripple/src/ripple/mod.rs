@@ -1,14 +1,10 @@
-// perf: T3 · metric: bounded single-pass work; no syscalls, no locks, no allocation on the steady path · check: review
 //! Rain on a still pond — continuous rings, interference, weather states.
 //! OS logo sits in the water and warps when rings pass through it.
 
 mod draw;
 mod physics;
-// `ripple::ripple` is not inception in the sense clippy means: RULES.md
-// §2 names a page after the function or type it implements, and this one
-// holds `Ripple::new` plus its helpers. The Screensaver trait impl lives
-// in the sibling `screensaver_impl.rs`. Renaming the module to dodge the
-// lint would break the page-naming rule the lint is meant to protect.
+// `ripple::ripple` holds `Ripple::new` plus its helpers. The Screensaver
+// trait impl lives in the sibling `screensaver_impl.rs`.
 #[allow(clippy::module_inception)]
 mod ripple;
 mod screensaver_impl;

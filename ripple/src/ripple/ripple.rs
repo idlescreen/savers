@@ -1,10 +1,9 @@
 // SPDX-License-Identifier: MIT
-// perf: T3 · metric: bounded single-pass work; no syscalls, no locks, no allocation on the steady path · check: test
-//
+
 // `Ripple` constructor + small public/internal helpers (Default,
 // new, prepare_for_bench, impact, pick_weather). The Screensaver
 // trait impl (init / update_frame_time / update / draw) lives in
-// `screensaver_impl.rs` per RULES.md one-fn-per-page.
+// `screensaver_impl.rs`.
 
 use crate::runner::{LcgRng, get_system_info, query_current_palette};
 

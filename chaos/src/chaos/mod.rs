@@ -1,4 +1,3 @@
-// perf: T3 · metric: bounded single-pass work; no syscalls, no locks, no allocation on the steady path · check: review
 //! Consolidated chaos screensaver effect module — hero visual polish.
 //!
 //! **Taxonomy Classification**: System Role (Purpose - Application Software).

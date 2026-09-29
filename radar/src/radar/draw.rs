@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: MIT
-// perf: T3 · metric: bounded single-pass work; no syscalls, no locks, no allocation on the steady path · check: review
 
 use super::blips;
 use super::draw_helpers::{draw_datalinks, draw_hud, draw_laser_beam, draw_lock_line};

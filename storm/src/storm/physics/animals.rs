@@ -1,4 +1,3 @@
-// perf: T3 · metric: allocates on the call path; cost scales with allocation count · check: review
 use crate::storm::Storm;
 use crate::storm::types::{Animal, AnimalState, AnimalType};
 
