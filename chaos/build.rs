@@ -1,19 +1,23 @@
-// Build script: embed the saver's brand icon at compile time.
-//
-// `build_support::embed_brand_icon` reads
-// `assets/scene-chaos.ico` and produces a `include_bytes!`-shaped
-// `pub static IDLE_SAVER_CHAOS_BRAND_ICON: &[u8]` symbol so the
-// runtime can surface a per-saver splash without an asset path at
-// runtime. The image never leaves the binary, which keeps the
-// plugin loader from depending on filesystem layout.
-//
-// Why this lives in `build.rs` (not in the runtime crate): the
-// `include_bytes!` macro runs at compile time of this crate, so
-// the icon has to be physically present here when `cargo build`
-// walks the dependency graph. Putting the embed in a script
-// (rather than a function on a regular source file) means the
-// bytes are pulled in before any test is even linked.
+// SPDX-License-Identifier: Apache-2.0
+// Copyright 2026 IdleScreen
+
+use std::path::Path;
 
 fn main() {
-    build_support::embed_brand_icon("assets/scene-chaos.ico", "idle-saver-chaos");
+    let icon = "assets/scene-chaos.ico";
+    let manifest = "libscreensaver_chaos.idleplugin.toml";
+
+    assert!(
+        Path::new(icon).exists(),
+        "Required icon asset does not exist: {icon}"
+    );
+    assert!(
+        Path::new(manifest).exists(),
+        "Required plugin manifest does not exist: {manifest}"
+    );
+
+    println!("cargo:rerun-if-changed={icon}");
+    println!("cargo:rerun-if-changed={manifest}");
+
+    build_support::embed_brand_icon(icon, "idle-saver-chaos");
 }

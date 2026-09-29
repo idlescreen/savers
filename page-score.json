@@ -1,6 +1,6 @@
 {
  "repo": "savers",
- "rev": "e9daffe",
+ "rev": "8576812",
  "dirty": true,
  "pages": [
   {
@@ -12,7 +12,7 @@
   },
   {
    "path": "./aurora/build.rs",
-   "lines": 19,
+   "lines": 23,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
@@ -82,7 +82,7 @@
   },
   {
    "path": "./beams/build.rs",
-   "lines": 19,
+   "lines": 23,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
@@ -236,7 +236,7 @@
   },
   {
    "path": "./bursts/build.rs",
-   "lines": 19,
+   "lines": 23,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
@@ -341,7 +341,7 @@
   },
   {
    "path": "./chaos/build.rs",
-   "lines": 19,
+   "lines": 23,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
@@ -446,7 +446,7 @@
   },
   {
    "path": "./cosmos/build.rs",
-   "lines": 19,
+   "lines": 23,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
@@ -698,7 +698,7 @@
   },
   {
    "path": "./glyphs/build.rs",
-   "lines": 19,
+   "lines": 23,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
@@ -768,7 +768,7 @@
   },
   {
    "path": "./gnats/build.rs",
-   "lines": 19,
+   "lines": 23,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
@@ -880,7 +880,7 @@
   },
   {
    "path": "./hearth/build.rs",
-   "lines": 19,
+   "lines": 23,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
@@ -964,17 +964,10 @@
   },
   {
    "path": "./meta/src/lib.rs",
-   "lines": 16,
+   "lines": 28,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
-  },
-  {
-   "path": "./meta/src/plugins.rs",
-   "lines": 14,
-   "bin_bytes": null,
-   "heat_pct": null,
-   "reach": 1
   },
   {
    "path": "./radar/benches/tick.rs",
@@ -985,7 +978,7 @@
   },
   {
    "path": "./radar/build.rs",
-   "lines": 19,
+   "lines": 23,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
@@ -1097,7 +1090,7 @@
   },
   {
    "path": "./ripple/build.rs",
-   "lines": 19,
+   "lines": 23,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
@@ -1195,7 +1188,7 @@
   },
   {
    "path": "./storm/build.rs",
-   "lines": 19,
+   "lines": 23,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0

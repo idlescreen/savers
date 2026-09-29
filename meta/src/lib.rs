@@ -4,7 +4,8 @@
 //! # IdleScreen Plugins All Meta-Crate
 //!
 //! This is a packaging-only placeholder library for the `idle-plugins-all`
-//! Debian package. It does not export any functions or contain active Rust logic.
+//! Debian package. It defines the catalog of default screensavers packaged
+//! by the metapackage.
 //!
 //! ## Discovery
 //!
@@ -12,5 +13,16 @@
 //! `/usr/libexec/idle/screensavers/` (installed by the individual screen packages) and
 //! presents them dynamically to the user session applet.
 
-pub mod plugins;
-pub use plugins::*;
+/// List of screensavers bundled in `idle-plugins-all`.
+pub const PLUGINS: &[&str] = &[
+    "beams", "bursts", "chaos", "cosmos", "glyphs", "gnats", "hearth", "radar", "ripple", "storm",
+];
+
+/// Returns the count of default screensaver plugins.
+pub fn plugin_count() -> usize {
+    PLUGINS.len()
+}
+
+pub mod plugins {
+    pub use super::{PLUGINS, plugin_count};
+}
