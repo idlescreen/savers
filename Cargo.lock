@@ -284,7 +284,7 @@ version = "0.1.0"
 
 [[package]]
 name = "idle-plugins-all"
-version = "3.3.13"
+version = "3.3.14"
 
 [[package]]
 name = "is-terminal"
