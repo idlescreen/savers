@@ -1,7 +1,7 @@
 {
  "repo": "savers",
- "rev": "e014d87",
- "dirty": true,
+ "rev": "aa5d284",
+ "dirty": false,
  "pages": [
   {
    "path": "./aurora/benches/tick.rs",
