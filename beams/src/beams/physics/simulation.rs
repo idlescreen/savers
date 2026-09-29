@@ -117,6 +117,9 @@ pub fn draw_impl(
     // Beam 1's live accent is applied inside get_light_at — no clone needed.
     let is_secondary = crate::runner::is_secondary_monitor();
 
+    let audio = idle_api::audio::query_audio_bands();
+    let surge = (audio[0] * 1.4 + audio[1] * 0.6).clamp(0.0, 1.0);
+
     let mut current_angles = Vec::new();
     let mut spot_cots = Vec::new();
     for spot in spotlights {
@@ -125,8 +128,9 @@ pub fn draw_impl(
         let angle = spot.angle_center + amp * (spot.phase + spot.phase_offset).sin();
         current_angles.push(angle);
 
-        // Cot culling uses outer soft cone
-        let outer = spot.spread * 1.75;
+        // Cot culling uses outer soft cone with audio surge modulation
+        let spread = spot.spread * (1.0 + surge * 0.5);
+        let outer = spread * 1.75;
         let a_min = angle - outer;
         let a_max = angle + outer;
 
@@ -144,8 +148,7 @@ pub fn draw_impl(
             0.0
         };
 
-        let inv_spread = 1.0 / spot.spread.max(1e-6);
-        spot_cots.push((a_min, a_max, cot_min, cot_max, inv_spread));
+        spot_cots.push((a_min, a_max, cot_min, cot_max, spread));
     }
 
     let light_ctx = LightContext::new(cols, rows, spotlights);

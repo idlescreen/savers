@@ -9,12 +9,33 @@ description = "Browser host shim — runs an IdleScreen saver under wasm32 for t
 publish = false
 
 [lib]
-crate-type = ["cdylib"]
+crate-type = ["cdylib", "rlib"]
 
 [package.metadata.cargo-machete]
-# `beams` is used via its lib name `screensaver_beams` — machete can't see it.
-ignored = ["beams"]
+ignored = [
+    "aurora",
+    "beams",
+    "bursts",
+    "chaos",
+    "cosmos",
+    "glyphs",
+    "gnats",
+    "hearth",
+    "radar",
+    "ripple",
+    "storm",
+]
 
 [dependencies]
+aurora = { path = "../aurora" }
 beams = { path = "../beams" }
+bursts = { path = "../bursts" }
+chaos = { path = "../chaos" }
+cosmos = { path = "../cosmos" }
+glyphs = { path = "../glyphs" }
+gnats = { path = "../gnats" }
+hearth = { path = "../hearth" }
+radar = { path = "../radar" }
+ripple = { path = "../ripple" }
+storm = { path = "../storm" }
 idle-api.workspace = true

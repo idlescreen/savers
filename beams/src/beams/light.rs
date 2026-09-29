@@ -95,7 +95,7 @@ pub fn get_light_at(
         let dy = ctx.y_origin - cy;
 
         if dy > 0.0 {
-            let (a_min, a_max, cot_min, cot_max, _inv_spread) = spot_cots[i];
+            let (a_min, a_max, cot_min, cot_max, spread) = spot_cots[i];
             // Slightly wider culling for soft halo.
             let mut in_beam = true;
             if a_min > 1e-4 && dx >= dy * cot_min * 1.08 {
@@ -126,12 +126,14 @@ pub fn get_light_at(
                 }
 
                 let abs_da = da.abs();
-                let ang = angular_weight(abs_da, spot.spread);
+                let ang = angular_weight(abs_da, spread);
                 if ang > 0.0 {
                     // Soft distance falloff (quadratic-ish).
                     let dist_t = (dist * ctx.inv_max_dist).clamp(0.0, 1.0);
                     let dist_intensity = (1.0 - dist_t) * (1.0 - dist_t * 0.35);
-                    let intensity = ang * dist_intensity * 0.92;
+                    let intensity = ang
+                        * dist_intensity
+                        * (0.92 + (spread / spot.spread.max(1e-6) - 1.0) * 0.4);
 
                     // Beam 1 tracks the live theme accent.
                     let (cr, cg, cb) = if i == 1 {

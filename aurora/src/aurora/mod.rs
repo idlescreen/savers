@@ -28,6 +28,8 @@ pub struct Aurora {
     pub(crate) cpu_load: f32,
     pub(crate) logo_text: String,
     pub(crate) accent: (u8, u8, u8),
+    pub(crate) target_accent: (u8, u8, u8),
+    pub(crate) current_accent: (f32, f32, f32),
     /// 0→1 fade-in after init / resize (~0.45s)
     pub(crate) intro_fade: f32,
     /// Countdown to the next brightening event.
@@ -86,6 +88,8 @@ impl Aurora {
             cpu_load: (sys.cpu_usage_pct / 100.0).clamp(0.0, 1.0),
             logo_text: sys.logo_text,
             accent,
+            target_accent: accent,
+            current_accent: (accent.0 as f32, accent.1 as f32, accent.2 as f32),
             intro_fade: 0.0,
             surge_timer: 14.0,
             surge_hold: 0.0,
@@ -179,9 +183,20 @@ impl Screensaver for Aurora {
             self.cpu_load = (sys.cpu_usage_pct / 100.0).clamp(0.0, 1.0);
             self.on_battery = sys.power_status.contains("Battery");
             self.logo_text = sys.logo_text;
-            self.accent = query_current_palette().accent;
+            self.target_accent = query_current_palette().accent;
             self.sys_refresh_timer = 0.0;
         }
+
+        // Smooth 1-second RGB lerp toward target accent
+        let t = (dt_secs * speed_mult / 1.0).clamp(0.0, 1.0);
+        self.current_accent.0 += (self.target_accent.0 as f32 - self.current_accent.0) * t;
+        self.current_accent.1 += (self.target_accent.1 as f32 - self.current_accent.1) * t;
+        self.current_accent.2 += (self.target_accent.2 as f32 - self.current_accent.2) * t;
+        self.accent = (
+            self.current_accent.0.round() as u8,
+            self.current_accent.1.round() as u8,
+            self.current_accent.2.round() as u8,
+        );
 
         if cols != self.last_cols || rows != self.last_rows {
             self.last_cols = cols;

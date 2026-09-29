@@ -28,6 +28,8 @@ pub struct Bursts {
     pub(crate) skyline_style_opt: u32,
     pub(crate) logo_text: String,
     pub(crate) accent: (u8, u8, u8),
+    pub(crate) target_accent: (u8, u8, u8),
+    pub(crate) current_accent: (f32, f32, f32),
 
     // Live system dynamics
     pub(crate) sys_refresh_timer: f32,
@@ -80,6 +82,12 @@ impl Bursts {
             skyline_style_opt,
             logo_text,
             accent: query_current_palette().accent,
+            target_accent: query_current_palette().accent,
+            current_accent: (
+                query_current_palette().accent.0 as f32,
+                query_current_palette().accent.1 as f32,
+                query_current_palette().accent.2 as f32,
+            ),
             sys_refresh_timer: 0.0,
             mem_pressure: sys.mem_used_pct / 100.0,
             cpu_load: (sys.cpu_usage_pct / 100.0).clamp(0.0, 1.0),

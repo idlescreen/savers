@@ -6,6 +6,9 @@
 use idle_api::{ScreensaverInstance, TerminalCell};
 use std::time::Duration;
 
+use crate::factory::create_saver_by_name;
+use crate::params::ensure_palette_hook;
+
 /// Owns the saver instance plus its render grid and packed output buffer.
 pub struct SaverHost {
     pub(crate) inst: Box<ScreensaverInstance>,
@@ -16,15 +19,18 @@ pub struct SaverHost {
 }
 
 impl SaverHost {
+    /// Create a host running the default saver (`beams`).
     pub fn new(cols: usize, rows: usize) -> Option<Box<Self>> {
+        Self::new_named("beams", cols, rows)
+    }
+
+    /// Create a host running a specified saver by name.
+    pub fn new_named(name: &str, cols: usize, rows: usize) -> Option<Box<Self>> {
         if cols == 0 || rows == 0 || cols > 512 || rows > 256 {
             return None;
         }
-        let raw = screensaver_beams::create_screensaver();
-        if raw.is_null() {
-            return None;
-        }
-        let mut inst = unsafe { Box::from_raw(raw) };
+        ensure_palette_hook();
+        let mut inst = create_saver_by_name(name)?;
         inst.inner.init(cols, rows);
         inst.inner.set_active(true);
         inst.inner.set_focused(true);

@@ -37,6 +37,7 @@ pub struct Beams {
     pub(super) target_frame_time: f32,
     pub(super) logo_text: String,
     pub(super) cached_accent: (u8, u8, u8),
+    pub(super) current_accent: (f32, f32, f32),
 
     /// 0→1 fade-in after init / resize (~0.45s)
     pub(super) intro_fade: f32,
@@ -82,6 +83,7 @@ impl Beams {
             target_frame_time: 0.01666667,
             logo_text,
             cached_accent: accent,
+            current_accent: (accent.0 as f32, accent.1 as f32, accent.2 as f32),
             intro_fade: 0.0,
         }
     }
@@ -147,6 +149,17 @@ impl Screensaver for Beams {
             self.logo_text = metrics.logo_text;
             self.cached_accent = metrics.cached_accent;
             self.sys_refresh_timer = 0.0;
+        }
+
+        // Smooth 1-second RGB lerp toward target accent
+        let t = (delta / 1.0).clamp(0.0, 1.0);
+        self.current_accent.0 += (self.cached_accent.0 as f32 - self.current_accent.0) * t;
+        self.current_accent.1 += (self.cached_accent.1 as f32 - self.current_accent.1) * t;
+        self.current_accent.2 += (self.cached_accent.2 as f32 - self.current_accent.2) * t;
+        if self.spotlights.len() > 1 {
+            self.spotlights[1].color_r = self.current_accent.0;
+            self.spotlights[1].color_g = self.current_accent.1;
+            self.spotlights[1].color_b = self.current_accent.2;
         }
 
         let bat = if self.on_battery { 0.55 } else { 1.0 };

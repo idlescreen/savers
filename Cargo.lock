@@ -621,8 +621,18 @@ dependencies = [
 name = "wasm-demo"
 version = "2.4.9"
 dependencies = [
+ "aurora",
  "beams",
+ "bursts",
+ "chaos",
+ "cosmos",
+ "glyphs",
+ "gnats",
+ "hearth",
  "idle-api",
+ "radar",
+ "ripple",
+ "storm",
 ]
 
 [[package]]

@@ -1,6 +1,6 @@
 {
  "repo": "savers",
- "rev": "8576812",
+ "rev": "8a28fc9",
  "dirty": true,
  "pages": [
   {
@@ -33,7 +33,7 @@
   },
   {
    "path": "./aurora/src/aurora/mod.rs",
-   "lines": 216,
+   "lines": 231,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
@@ -131,7 +131,7 @@
   },
   {
    "path": "./beams/src/beams/mod.rs",
-   "lines": 242,
+   "lines": 252,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
@@ -166,7 +166,7 @@
   },
   {
    "path": "./beams/src/beams/physics/simulation.rs",
-   "lines": 241,
+   "lines": 244,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 1
@@ -264,7 +264,7 @@
   },
   {
    "path": "./bursts/src/bursts/mod.rs",
-   "lines": 157,
+   "lines": 165,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
@@ -306,7 +306,7 @@
   },
   {
    "path": "./bursts/src/bursts/update/rockets.rs",
-   "lines": 229,
+   "lines": 246,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
@@ -1153,7 +1153,7 @@
   },
   {
    "path": "./ripple/src/ripple/screensaver_impl.rs",
-   "lines": 134,
+   "lines": 154,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
@@ -1327,15 +1327,36 @@
    "reach": 0
   },
   {
-   "path": "./wasm-demo/src/host.rs",
-   "lines": 70,
+   "path": "./wasm-demo/src/factory.rs",
+   "lines": 55,
    "bin_bytes": null,
    "heat_pct": null,
-   "reach": 1
+   "reach": 3
+  },
+  {
+   "path": "./wasm-demo/src/host.rs",
+   "lines": 76,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 2
   },
   {
    "path": "./wasm-demo/src/lib.rs",
-   "lines": 72,
+   "lines": 111,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./wasm-demo/src/params.rs",
+   "lines": 85,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 3
+  },
+  {
+   "path": "./wasm-demo/src/tests.rs",
+   "lines": 48,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0

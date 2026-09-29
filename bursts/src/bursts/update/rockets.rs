@@ -9,10 +9,21 @@ impl Bursts {
             self.mem_pressure = sys.mem_used_pct / 100.0;
             self.cpu_load = (sys.cpu_usage_pct / 100.0).clamp(0.0, 1.0);
             self.on_battery = sys.power_status.contains("Battery");
-            self.accent = crate::runner::query_current_palette().accent;
+            self.target_accent = crate::runner::query_current_palette().accent;
             self.logo_text = sys.logo_text.clone();
             self.sys_refresh_timer = 0.0;
         }
+
+        // Smooth 1-second RGB lerp toward target accent
+        let t = (delta / 1.0).clamp(0.0, 1.0);
+        self.current_accent.0 += (self.target_accent.0 as f32 - self.current_accent.0) * t;
+        self.current_accent.1 += (self.target_accent.1 as f32 - self.current_accent.1) * t;
+        self.current_accent.2 += (self.target_accent.2 as f32 - self.current_accent.2) * t;
+        self.accent = (
+            self.current_accent.0.round() as u8,
+            self.current_accent.1.round() as u8,
+            self.current_accent.2.round() as u8,
+        );
     }
 
     pub(super) fn resize_if_needed(&mut self, cols: usize, rows: usize) {
@@ -58,8 +69,12 @@ impl Bursts {
     }
 
     pub(super) fn maybe_launch_rocket(&mut self, cols: usize, rows: usize) {
-        // Quiet sky: hold launches so the field can breathe between waves.
-        if self.quiet_timer > 0.0 || self.launch_cooldown > 0.0 {
+        let audio = idle_api::audio::query_audio_bands();
+        let audio_peak = audio[0].max(audio[1] * 0.9);
+        let audio_boost = audio_peak > 0.45;
+        if audio_boost {
+            self.quiet_timer = 0.0;
+        } else if self.quiet_timer > 0.0 || self.launch_cooldown > 0.0 {
             return;
         }
 
@@ -73,7 +88,11 @@ impl Bursts {
         // Cap concurrent rockets lower so we never dump a full volley at once.
         let max_rockets =
             (base_max as f32 * load_mult * self.quality_scale * bat).clamp(1.0, 4.0) as usize;
-        let chance = base_chance * load_mult * self.quality_scale * bat;
+        let chance = if audio_boost {
+            (base_chance * 4.0_f32).min(0.85_f32)
+        } else {
+            base_chance * load_mult * self.quality_scale * bat
+        };
         if self.rockets.len() < max_rockets && self.rng.next_bool(chance) {
             let bounds = if crate::runner::is_secondary_monitor() {
                 crate::runner::MonitorCellBounds {

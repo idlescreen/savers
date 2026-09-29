@@ -91,6 +91,26 @@ impl Screensaver for Ripple {
 
         let on_battery = self.on_battery;
         let quality_scale = self.quality_scale;
+
+        let audio = idle_api::audio::query_audio_bands();
+        let audio_energy = audio[0] * 1.5 + audio[1] * 0.8 + audio[2] * 0.4;
+        if audio_energy > 0.35 && self.rng.next_f32() < audio_energy.min(0.85) {
+            let x = self.rng.next_f32() * cols as f32;
+            let y = self.rng.next_f32() * rows as f32;
+            let strength = (audio_energy * 0.7).clamp(0.4, 1.2);
+            types::spawn_ring(
+                &mut self.rings,
+                self.weather,
+                on_battery,
+                quality_scale,
+                x,
+                y,
+                strength,
+                cols,
+                rows,
+            );
+        }
+
         let state = super::update::RippleState {
             rings: &mut self.rings,
             drops: &mut self.drops,
