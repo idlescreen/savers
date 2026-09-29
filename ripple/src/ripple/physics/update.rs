@@ -1,6 +1,6 @@
 //! Simulation update logic for Ripple screensaver.
 
-use super::types::{self, DelayedRing, Drop, Ring, Splash, Weather};
+use crate::ripple::types::{self, DelayedRing, Drop, Ring, Splash, Weather};
 use crate::runner::LcgRng;
 
 pub struct RippleState<'a> {

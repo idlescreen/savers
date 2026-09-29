@@ -1,8 +1,8 @@
 //! Core calculations and helper functions for the beams screensaver.
 
-use super::light::{LightContext, draw_spotlight, get_light_at};
-use super::physics_star::draw_star;
-use super::types::{DustParticle, Spotlight, Star};
+use super::star::draw_star;
+use crate::beams::light::{LightContext, draw_spotlight, get_light_at};
+use crate::beams::types::{DustParticle, Spotlight, Star};
 use crate::runner::TerminalCell;
 
 // physics function with many positional inputs (positions, velocities, parameters); refactor to RenderContext struct tracked for Sprint-03 housekeeping.

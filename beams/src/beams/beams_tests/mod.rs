@@ -3,6 +3,7 @@ use std::sync::Mutex;
 mod behavior;
 mod lifecycle;
 mod light;
+mod math_proptest;
 
 /// Process-global env races under parallel tests.
 /// Host reads `IDLE_SECONDARY_MONITOR` (see idle-runner sys_info).

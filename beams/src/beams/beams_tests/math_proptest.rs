@@ -2,8 +2,8 @@
 //! Deterministic std-only replacement for the previous proptest version.
 // SPDX-License-Identifier: Apache-2.0
 
-use super::pacing::{FramePacing, update_frame_time};
-use super::types::smoothstep;
+use crate::beams::pacing::{FramePacing, update_frame_time};
+use crate::beams::types::smoothstep;
 use std::time::Duration;
 
 /// xorshift64* — deterministic case generation without proptest.

@@ -1,8 +1,8 @@
-pub use super::physics_helpers::{
+pub use super::forces::{
     decay_logo_excitations, update_attractors, update_kill_sparks, update_logo_excitations,
     update_stars,
 };
-use super::types::{Attractor, Firefly};
+use crate::gnats::types::{Attractor, Firefly};
 use crate::runner::LcgRng;
 
 // physics function with many positional inputs (positions, velocities, parameters); refactor to RenderContext struct tracked for Sprint-03 housekeeping.
@@ -188,6 +188,3 @@ pub fn compute_firefly_forces_and_update(
     dead_indices
 }
 
-#[cfg(test)]
-#[path = "physics_tests.rs"]
-mod tests;

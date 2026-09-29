@@ -1,7 +1,7 @@
 //! Beam motion and particle spawning helpers for Beams screensaver.
 
-use super::MAX_CALM_BEAMS;
-use super::types::{DustParticle, Spotlight, Star};
+use crate::beams::MAX_CALM_BEAMS;
+use crate::beams::types::{DustParticle, Spotlight, Star};
 use crate::runner::LcgRng;
 
 pub fn spawn_dust(rng: &mut LcgRng, near: bool) -> DustParticle {

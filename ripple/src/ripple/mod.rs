@@ -9,7 +9,7 @@ mod physics;
 mod ripple;
 mod screensaver_impl;
 mod types;
-mod update;
+pub use physics::update;
 
 pub use types::{DelayedRing, Drop, Ring, Splash, Weather};
 

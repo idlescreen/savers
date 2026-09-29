@@ -1,5 +1,5 @@
 use super::*;
-use crate::gnats::{KillSpark, Star};
+use crate::gnats::{Attractor, Firefly, KillSpark, Star};
 use crate::runner::LcgRng;
 
 #[test]

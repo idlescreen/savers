@@ -1,5 +1,5 @@
 use super::Gnats;
-use super::render_helpers::{draw_connectors, draw_stars};
+use super::render_effects::{draw_connectors, draw_stars};
 use crate::runner::TerminalCell;
 
 /// Soft glow sample for bright fireflies (orthogonal neighbors).

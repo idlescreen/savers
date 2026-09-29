@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-use super::types::ExplosionParticle;
+use crate::radar::types::ExplosionParticle;
 use crate::runner::LcgRng;
 
 pub fn spawn_explosion(x: f32, y: f32, rng: &mut LcgRng, particles: &mut Vec<ExplosionParticle>) {

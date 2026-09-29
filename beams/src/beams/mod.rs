@@ -1,11 +1,10 @@
-mod advection;
 mod light;
-mod motion;
 mod pacing;
-mod physics;
-mod physics_star;
+pub mod physics;
 mod sys;
 mod types;
+
+use physics::{advection, motion};
 
 pub use types::{DustParticle, Spotlight, Star, smoothstep};
 
@@ -242,6 +241,3 @@ impl Screensaver for Beams {
 #[path = "beams_tests/mod.rs"]
 mod tests;
 
-#[cfg(test)]
-#[path = "math_proptest.rs"]
-mod math_proptest;

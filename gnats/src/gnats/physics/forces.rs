@@ -1,4 +1,4 @@
-use super::types::{Attractor, Firefly, KillSpark, Star};
+use crate::gnats::types::{Attractor, Firefly, KillSpark, Star};
 
 pub fn update_attractors(
     attractors: &mut [Attractor],

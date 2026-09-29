@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 
-use super::particle_helpers::{spawn_massive_explosion, spawn_nuke_explosion};
-use super::types::{EnemyShip, ExplosionParticle, LaserBeam, RadarJet};
+use super::particles::{spawn_massive_explosion, spawn_nuke_explosion};
+use crate::radar::types::{EnemyShip, ExplosionParticle, LaserBeam, RadarJet};
 use crate::runner::LcgRng;
 
 // physics function with many positional inputs (positions, velocities, parameters); refactor to RenderContext struct tracked for Sprint-03 housekeeping.

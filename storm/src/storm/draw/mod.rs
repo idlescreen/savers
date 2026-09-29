@@ -1,7 +1,7 @@
 //! Drawing and rendering implementation for the storm screensaver.
 
 pub mod entities;
-pub mod helpers;
+pub mod scenery;
 pub mod rain_lightning;
 
 use crate::runner::TerminalCell;

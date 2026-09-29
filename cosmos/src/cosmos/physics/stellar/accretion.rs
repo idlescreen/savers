@@ -1,10 +1,10 @@
 use crate::cosmos::Cosmos;
 use crate::cosmos::physics::logo_to_particle_universe;
 
-use super::accretion_helpers::gravitate_and_accrete_particles;
-use super::drift::handle_logo_character_drift;
+use super::gravitation::gravitate_and_accrete_particles;
 use super::ignition::handle_nebular_stellar_ignition;
-use super::merges::handle_seed_merges;
+use crate::cosmos::physics::drift::handle_logo_character_drift;
+use crate::cosmos::physics::merges::handle_seed_merges;
 
 pub fn update_accretion(eff: &mut Cosmos, delta: f32, cols: usize, rows: usize) {
     let dir = if eff.spin_clockwise { 1.0f32 } else { -1.0f32 };

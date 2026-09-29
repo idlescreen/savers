@@ -1,18 +1,15 @@
-pub mod accretion;
-pub mod accretion_helpers;
 pub mod bounds;
-pub mod collapse;
 pub mod drift;
-pub mod expansion;
 pub mod history;
-pub mod ignition;
-#[path = "physics/logo/build.rs"]
 pub mod logo;
 pub mod merges;
 pub mod particle_cap;
-pub mod singularity;
 pub mod states;
+pub mod stellar;
 pub mod update;
+
+#[allow(unused_imports)]
+pub use stellar::{accretion, collapse, expansion, gravitation, ignition, singularity};
 
 pub use states::enter_state;
 pub use update::update_frame_time;

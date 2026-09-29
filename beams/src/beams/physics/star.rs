@@ -1,7 +1,7 @@
 //! Star rendering for the beams screensaver (hero polish).
 
-use super::light::{LightContext, get_light_at};
-use super::types::{Spotlight, Star};
+use crate::beams::light::{LightContext, get_light_at};
+use crate::beams::types::{Spotlight, Star};
 use crate::runner::TerminalCell;
 
 // physics function with many positional inputs (positions, velocities, parameters); refactor to RenderContext struct tracked for Sprint-03 housekeeping.

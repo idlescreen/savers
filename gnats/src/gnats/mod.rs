@@ -2,13 +2,12 @@
 //!
 //! **Taxonomy Classification**: System Role (Purpose - Application Software).
 
-mod physics;
-mod physics_helpers;
+pub mod physics;
 mod pop;
+mod population;
 mod render;
-mod render_helpers;
+mod render_effects;
 mod types;
-mod update_helpers;
 
 pub use types::{Attractor, Firefly, KillSpark, Star};
 

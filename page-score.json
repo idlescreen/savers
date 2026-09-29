@@ -1,6 +1,6 @@
 {
  "repo": "savers",
- "rev": "311a006",
+ "rev": "e014d87",
  "dirty": true,
  "pages": [
   {
@@ -88,13 +88,6 @@
    "reach": 0
   },
   {
-   "path": "./beams/src/beams/advection.rs",
-   "lines": 103,
-   "bin_bytes": null,
-   "heat_pct": null,
-   "reach": 1
-  },
-  {
    "path": "./beams/src/beams/beams_tests/behavior.rs",
    "lines": 88,
    "bin_bytes": null,
@@ -113,11 +106,18 @@
    "lines": 124,
    "bin_bytes": null,
    "heat_pct": null,
+   "reach": 3
+  },
+  {
+   "path": "./beams/src/beams/beams_tests/math_proptest.rs",
+   "lines": 98,
+   "bin_bytes": null,
+   "heat_pct": null,
    "reach": 0
   },
   {
    "path": "./beams/src/beams/beams_tests/mod.rs",
-   "lines": 30,
+   "lines": 31,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
@@ -130,25 +130,11 @@
    "reach": 6
   },
   {
-   "path": "./beams/src/beams/math_proptest.rs",
-   "lines": 98,
-   "bin_bytes": null,
-   "heat_pct": null,
-   "reach": 0
-  },
-  {
    "path": "./beams/src/beams/mod.rs",
-   "lines": 247,
+   "lines": 243,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
-  },
-  {
-   "path": "./beams/src/beams/motion.rs",
-   "lines": 71,
-   "bin_bytes": null,
-   "heat_pct": null,
-   "reach": 1
   },
   {
    "path": "./beams/src/beams/pacing.rs",
@@ -158,14 +144,35 @@
    "reach": 2
   },
   {
-   "path": "./beams/src/beams/physics.rs",
+   "path": "./beams/src/beams/physics/advection.rs",
+   "lines": 103,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./beams/src/beams/physics/mod.rs",
+   "lines": 8,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./beams/src/beams/physics/motion.rs",
+   "lines": 71,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./beams/src/beams/physics/simulation.rs",
    "lines": 241,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 1
   },
   {
-   "path": "./beams/src/beams/physics_star.rs",
+   "path": "./beams/src/beams/physics/star.rs",
    "lines": 158,
    "bin_bytes": null,
    "heat_pct": null,
@@ -452,29 +459,8 @@
    "reach": 0
   },
   {
-   "path": "./cosmos/src/cosmos/physics/accretion_helpers.rs",
-   "lines": 206,
-   "bin_bytes": null,
-   "heat_pct": null,
-   "reach": 1
-  },
-  {
-   "path": "./cosmos/src/cosmos/physics/accretion.rs",
-   "lines": 87,
-   "bin_bytes": null,
-   "heat_pct": null,
-   "reach": 2
-  },
-  {
    "path": "./cosmos/src/cosmos/physics/bounds.rs",
    "lines": 45,
-   "bin_bytes": null,
-   "heat_pct": null,
-   "reach": 1
-  },
-  {
-   "path": "./cosmos/src/cosmos/physics/collapse.rs",
-   "lines": 59,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 1
@@ -487,13 +473,6 @@
    "reach": 1
   },
   {
-   "path": "./cosmos/src/cosmos/physics/expansion.rs",
-   "lines": 51,
-   "bin_bytes": null,
-   "heat_pct": null,
-   "reach": 1
-  },
-  {
    "path": "./cosmos/src/cosmos/physics/history.rs",
    "lines": 39,
    "bin_bytes": null,
@@ -501,18 +480,11 @@
    "reach": 5
   },
   {
-   "path": "./cosmos/src/cosmos/physics/ignition.rs",
-   "lines": 111,
-   "bin_bytes": null,
-   "heat_pct": null,
-   "reach": 2
-  },
-  {
-   "path": "./cosmos/src/cosmos/physics/logo/build.rs",
+   "path": "./cosmos/src/cosmos/physics/logo.rs",
    "lines": 104,
    "bin_bytes": null,
    "heat_pct": null,
-   "reach": 0
+   "reach": 1
   },
   {
    "path": "./cosmos/src/cosmos/physics/merges.rs",
@@ -530,17 +502,10 @@
   },
   {
    "path": "./cosmos/src/cosmos/physics.rs",
-   "lines": 88,
+   "lines": 85,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 15
-  },
-  {
-   "path": "./cosmos/src/cosmos/physics/singularity.rs",
-   "lines": 102,
-   "bin_bytes": null,
-   "heat_pct": null,
-   "reach": 2
   },
   {
    "path": "./cosmos/src/cosmos/physics/states/accretion.rs",
@@ -578,11 +543,60 @@
    "reach": 1
   },
   {
+   "path": "./cosmos/src/cosmos/physics/stellar/accretion.rs",
+   "lines": 87,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./cosmos/src/cosmos/physics/stellar/collapse.rs",
+   "lines": 59,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./cosmos/src/cosmos/physics/stellar/expansion.rs",
+   "lines": 51,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./cosmos/src/cosmos/physics/stellar/gravitation.rs",
+   "lines": 206,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./cosmos/src/cosmos/physics/stellar/ignition.rs",
+   "lines": 111,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 2
+  },
+  {
+   "path": "./cosmos/src/cosmos/physics/stellar/mod.rs",
+   "lines": 8,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./cosmos/src/cosmos/physics/stellar/singularity.rs",
+   "lines": 102,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
    "path": "./cosmos/src/cosmos/physics/update.rs",
    "lines": 217,
    "bin_bytes": null,
    "heat_pct": null,
-   "reach": 1
+   "reach": 2
   },
   {
    "path": "./cosmos/src/cosmos/render/big_bang_shell.rs",
@@ -754,7 +768,7 @@
   },
   {
    "path": "./gnats/src/gnats/mod.rs",
-   "lines": 240,
+   "lines": 239,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
@@ -767,21 +781,28 @@
    "reach": 0
   },
   {
-   "path": "./gnats/src/gnats/physics_helpers.rs",
+   "path": "./gnats/src/gnats/physics/forces.rs",
    "lines": 112,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 1
   },
   {
-   "path": "./gnats/src/gnats/physics.rs",
-   "lines": 193,
+   "path": "./gnats/src/gnats/physics/mod.rs",
+   "lines": 9,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./gnats/src/gnats/physics/simulation.rs",
+   "lines": 190,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 1
   },
   {
-   "path": "./gnats/src/gnats/physics_tests.rs",
+   "path": "./gnats/src/gnats/physics/tests.rs",
    "lines": 147,
    "bin_bytes": null,
    "heat_pct": null,
@@ -795,7 +816,14 @@
    "reach": 1
   },
   {
-   "path": "./gnats/src/gnats/render_helpers.rs",
+   "path": "./gnats/src/gnats/population.rs",
+   "lines": 111,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./gnats/src/gnats/render_effects.rs",
    "lines": 193,
    "bin_bytes": null,
    "heat_pct": null,
@@ -814,13 +842,6 @@
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 5
-  },
-  {
-   "path": "./gnats/src/gnats/update_helpers.rs",
-   "lines": 111,
-   "bin_bytes": null,
-   "heat_pct": null,
-   "reach": 0
   },
   {
    "path": "./gnats/src/lib.rs",
@@ -970,7 +991,7 @@
    "reach": 1
   },
   {
-   "path": "./radar/src/radar/draw_helpers.rs",
+   "path": "./radar/src/radar/draw_hud.rs",
    "lines": 223,
    "bin_bytes": null,
    "heat_pct": null,
@@ -984,35 +1005,42 @@
    "reach": 1
   },
   {
-   "path": "./radar/src/radar/jet_helpers.rs",
-   "lines": 118,
-   "bin_bytes": null,
-   "heat_pct": null,
-   "reach": 1
-  },
-  {
    "path": "./radar/src/radar/mod.rs",
-   "lines": 184,
+   "lines": 181,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
   },
   {
-   "path": "./radar/src/radar/particle_helpers.rs",
-   "lines": 79,
-   "bin_bytes": null,
-   "heat_pct": null,
-   "reach": 2
-  },
-  {
-   "path": "./radar/src/radar/physics_helpers.rs",
+   "path": "./radar/src/radar/physics/collision.rs",
    "lines": 246,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 1
   },
   {
-   "path": "./radar/src/radar/physics.rs",
+   "path": "./radar/src/radar/physics/jets.rs",
+   "lines": 118,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./radar/src/radar/physics/mod.rs",
+   "lines": 9,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./radar/src/radar/physics/particles.rs",
+   "lines": 79,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 2
+  },
+  {
+   "path": "./radar/src/radar/physics/physics.rs",
    "lines": 249,
    "bin_bytes": null,
    "heat_pct": null,
@@ -1082,25 +1110,32 @@
    "reach": 0
   },
   {
-   "path": "./ripple/src/ripple/physics.rs",
-   "lines": 143,
+   "path": "./ripple/src/ripple/physics/mod.rs",
+   "lines": 145,
    "bin_bytes": null,
    "heat_pct": null,
-   "reach": 2
+   "reach": 0
   },
   {
-   "path": "./ripple/src/ripple/physics_tests.rs",
+   "path": "./ripple/src/ripple/physics/physics_tests.rs",
    "lines": 61,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
   },
   {
+   "path": "./ripple/src/ripple/physics/update.rs",
+   "lines": 142,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 2
+  },
+  {
    "path": "./ripple/src/ripple/ripple.rs",
    "lines": 146,
    "bin_bytes": null,
    "heat_pct": null,
-   "reach": 4
+   "reach": 5
   },
   {
    "path": "./ripple/src/ripple/ripple_tests.rs",
@@ -1122,13 +1157,6 @@
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 8
-  },
-  {
-   "path": "./ripple/src/ripple/update.rs",
-   "lines": 142,
-   "bin_bytes": null,
-   "heat_pct": null,
-   "reach": 1
   },
   {
    "path": "./ripple/src/stress_tests.rs",
@@ -1173,13 +1201,6 @@
    "reach": 0
   },
   {
-   "path": "./storm/src/storm/draw/helpers.rs",
-   "lines": 184,
-   "bin_bytes": null,
-   "heat_pct": null,
-   "reach": 0
-  },
-  {
    "path": "./storm/src/storm/draw/mod.rs",
    "lines": 109,
    "bin_bytes": null,
@@ -1189,6 +1210,13 @@
   {
    "path": "./storm/src/storm/draw/rain_lightning.rs",
    "lines": 140,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./storm/src/storm/draw/scenery.rs",
+   "lines": 184,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0

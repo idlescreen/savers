@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 
-use super::particle_helpers::{spawn_explosion, spawn_failure_puff};
-use super::types::{EnemyShip, ExplosionParticle, GoodShip, RadarJet};
+use super::particles::{spawn_explosion, spawn_failure_puff};
+use crate::radar::types::{EnemyShip, ExplosionParticle, GoodShip, RadarJet};
 use crate::runner::LcgRng;
 
 fn calc_velocity(ex: f32, ey: f32, cx: f32, cy: f32, speed: f32) -> (f32, f32) {

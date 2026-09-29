@@ -1,5 +1,7 @@
 //! Physics simulation and displacement helpers for Ripple.
 
+pub mod update;
+
 use super::types::Ring;
 
 /// Radial displacement from active ring fronts at a point (logo warp).

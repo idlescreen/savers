@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 
-use super::jet_helpers::update_jets;
-use super::physics_helpers::{
+use super::collision::{
     init_jets, spawn_enemy, spawn_nuke_and_boss, spawn_scouts, update_defenders,
 };
-use super::types::{EnemyShip, ExplosionParticle, GoodShip, LaserBeam, RadarJet};
+use super::jets::update_jets;
+use crate::radar::types::{EnemyShip, ExplosionParticle, GoodShip, LaserBeam, RadarJet};
 use crate::runner::LcgRng;
 use std::time::Duration;
 

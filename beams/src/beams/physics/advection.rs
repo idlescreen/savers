@@ -1,7 +1,7 @@
 //! Dust particle advection and light sampling logic for Beams.
 
-use super::light;
-use super::types::{DustParticle, Spotlight, Star};
+use crate::beams::light;
+use crate::beams::types::{DustParticle, Spotlight, Star};
 use crate::runner::LcgRng;
 
 // physics function with many positional inputs (positions, velocities, parameters); refactor to RenderContext struct tracked for Sprint-03 housekeeping.

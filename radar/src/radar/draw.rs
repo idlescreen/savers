@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 
 use super::blips;
-use super::draw_helpers::{draw_datalinks, draw_hud, draw_laser_beam, draw_lock_line};
+use super::draw_hud::{draw_datalinks, draw_hud, draw_laser_beam, draw_lock_line};
 use super::types::{EnemyShip, ExplosionParticle, GoodShip, LaserBeam, RadarJet};
 use crate::runner::ScreenPalette;
 use crate::runner::TerminalCell;
