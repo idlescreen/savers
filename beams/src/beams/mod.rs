@@ -240,4 +240,3 @@ impl Screensaver for Beams {
 #[cfg(test)]
 #[path = "beams_tests/mod.rs"]
 mod tests;
-

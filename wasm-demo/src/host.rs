@@ -3,8 +3,8 @@
 
 //! WebAssembly host container for screensaver rendering.
 
-use std::time::Duration;
 use idle_api::{ScreensaverInstance, TerminalCell};
+use std::time::Duration;
 
 /// Owns the saver instance plus its render grid and packed output buffer.
 pub struct SaverHost {

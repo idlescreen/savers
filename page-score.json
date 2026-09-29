@@ -1,6 +1,6 @@
 {
  "repo": "savers",
- "rev": "98430f5",
+ "rev": "e9daffe",
  "dirty": true,
  "pages": [
   {
@@ -131,7 +131,7 @@
   },
   {
    "path": "./beams/src/beams/mod.rs",
-   "lines": 243,
+   "lines": 242,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
@@ -803,7 +803,7 @@
   },
   {
    "path": "./gnats/src/gnats/physics/simulation.rs",
-   "lines": 190,
+   "lines": 189,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 1
@@ -971,7 +971,7 @@
   },
   {
    "path": "./meta/src/plugins.rs",
-   "lines": 23,
+   "lines": 14,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 1

@@ -5,16 +5,7 @@
 
 /// List of screensavers bundled in `idle-plugins-all`.
 pub const PLUGINS: &[&str] = &[
-    "beams",
-    "bursts",
-    "chaos",
-    "cosmos",
-    "glyphs",
-    "gnats",
-    "hearth",
-    "radar",
-    "ripple",
-    "storm",
+    "beams", "bursts", "chaos", "cosmos", "glyphs", "gnats", "hearth", "radar", "ripple", "storm",
 ];
 
 /// Returns the count of default screensaver plugins.

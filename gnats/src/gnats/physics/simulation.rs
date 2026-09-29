@@ -187,4 +187,3 @@ pub fn compute_firefly_forces_and_update(
 
     dead_indices
 }
-
