@@ -1,0 +1,1303 @@
+{
+ "repo": "savers",
+ "rev": "06b5482",
+ "dirty": true,
+ "pages": [
+  {
+   "path": "./aurora/benches/tick.rs",
+   "lines": 94,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./aurora/build.rs",
+   "lines": 19,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./aurora/src/aurora/aurora_tests.rs",
+   "lines": 104,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./aurora/src/aurora/draw.rs",
+   "lines": 190,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./aurora/src/aurora/mod.rs",
+   "lines": 216,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./aurora/src/aurora/sky.rs",
+   "lines": 124,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 2
+  },
+  {
+   "path": "./aurora/src/aurora/types.rs",
+   "lines": 32,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 2
+  },
+  {
+   "path": "./aurora/src/lib.rs",
+   "lines": 62,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./aurora/src/stress_tests.rs",
+   "lines": 39,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./aurora/src/tests_perf.rs",
+   "lines": 36,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./beams/benches/tick.rs",
+   "lines": 94,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./beams/build.rs",
+   "lines": 19,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./beams/src/beams/advection.rs",
+   "lines": 103,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./beams/src/beams/beams_tests/behavior.rs",
+   "lines": 88,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./beams/src/beams/beams_tests/lifecycle.rs",
+   "lines": 33,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./beams/src/beams/beams_tests/light.rs",
+   "lines": 124,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./beams/src/beams/beams_tests/mod.rs",
+   "lines": 30,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./beams/src/beams/light.rs",
+   "lines": 220,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 6
+  },
+  {
+   "path": "./beams/src/beams/math_proptest.rs",
+   "lines": 98,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./beams/src/beams/mod.rs",
+   "lines": 247,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./beams/src/beams/motion.rs",
+   "lines": 71,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./beams/src/beams/pacing.rs",
+   "lines": 34,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 2
+  },
+  {
+   "path": "./beams/src/beams/physics.rs",
+   "lines": 241,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./beams/src/beams/physics_star.rs",
+   "lines": 158,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./beams/src/beams/sys.rs",
+   "lines": 41,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./beams/src/beams/types.rs",
+   "lines": 158,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 8
+  },
+  {
+   "path": "./beams/src/lib.rs",
+   "lines": 65,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./beams/src/stress_tests.rs",
+   "lines": 39,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./beams/src/tests_perf.rs",
+   "lines": 42,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./build-support/src/lib.rs",
+   "lines": 143,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./bursts/benches/tick.rs",
+   "lines": 89,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./bursts/build.rs",
+   "lines": 19,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./bursts/src/bursts/bursts_tests.rs",
+   "lines": 96,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./bursts/src/bursts/drawing.rs",
+   "lines": 229,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./bursts/src/bursts/draw.rs",
+   "lines": 213,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./bursts/src/bursts/mod.rs",
+   "lines": 157,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./bursts/src/bursts/physics.rs",
+   "lines": 223,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 3
+  },
+  {
+   "path": "./bursts/src/bursts/physics_tests.rs",
+   "lines": 139,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./bursts/src/bursts/types.rs",
+   "lines": 58,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 6
+  },
+  {
+   "path": "./bursts/src/bursts/update/mod.rs",
+   "lines": 78,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./bursts/src/bursts/update/particles.rs",
+   "lines": 68,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./bursts/src/bursts/update/rockets.rs",
+   "lines": 229,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./bursts/src/lib.rs",
+   "lines": 65,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./bursts/src/stress_tests.rs",
+   "lines": 39,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./bursts/src/tests_perf.rs",
+   "lines": 31,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./chaos/benches/tick.rs",
+   "lines": 94,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./chaos/build.rs",
+   "lines": 19,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./chaos/src/chaos/chaos_tests.rs",
+   "lines": 133,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./chaos/src/chaos/draw/effects.rs",
+   "lines": 101,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./chaos/src/chaos/draw/mod.rs",
+   "lines": 139,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./chaos/src/chaos/draw/spike.rs",
+   "lines": 28,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./chaos/src/chaos/draw/stars.rs",
+   "lines": 203,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./chaos/src/chaos/mod.rs",
+   "lines": 122,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./chaos/src/chaos/physics.rs",
+   "lines": 177,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./chaos/src/chaos/screensaver_impl.rs",
+   "lines": 222,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./chaos/src/chaos/types.rs",
+   "lines": 53,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./chaos/src/chaos/update_chaos.rs",
+   "lines": 209,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./chaos/src/lib.rs",
+   "lines": 65,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./chaos/src/stress_tests.rs",
+   "lines": 39,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./chaos/src/tests_perf.rs",
+   "lines": 35,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./cosmos/benches/tick.rs",
+   "lines": 113,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./cosmos/build.rs",
+   "lines": 19,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./cosmos/src/cosmos/cosmos_tests.rs",
+   "lines": 207,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./cosmos/src/cosmos/mod.rs",
+   "lines": 201,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./cosmos/src/cosmos/physics/accretion_helpers.rs",
+   "lines": 206,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./cosmos/src/cosmos/physics/accretion.rs",
+   "lines": 87,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 2
+  },
+  {
+   "path": "./cosmos/src/cosmos/physics/bounds.rs",
+   "lines": 45,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./cosmos/src/cosmos/physics/collapse.rs",
+   "lines": 59,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./cosmos/src/cosmos/physics/drift.rs",
+   "lines": 133,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./cosmos/src/cosmos/physics/expansion.rs",
+   "lines": 51,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./cosmos/src/cosmos/physics/history.rs",
+   "lines": 39,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 5
+  },
+  {
+   "path": "./cosmos/src/cosmos/physics/ignition.rs",
+   "lines": 111,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 2
+  },
+  {
+   "path": "./cosmos/src/cosmos/physics/logo/build.rs",
+   "lines": 104,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./cosmos/src/cosmos/physics/merges.rs",
+   "lines": 183,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./cosmos/src/cosmos/physics/particle_cap.rs",
+   "lines": 27,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 2
+  },
+  {
+   "path": "./cosmos/src/cosmos/physics.rs",
+   "lines": 88,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 15
+  },
+  {
+   "path": "./cosmos/src/cosmos/physics/singularity.rs",
+   "lines": 102,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 2
+  },
+  {
+   "path": "./cosmos/src/cosmos/physics/states/accretion.rs",
+   "lines": 62,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./cosmos/src/cosmos/physics/states/big_bang.rs",
+   "lines": 108,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./cosmos/src/cosmos/physics/states/darkness.rs",
+   "lines": 37,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./cosmos/src/cosmos/physics/states/mod.rs",
+   "lines": 46,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./cosmos/src/cosmos/physics/states/singularity.rs",
+   "lines": 69,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./cosmos/src/cosmos/physics/update.rs",
+   "lines": 217,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./cosmos/src/cosmos/render/big_bang_shell.rs",
+   "lines": 80,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./cosmos/src/cosmos/render/black_hole_disk.rs",
+   "lines": 95,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 2
+  },
+  {
+   "path": "./cosmos/src/cosmos/render/grav_wave.rs",
+   "lines": 86,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./cosmos/src/cosmos/render/life.rs",
+   "lines": 189,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 3
+  },
+  {
+   "path": "./cosmos/src/cosmos/render/mod.rs",
+   "lines": 22,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./cosmos/src/cosmos/render/particles.rs",
+   "lines": 80,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./cosmos/src/cosmos/render/seeds.rs",
+   "lines": 43,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./cosmos/src/cosmos/render/star_corona.rs",
+   "lines": 168,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./cosmos/src/cosmos/types.rs",
+   "lines": 54,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 15
+  },
+  {
+   "path": "./cosmos/src/lib.rs",
+   "lines": 69,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./cosmos/src/stress_tests.rs",
+   "lines": 39,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./cosmos/src/tests_perf.rs",
+   "lines": 71,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./glyphs/benches/tick.rs",
+   "lines": 94,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./glyphs/build.rs",
+   "lines": 19,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./glyphs/src/glyphs/draw.rs",
+   "lines": 80,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./glyphs/src/glyphs/glyphs_tests.rs",
+   "lines": 153,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./glyphs/src/glyphs/mod.rs",
+   "lines": 120,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./glyphs/src/glyphs/physics.rs",
+   "lines": 70,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 3
+  },
+  {
+   "path": "./glyphs/src/glyphs/screensaver_impl.rs",
+   "lines": 111,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./glyphs/src/lib.rs",
+   "lines": 65,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./glyphs/src/stress_tests.rs",
+   "lines": 39,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./glyphs/src/tests_perf.rs",
+   "lines": 33,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./gnats/benches/tick.rs",
+   "lines": 103,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./gnats/build.rs",
+   "lines": 19,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./gnats/src/gnats/mod.rs",
+   "lines": 240,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./gnats/src/gnats/mod_tests.rs",
+   "lines": 27,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./gnats/src/gnats/physics_helpers.rs",
+   "lines": 112,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./gnats/src/gnats/physics.rs",
+   "lines": 193,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./gnats/src/gnats/physics_tests.rs",
+   "lines": 147,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./gnats/src/gnats/pop.rs",
+   "lines": 45,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./gnats/src/gnats/render_helpers.rs",
+   "lines": 193,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./gnats/src/gnats/render.rs",
+   "lines": 240,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 3
+  },
+  {
+   "path": "./gnats/src/gnats/types.rs",
+   "lines": 39,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 5
+  },
+  {
+   "path": "./gnats/src/gnats/update_helpers.rs",
+   "lines": 111,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./gnats/src/lib.rs",
+   "lines": 69,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./gnats/src/stress_tests.rs",
+   "lines": 39,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./gnats/src/tests_perf.rs",
+   "lines": 36,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./hearth/benches/tick.rs",
+   "lines": 94,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./hearth/build.rs",
+   "lines": 19,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./hearth/src/hearth/background.rs",
+   "lines": 149,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./hearth/src/hearth/draw.rs",
+   "lines": 142,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 2
+  },
+  {
+   "path": "./hearth/src/hearth/fx.rs",
+   "lines": 140,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./hearth/src/hearth/hearth_tests.rs",
+   "lines": 63,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./hearth/src/hearth/mod.rs",
+   "lines": 247,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./hearth/src/hearth/particles.rs",
+   "lines": 141,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./hearth/src/hearth/setup.rs",
+   "lines": 74,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./hearth/src/hearth/types.rs",
+   "lines": 36,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 5
+  },
+  {
+   "path": "./hearth/src/lib.rs",
+   "lines": 62,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./hearth/src/stress_tests.rs",
+   "lines": 39,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./hearth/src/tests_perf.rs",
+   "lines": 24,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./meta/src/lib.rs",
+   "lines": 33,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./radar/benches/tick.rs",
+   "lines": 89,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./radar/build.rs",
+   "lines": 19,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./radar/src/lib.rs",
+   "lines": 67,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./radar/src/radar/blips.rs",
+   "lines": 162,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./radar/src/radar/draw_helpers.rs",
+   "lines": 223,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./radar/src/radar/draw.rs",
+   "lines": 246,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./radar/src/radar/jet_helpers.rs",
+   "lines": 118,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./radar/src/radar/mod.rs",
+   "lines": 184,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./radar/src/radar/particle_helpers.rs",
+   "lines": 79,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 2
+  },
+  {
+   "path": "./radar/src/radar/physics_helpers.rs",
+   "lines": 246,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./radar/src/radar/physics.rs",
+   "lines": 249,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./radar/src/radar/radar_tests.rs",
+   "lines": 103,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./radar/src/radar/types.rs",
+   "lines": 60,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 8
+  },
+  {
+   "path": "./radar/src/stress_tests.rs",
+   "lines": 39,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./radar/src/tests_perf.rs",
+   "lines": 40,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./ripple/benches/tick.rs",
+   "lines": 94,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./ripple/build.rs",
+   "lines": 19,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./ripple/src/lib.rs",
+   "lines": 62,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./ripple/src/ripple/draw.rs",
+   "lines": 238,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./ripple/src/ripple/mod.rs",
+   "lines": 47,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./ripple/src/ripple/physics.rs",
+   "lines": 143,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 2
+  },
+  {
+   "path": "./ripple/src/ripple/physics_tests.rs",
+   "lines": 61,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./ripple/src/ripple/ripple.rs",
+   "lines": 146,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 4
+  },
+  {
+   "path": "./ripple/src/ripple/ripple_tests.rs",
+   "lines": 92,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./ripple/src/ripple/screensaver_impl.rs",
+   "lines": 134,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./ripple/src/ripple/types.rs",
+   "lines": 133,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 8
+  },
+  {
+   "path": "./ripple/src/ripple/update.rs",
+   "lines": 142,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./ripple/src/stress_tests.rs",
+   "lines": 39,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./ripple/src/tests_perf.rs",
+   "lines": 24,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./storm/benches/tick.rs",
+   "lines": 94,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./storm/build.rs",
+   "lines": 19,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./storm/src/lib.rs",
+   "lines": 65,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./storm/src/storm/draw/entities.rs",
+   "lines": 240,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./storm/src/storm/draw/helpers.rs",
+   "lines": 184,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./storm/src/storm/draw/mod.rs",
+   "lines": 109,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./storm/src/storm/draw/rain_lightning.rs",
+   "lines": 140,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./storm/src/storm/mod.rs",
+   "lines": 90,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./storm/src/storm/physics/animals.rs",
+   "lines": 124,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./storm/src/storm/physics/bird.rs",
+   "lines": 144,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./storm/src/storm/physics/drops.rs",
+   "lines": 227,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./storm/src/storm/physics/lightning.rs",
+   "lines": 224,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./storm/src/storm/physics/puddle.rs",
+   "lines": 37,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./storm/src/storm/physics.rs",
+   "lines": 129,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./storm/src/storm/physics/scenery.rs",
+   "lines": 168,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./storm/src/storm/screensaver_impl.rs",
+   "lines": 97,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./storm/src/storm/storm.rs",
+   "lines": 155,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 14
+  },
+  {
+   "path": "./storm/src/storm/storm_tests.rs",
+   "lines": 83,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./storm/src/storm/types.rs",
+   "lines": 79,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 8
+  },
+  {
+   "path": "./storm/src/stress_tests.rs",
+   "lines": 39,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./storm/src/tests_perf.rs",
+   "lines": 33,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./wasm-demo/src/lib.rs",
+   "lines": 112,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  }
+ ],
+ "notes": "reach counts referencing files (shared file names qualified by ancestor dir);"
+}

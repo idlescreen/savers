@@ -36,6 +36,8 @@ jobs:
           echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
           rustup show || true
           if [ -f rust-toolchain.toml ]; then rustup show; else rustup default stable; fi
+      - name: Validate page-score.json
+        run: qa/page_score_check.sh
       - name: cargo fmt
         run: cargo fmt --all -- --check
       - name: cargo clippy
