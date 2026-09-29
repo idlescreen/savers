@@ -1,7 +1,7 @@
 {
  "repo": "savers",
- "rev": "aa5d284",
- "dirty": false,
+ "rev": "98430f5",
+ "dirty": true,
  "pages": [
   {
    "path": "./aurora/benches/tick.rs",
@@ -215,10 +215,17 @@
   },
   {
    "path": "./build-support/src/lib.rs",
-   "lines": 143,
+   "lines": 71,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
+  },
+  {
+   "path": "./build-support/src/resource.rs",
+   "lines": 81,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
   },
   {
    "path": "./bursts/benches/tick.rs",
@@ -957,10 +964,17 @@
   },
   {
    "path": "./meta/src/lib.rs",
-   "lines": 33,
+   "lines": 16,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
+  },
+  {
+   "path": "./meta/src/plugins.rs",
+   "lines": 23,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
   },
   {
    "path": "./radar/benches/tick.rs",
@@ -1320,8 +1334,15 @@
    "reach": 0
   },
   {
+   "path": "./wasm-demo/src/host.rs",
+   "lines": 70,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
    "path": "./wasm-demo/src/lib.rs",
-   "lines": 112,
+   "lines": 72,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
