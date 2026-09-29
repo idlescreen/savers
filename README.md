@@ -64,11 +64,3 @@ idlescreen update          # get new saver builds
 ## License
 
 Apache-2.0 · © 2026 IdleScreen
-
----
-
-<div align="center">
-
-[![Necrometer](necrometer.svg)](https://necrometer.dev/?u=idlescreen)
-
-</div>
