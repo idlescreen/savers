@@ -40,7 +40,7 @@ repository = "https://github.com/idlescreen/savers"
 [workspace.dependencies]
 # `idle/` is a sibling checkout of the engine repo — CI fetches it into
 # the repo root; locally bootstrap.sh symlinks it.
-idle-api = { version = "3.5.0", path = "runtime/idle-api" }
+idle-api = { version = "3.5.1", path = "runtime/idle-api" }
 build-support = { path = "build-support" }
 # Bench harness. `default-features = false` drops the `rayon` parallel
 # runner (we use the default single-thread runner — bench numbers stay
