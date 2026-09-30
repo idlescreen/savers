@@ -1,7 +1,7 @@
 {
  "repo": "savers",
- "rev": "8a28fc9",
- "dirty": true,
+ "rev": "5d6b248",
+ "dirty": false,
  "pages": [
   {
    "path": "./aurora/benches/tick.rs",
@@ -124,14 +124,14 @@
   },
   {
    "path": "./beams/src/beams/light.rs",
-   "lines": 220,
+   "lines": 222,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 6
   },
   {
    "path": "./beams/src/beams/mod.rs",
-   "lines": 252,
+   "lines": 255,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
@@ -306,7 +306,7 @@
   },
   {
    "path": "./bursts/src/bursts/update/rockets.rs",
-   "lines": 246,
+   "lines": 248,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
@@ -1356,7 +1356,7 @@
   },
   {
    "path": "./wasm-demo/src/tests.rs",
-   "lines": 48,
+   "lines": 46,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
