@@ -27,15 +27,15 @@ ignored = [
 ]
 
 [dependencies]
-aurora = { path = "../aurora" }
-beams = { path = "../beams" }
-bursts = { path = "../bursts" }
-chaos = { path = "../chaos" }
-cosmos = { path = "../cosmos" }
-glyphs = { path = "../glyphs" }
-gnats = { path = "../gnats" }
-hearth = { path = "../hearth" }
-radar = { path = "../radar" }
-ripple = { path = "../ripple" }
-storm = { path = "../storm" }
+aurora = { path = "../aurora", features = ["bundled"] }
+beams = { path = "../beams", features = ["bundled"] }
+bursts = { path = "../bursts", features = ["bundled"] }
+chaos = { path = "../chaos", features = ["bundled"] }
+cosmos = { path = "../cosmos", features = ["bundled"] }
+glyphs = { path = "../glyphs", features = ["bundled"] }
+gnats = { path = "../gnats", features = ["bundled"] }
+hearth = { path = "../hearth", features = ["bundled"] }
+radar = { path = "../radar", features = ["bundled"] }
+ripple = { path = "../ripple", features = ["bundled"] }
+storm = { path = "../storm", features = ["bundled"] }
 idle-api.workspace = true

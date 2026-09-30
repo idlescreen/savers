@@ -9,7 +9,7 @@ pub use idle_api as runner;
 /// The host loader uses this for ABI negotiation; a mismatch is a hard
 /// refusal (PluginError::ApiVersionMismatch). The function is `extern "C"`
 /// so the host resolves it via `Library::get`.
-#[unsafe(no_mangle)]
+#[cfg_attr(not(feature = "bundled"), unsafe(no_mangle))]
 pub extern "C" fn idle_api_version() -> u32 {
     idle_api::API_VERSION
 }
@@ -29,7 +29,7 @@ mod tests_perf;
 #[cfg(test)]
 mod stress_tests;
 
-#[unsafe(no_mangle)]
+#[cfg_attr(not(feature = "bundled"), unsafe(no_mangle))]
 pub extern "C" fn create_screensaver() -> *mut idle_api::ScreensaverInstance {
     let effect = glyphs::Glyphs::new();
     let instance = idle_api::ScreensaverInstance {
@@ -43,7 +43,7 @@ pub extern "C" fn create_screensaver() -> *mut idle_api::ScreensaverInstance {
 /// # Safety
 ///
 /// The caller must ensure that `ptr` is a valid pointer allocated by `create_screensaver` and has not been freed.
-#[unsafe(no_mangle)]
+#[cfg_attr(not(feature = "bundled"), unsafe(no_mangle))]
 pub unsafe extern "C" fn destroy_screensaver(ptr: *mut idle_api::ScreensaverInstance) {
     if !ptr.is_null() {
         unsafe {

@@ -57,3 +57,7 @@ idle-daemon = "*"
 [package.metadata.generate-rpm.provides]
 
 [package.metadata.generate-rpm.obsoletes]
+
+[features]
+default = []
+bundled = []
