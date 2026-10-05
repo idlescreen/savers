@@ -1,272 +1,272 @@
 {
   "benches": {
     "aurora_draw/draw_160x48": {
-      "median_abs_dev_ns": 246.81540307155268,
-      "median_ns": 138023.81923076924
+      "median_abs_dev_ns": 163.06334627171526,
+      "median_ns": 100745.52343424885
     },
     "aurora_draw/draw_210x57": {
-      "median_abs_dev_ns": 414.6197542725579,
-      "median_ns": 202599.11182795698
+      "median_abs_dev_ns": 233.73408229484357,
+      "median_ns": 147628.77435897436
     },
     "aurora_draw/draw_80x24": {
-      "median_abs_dev_ns": 81.4300885745688,
-      "median_ns": 44641.62133699634
+      "median_abs_dev_ns": 36.80220632908696,
+      "median_ns": 33330.36735646099
     },
     "aurora_update/update_160x48": {
-      "median_abs_dev_ns": 0.44107413687356595,
-      "median_ns": 301.7184827128349
+      "median_abs_dev_ns": 0.39988139214605606,
+      "median_ns": 289.19863430723376
     },
     "aurora_update/update_210x57": {
-      "median_abs_dev_ns": 0.48000974383613826,
-      "median_ns": 301.69196233779564
+      "median_abs_dev_ns": 6.996091533481332,
+      "median_ns": 286.8570123852802
     },
     "aurora_update/update_80x24": {
-      "median_abs_dev_ns": 0.7401051212924008,
-      "median_ns": 302.01263168480364
+      "median_abs_dev_ns": 0.5009421810057199,
+      "median_ns": 289.4022046278524
     },
     "beams_draw/draw_160x48": {
-      "median_abs_dev_ns": 387.6599769638195,
-      "median_ns": 326518.20484400657
+      "median_abs_dev_ns": 335.9615068174575,
+      "median_ns": 250563.18445945944
     },
     "beams_draw/draw_210x57": {
-      "median_abs_dev_ns": 539.1980533529153,
-      "median_ns": 472725.5857389801
+      "median_abs_dev_ns": 724.2802946824476,
+      "median_ns": 363570.4337228042
     },
     "beams_draw/draw_80x24": {
-      "median_abs_dev_ns": 111.72499300702171,
-      "median_ns": 99326.23298059966
+      "median_abs_dev_ns": 127.72727964306071,
+      "median_ns": 73487.52250136164
     },
     "beams_update/update_160x48": {
-      "median_abs_dev_ns": 570.755734589631,
-      "median_ns": 36093.65311418685
+      "median_abs_dev_ns": 134.57091834115772,
+      "median_ns": 28590.874815109797
     },
     "beams_update/update_210x57": {
-      "median_abs_dev_ns": 597.4727042437443,
-      "median_ns": 35642.31286445013
+      "median_abs_dev_ns": 126.49464514044354,
+      "median_ns": 28184.51558668604
     },
     "beams_update/update_80x24": {
-      "median_abs_dev_ns": 163.07591887896723,
-      "median_ns": 26861.6799434187
+      "median_abs_dev_ns": 76.00875423769389,
+      "median_ns": 19712.52782051282
     },
     "bursts_draw/draw_160x48": {
-      "median_abs_dev_ns": 22.602759415787144,
-      "median_ns": 16670.89408855034
+      "median_abs_dev_ns": 16.587199721309467,
+      "median_ns": 12767.64911915097
     },
     "bursts_draw/draw_210x57": {
-      "median_abs_dev_ns": 23.680280015227083,
-      "median_ns": 21508.703274985884
+      "median_abs_dev_ns": 33.74251746172016,
+      "median_ns": 16591.110749283886
     },
     "bursts_draw/draw_80x24": {
-      "median_abs_dev_ns": 12.024862693493082,
-      "median_ns": 6966.737424397308
+      "median_abs_dev_ns": 8.66033498552377,
+      "median_ns": 5233.556507936508
     },
     "bursts_update/update_160x48": {
-      "median_abs_dev_ns": 142.83291552830144,
-      "median_ns": 27658.36255877743
+      "median_abs_dev_ns": 90.06482566920266,
+      "median_ns": 22099.042763157893
     },
     "bursts_update/update_210x57": {
-      "median_abs_dev_ns": 309.51020623842874,
-      "median_ns": 40862.14108843537
+      "median_abs_dev_ns": 132.16816261289466,
+      "median_ns": 30581.21568032787
     },
     "bursts_update/update_80x24": {
-      "median_abs_dev_ns": 100.13116842254689,
-      "median_ns": 8758.17483019142
+      "median_abs_dev_ns": 59.753412808784105,
+      "median_ns": 6752.119062031046
     },
     "chaos_draw/draw_160x48": {
-      "median_abs_dev_ns": 7.914691387275401,
-      "median_ns": 5549.038292967782
+      "median_abs_dev_ns": 4.696905079136498,
+      "median_ns": 4596.4519820423475
     },
     "chaos_draw/draw_210x57": {
-      "median_abs_dev_ns": 10.996891350878347,
-      "median_ns": 7728.36421587071
+      "median_abs_dev_ns": 10.91225206871232,
+      "median_ns": 6537.797861311711
     },
     "chaos_draw/draw_80x24": {
-      "median_abs_dev_ns": 2.9976879128820175,
-      "median_ns": 2522.7477560795874
+      "median_abs_dev_ns": 2.2066137455945234,
+      "median_ns": 1974.7436811934076
     },
     "chaos_update/update_160x48": {
-      "median_abs_dev_ns": 0.186975786275206,
-      "median_ns": 91.07079273539676
+      "median_abs_dev_ns": 1.190815689439662,
+      "median_ns": 48.10730956865589
     },
     "chaos_update/update_210x57": {
-      "median_abs_dev_ns": 0.11242935926161728,
-      "median_ns": 90.9884485164811
+      "median_abs_dev_ns": 1.3595587305778318,
+      "median_ns": 48.434223249703656
     },
     "chaos_update/update_80x24": {
-      "median_abs_dev_ns": 0.19287466463727457,
-      "median_ns": 91.0535331313278
+      "median_abs_dev_ns": 1.1997093841037656,
+      "median_ns": 47.967141883251415
     },
     "cosmos_draw/draw_160x48": {
-      "median_abs_dev_ns": 5.968053227379335,
-      "median_ns": 4144.98352920228
+      "median_abs_dev_ns": 3.188240574952356,
+      "median_ns": 3610.8628757136585
     },
     "cosmos_draw/draw_210x57": {
-      "median_abs_dev_ns": 9.6119088278873,
-      "median_ns": 6351.431819935886
+      "median_abs_dev_ns": 7.058840555212273,
+      "median_ns": 5556.848040977714
     },
     "cosmos_draw/draw_80x24": {
-      "median_abs_dev_ns": 2.01267015549292,
-      "median_ns": 1153.966322815534
+      "median_abs_dev_ns": 1.2023226805920157,
+      "median_ns": 995.5124187086028
     },
     "cosmos_update/update_160x48": {
-      "median_abs_dev_ns": 8825.616966950567,
-      "median_ns": 19591.44969208211
+      "median_abs_dev_ns": 5115.975780238282,
+      "median_ns": 16273.360704110702
     },
     "cosmos_update/update_210x57": {
-      "median_abs_dev_ns": 4816.6567903710875,
-      "median_ns": 14639.321721758577
+      "median_abs_dev_ns": 3574.0509224543175,
+      "median_ns": 12280.313518518518
     },
     "cosmos_update/update_80x24": {
-      "median_abs_dev_ns": 11134.528748583043,
-      "median_ns": 23304.66306025228
+      "median_abs_dev_ns": 8185.469524079954,
+      "median_ns": 17750.829244420478
     },
     "glyphs_draw/draw_160x48": {
-      "median_abs_dev_ns": 13.555549123326662,
-      "median_ns": 7589.643344840813
+      "median_abs_dev_ns": 10.382481768336502,
+      "median_ns": 6544.596134248046
     },
     "glyphs_draw/draw_210x57": {
-      "median_abs_dev_ns": 13.066305119933388,
-      "median_ns": 10900.944844919786
+      "median_abs_dev_ns": 10.067920843986355,
+      "median_ns": 8984.531394232588
     },
     "glyphs_draw/draw_80x24": {
-      "median_abs_dev_ns": 6.33810615129421,
-      "median_ns": 3865.4219155844157
+      "median_abs_dev_ns": 4.800000066302189,
+      "median_ns": 3585.0111069062505
     },
     "glyphs_update/update_160x48": {
-      "median_abs_dev_ns": 5.492406303344731,
-      "median_ns": 1540.636059809979
+      "median_abs_dev_ns": 3.5879358530363734,
+      "median_ns": 1240.853168851259
     },
     "glyphs_update/update_210x57": {
-      "median_abs_dev_ns": 8.259230475899853,
-      "median_ns": 1967.157999559639
+      "median_abs_dev_ns": 4.660525938042105,
+      "median_ns": 1590.9450403906953
     },
     "glyphs_update/update_80x24": {
-      "median_abs_dev_ns": 1.744565134733886,
-      "median_ns": 858.6644048158564
+      "median_abs_dev_ns": 1.3288874607928098,
+      "median_ns": 699.6727793776543
     },
     "gnats_draw/draw_160x48": {
-      "median_abs_dev_ns": 25.571108996160522,
-      "median_ns": 20575.7025862069
+      "median_abs_dev_ns": 16.94879155430151,
+      "median_ns": 17928.86726890756
     },
     "gnats_draw/draw_210x57": {
-      "median_abs_dev_ns": 29.49461250687041,
-      "median_ns": 19006.60955432649
+      "median_abs_dev_ns": 16.53888818795203,
+      "median_ns": 16242.315452966137
     },
     "gnats_draw/draw_80x24": {
-      "median_abs_dev_ns": 34.11059007751223,
-      "median_ns": 15234.90417747047
+      "median_abs_dev_ns": 15.938737914797603,
+      "median_ns": 13628.095130875317
     },
     "gnats_update/update_160x48": {
-      "median_abs_dev_ns": 308.8943573079331,
-      "median_ns": 11762.806023918189
+      "median_abs_dev_ns": 249.00743683287226,
+      "median_ns": 9324.67687784015
     },
     "gnats_update/update_210x57": {
-      "median_abs_dev_ns": 406.63880846262094,
-      "median_ns": 11678.646356685911
+      "median_abs_dev_ns": 313.7470907420542,
+      "median_ns": 9187.614194907173
     },
     "gnats_update/update_80x24": {
-      "median_abs_dev_ns": 134.3065173024136,
-      "median_ns": 6577.526840062112
+      "median_abs_dev_ns": 93.25352484625174,
+      "median_ns": 5126.026472170789
     },
     "hearth_draw/draw_160x48": {
-      "median_abs_dev_ns": 81.15147884211453,
-      "median_ns": 100997.95655913978
+      "median_abs_dev_ns": 70.95723872146418,
+      "median_ns": 88155.9219924812
     },
     "hearth_draw/draw_210x57": {
-      "median_abs_dev_ns": 161.42740442660065,
-      "median_ns": 156012.52881478798
+      "median_abs_dev_ns": 74.11755847726126,
+      "median_ns": 136252.94465116278
     },
     "hearth_draw/draw_80x24": {
-      "median_abs_dev_ns": 31.100062002206503,
-      "median_ns": 27169.519651401228
+      "median_abs_dev_ns": 19.655518836566095,
+      "median_ns": 23537.26919586765
     },
     "hearth_update/update_160x48": {
-      "median_abs_dev_ns": 1.5704348502949739,
-      "median_ns": 656.9553534129618
+      "median_abs_dev_ns": 1.1635411473121182,
+      "median_ns": 576.7279943374285
     },
     "hearth_update/update_210x57": {
-      "median_abs_dev_ns": 1.7114047663240797,
-      "median_ns": 657.1744336687702
+      "median_abs_dev_ns": 0.9700784739147023,
+      "median_ns": 582.1585559136229
     },
     "hearth_update/update_80x24": {
-      "median_abs_dev_ns": 1.270514334681065,
-      "median_ns": 656.5236643437863
+      "median_abs_dev_ns": 1.418532540705847,
+      "median_ns": 576.5675696931794
     },
     "radar_draw/draw_160x48": {
-      "median_abs_dev_ns": 365.71016105120816,
-      "median_ns": 220672.40162570405
+      "median_abs_dev_ns": 219.86030984669492,
+      "median_ns": 170271.76286482334
     },
     "radar_draw/draw_210x57": {
-      "median_abs_dev_ns": 450.9830965684173,
-      "median_ns": 340993.39548444975
+      "median_abs_dev_ns": 342.89242724578065,
+      "median_ns": 264901.63703703706
     },
     "radar_draw/draw_80x24": {
-      "median_abs_dev_ns": 87.89426704491504,
-      "median_ns": 58714.120335889005
+      "median_abs_dev_ns": 60.76451390846088,
+      "median_ns": 43805.57438957726
     },
     "radar_update/update_160x48": {
-      "median_abs_dev_ns": 25.177626685971394,
-      "median_ns": 815.9072144245882
+      "median_abs_dev_ns": 14.71224571487665,
+      "median_ns": 668.318121423581
     },
     "radar_update/update_210x57": {
-      "median_abs_dev_ns": 24.22111711528573,
-      "median_ns": 872.9206349206349
+      "median_abs_dev_ns": 18.104045146230835,
+      "median_ns": 710.3429964539007
     },
     "radar_update/update_80x24": {
-      "median_abs_dev_ns": 13.254244871010611,
-      "median_ns": 719.2421058753268
+      "median_abs_dev_ns": 9.771641328893576,
+      "median_ns": 598.183306665796
     },
     "ripple_draw/draw_160x48": {
-      "median_abs_dev_ns": 552.0479828867789,
-      "median_ns": 126002.37268847795
+      "median_abs_dev_ns": 64.72423230844245,
+      "median_ns": 107677.51837962962
     },
     "ripple_draw/draw_210x57": {
-      "median_abs_dev_ns": 937.8449687070987,
-      "median_ns": 202748.66498316498
+      "median_abs_dev_ns": 107.1620651450459,
+      "median_ns": 168908.0105298913
     },
     "ripple_draw/draw_80x24": {
-      "median_abs_dev_ns": 73.61051947090854,
-      "median_ns": 41660.600997151
+      "median_abs_dev_ns": 26.33654187544437,
+      "median_ns": 33474.66578431372
     },
     "ripple_update/update_160x48": {
-      "median_abs_dev_ns": 6.211372216915949,
-      "median_ns": 311.79157572975726
+      "median_abs_dev_ns": 4.989619019992029,
+      "median_ns": 285.7600774043733
     },
     "ripple_update/update_210x57": {
-      "median_abs_dev_ns": 6.1435725044570075,
-      "median_ns": 313.1499947229106
+      "median_abs_dev_ns": 4.665029063928684,
+      "median_ns": 287.1006003261725
     },
     "ripple_update/update_80x24": {
-      "median_abs_dev_ns": 5.516393418187926,
-      "median_ns": 310.28848759448863
+      "median_abs_dev_ns": 4.8038113550885635,
+      "median_ns": 285.9109970493118
     },
     "storm_draw/draw_160x48": {
-      "median_abs_dev_ns": 20.68150070758374,
-      "median_ns": 7167.970841808794
+      "median_abs_dev_ns": 7.586160277746705,
+      "median_ns": 6113.099039615847
     },
     "storm_draw/draw_210x57": {
-      "median_abs_dev_ns": 31.48473645983989,
-      "median_ns": 10840.278069448283
+      "median_abs_dev_ns": 17.22033671143058,
+      "median_ns": 8722.47454407295
     },
     "storm_draw/draw_80x24": {
-      "median_abs_dev_ns": 4.176974013061158,
-      "median_ns": 2838.5958835978836
+      "median_abs_dev_ns": 2.088255732276297,
+      "median_ns": 2302.1933230564005
     },
     "storm_update/update_160x48": {
-      "median_abs_dev_ns": 7.234387550744405,
-      "median_ns": 3638.646160580152
+      "median_abs_dev_ns": 5.396503846404976,
+      "median_ns": 2997.375815893518
     },
     "storm_update/update_210x57": {
-      "median_abs_dev_ns": 12.343377849573196,
-      "median_ns": 4355.854737720121
+      "median_abs_dev_ns": 5.188572221805385,
+      "median_ns": 3543.3563433607815
     },
     "storm_update/update_80x24": {
-      "median_abs_dev_ns": 7.445033140274644,
-      "median_ns": 2392.3767117691277
+      "median_abs_dev_ns": 4.106524351204845,
+      "median_ns": 2036.7993304963213
     }
   },
-  "captured_at": "2026-09-28",
-  "commit": "47eb8ca",
+  "captured_at": "2026-10-05",
+  "commit": "45f9386",
   "note": "Captured by scripts/refresh-baseline.sh from criterion estimates.json",
   "version": 2
 }
