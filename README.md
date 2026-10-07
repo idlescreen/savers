@@ -26,13 +26,14 @@
 
 </div>
 
-All eleven official IdleScreen screensaver plugins in one workspace, plus
+All twelve official IdleScreen screensaver plugins in one workspace, plus
 the `idle-savers` bundle (`meta/`). Part of
 [IdleScreen](https://idlescreen.github.io) — modular Wayland screensavers
 for Linux.
 
 | Saver | Package | Description |
 |---|---|---|
+| `ascii/` | `idle-saver-ascii` | Branded ASCII logo with terminal text effects (`[saver] ascii.*` params) |
 | `aurora/` | `idle-saver-aurora` | Aurora borealis curtains over a starfield (`[saver] aurora.*` params) |
 | `beams/` | `idle-saver-beams` | Spotlight cones sweeping a rising dust starfield |
 | `bursts/` | `idle-saver-bursts` | Firework rockets and particle bursts |
@@ -44,6 +45,31 @@ for Linux.
 | `radar/` | `idle-saver-radar` | Radar sweep with drifting contacts |
 | `ripple/` | `idle-saver-ripple` | Rain ripples on dark water |
 | `storm/` | `idle-saver-storm` | Forest rain, lightning, wildlife silhouettes |
+
+### `ascii` parameters
+
+Savers take per-saver settings under `[saver]` in
+`~/.config/idlescreen/config.yaml`:
+
+| Key | Values | Default | Meaning |
+|---|---|---|---|
+| `ascii.effect` | `random`, `decrypt`, `matrix`, `scramble`, `wave`, `led`, `shower` | `random` | `random` rotates through every effect on its own dwell timer |
+| `ascii.text` | any word or short phrase | session logo text | Rendered as a block-letter logo |
+| `ascii.sub` | any short phrase | *unset* | Optional second line beneath the logo |
+| `ascii.ramp` | `blocks`, `matrix`, `minimal` | `blocks` | Character ramp used for the noise layer |
+| `ascii.speed` | `0.15`–`4.0` | `1.0` | Animation rate multiplier |
+| `ascii.fg` | `#rrggbb` | theme accent | Glyph colour |
+
+`decrypt` resolves noise into the logo character by character. `matrix` sweeps
+a rain head down each column. `scramble` shimmers between noise and glyphs.
+`wave` ripples the block through a sine displacement. `led` expands an
+ignition front from the centre. `shower` falls each glyph at its own speed.
+
+To judge an effect without leaving the terminal:
+
+```sh
+cargo run -p ascii --example showcase -- <effect> <text> [ramp]
+```
 
 ## Install
 

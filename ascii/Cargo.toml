@@ -1,0 +1,63 @@
+[package]
+authors.workspace = true
+repository.workspace = true
+license.workspace = true
+name = "ascii"
+version.workspace = true
+edition.workspace = true
+description = "Branded ASCII logo with terminal text effects"
+publish = false
+autobins = false
+
+[lib]
+name = "screensaver_ascii"
+path = "src/lib.rs"
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+idle-api.workspace = true
+
+[build-dependencies]
+build-support.workspace = true
+
+[dev-dependencies]
+criterion = { workspace = true }
+
+[[bench]]
+name = "tick"
+harness = false
+
+[package.metadata.deb]
+name = "idle-saver-ascii"
+maintainer = "idlescreen <jerydleuck@gmail.com>"
+extended-description = "Branded ASCII logo with terminal text effects. Official IdleScreen screensaver plugin."
+depends = "libc6"
+section = "utils"
+priority = "optional"
+assets = [
+    ["target/release/libscreensaver_ascii.so", "usr/libexec/idle/screensavers/libscreensaver_ascii.so", "644"],
+    ["libscreensaver_ascii.idleplugin.toml", "usr/libexec/idle/screensavers/libscreensaver_ascii.idleplugin.toml", "644"]
+]
+
+[package.metadata.generate-rpm]
+name = "idle-saver-ascii"
+release = "1"
+arch = "x86_64"
+summary = "Branded ASCII logo with terminal text effects"
+description = "Branded ASCII logo with terminal text effects"
+license = "Apache-2.0"
+assets = [
+    { source = "target/release/libscreensaver_ascii.so", dest = "/usr/libexec/idle/screensavers/libscreensaver_ascii.so", mode = "644", user = "root", group = "root" },
+    { source = "libscreensaver_ascii.idleplugin.toml", dest = "/usr/libexec/idle/screensavers/libscreensaver_ascii.idleplugin.toml", mode = "644", user = "root", group = "root" }
+]
+
+[package.metadata.generate-rpm.requires]
+idle-daemon = "*"
+
+[package.metadata.generate-rpm.provides]
+
+[package.metadata.generate-rpm.obsoletes]
+
+[features]
+default = []
+bundled = []

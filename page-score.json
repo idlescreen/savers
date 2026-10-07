@@ -1,8 +1,169 @@
 {
  "repo": "savers",
- "rev": "dbe0424",
- "dirty": false,
+ "rev": "735dd3a",
+ "dirty": true,
  "pages": [
+  {
+   "path": "./ascii/benches/tick.rs",
+   "lines": 101,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./ascii/build.rs",
+   "lines": 19,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./ascii/examples/showcase.rs",
+   "lines": 79,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./ascii/src/ascii/cell_state.rs",
+   "lines": 165,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 10
+  },
+  {
+   "path": "./ascii/src/ascii/draw.rs",
+   "lines": 50,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./ascii/src/ascii/effect.rs",
+   "lines": 115,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 5
+  },
+  {
+   "path": "./ascii/src/ascii/effects/decrypt.rs",
+   "lines": 38,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./ascii/src/ascii/effects/led.rs",
+   "lines": 41,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./ascii/src/ascii/effects/matrix.rs",
+   "lines": 37,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./ascii/src/ascii/effects/mod.rs",
+   "lines": 14,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./ascii/src/ascii/effects/scramble.rs",
+   "lines": 32,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./ascii/src/ascii/effects/shower.rs",
+   "lines": 38,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./ascii/src/ascii/effects/wave.rs",
+   "lines": 34,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 2
+  },
+  {
+   "path": "./ascii/src/ascii/load_art.rs",
+   "lines": 105,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 2
+  },
+  {
+   "path": "./ascii/src/ascii/mod.rs",
+   "lines": 132,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./ascii/src/ascii/params.rs",
+   "lines": 91,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 1
+  },
+  {
+   "path": "./ascii/src/ascii/ramp.rs",
+   "lines": 107,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 3
+  },
+  {
+   "path": "./ascii/src/ascii/screensaver_impl.rs",
+   "lines": 76,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./ascii/src/ascii/tests/ascii_tests.rs",
+   "lines": 158,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./ascii/src/ascii/tests/mod.rs",
+   "lines": 7,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./ascii/src/lib.rs",
+   "lines": 62,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./ascii/src/stress_tests.rs",
+   "lines": 42,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./ascii/src/tests_perf.rs",
+   "lines": 47,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
   {
    "path": "./aurora/benches/tick.rs",
    "lines": 94,
@@ -216,14 +377,14 @@
   {
    "path": "./build-support/src/lib.rs",
    "lines": 71,
-   "bin_bytes": null,
+   "bin_bytes": 3791,
    "heat_pct": null,
    "reach": 0
   },
   {
    "path": "./build-support/src/resource.rs",
    "lines": 81,
-   "bin_bytes": null,
+   "bin_bytes": 3275,
    "heat_pct": null,
    "reach": 1
   },
@@ -358,7 +519,7 @@
    "lines": 101,
    "bin_bytes": null,
    "heat_pct": null,
-   "reach": 0
+   "reach": 1
   },
   {
    "path": "./chaos/src/chaos/draw/mod.rs",
@@ -965,7 +1126,7 @@
   {
    "path": "./meta/src/lib.rs",
    "lines": 28,
-   "bin_bytes": null,
+   "bin_bytes": 6,
    "heat_pct": null,
    "reach": 0
   },
@@ -1362,5 +1523,5 @@
    "reach": 0
   }
  ],
- "notes": "reach counts referencing files (shared file names qualified by ancestor dir);"
+ "notes": "reach counts referencing files (shared file names qualified by ancestor dir); bin_bytes from newest workspace dev rlib per crate via nm (inlining approx, bins re-link the same code; shims excluded, foreign paths never attributed);"
 }

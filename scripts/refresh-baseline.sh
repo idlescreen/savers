@@ -13,13 +13,13 @@
 # this script started are collected, so a stale directory left behind by
 # a bench that was renamed cannot leak into the baseline.
 #
-# All eleven savers are T1: each holds the `Screensaver` impl that the
+# All twelve savers are T1: each holds the `Screensaver` impl that the
 # `tick` bench drives, so each is gated.
 set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
-SAVERS=(aurora beams bursts chaos cosmos glyphs gnats hearth radar ripple storm)
+SAVERS=(ascii aurora beams bursts chaos cosmos glyphs gnats hearth radar ripple storm)
 
 GROUP="${1:-}"
 if [ -n "$GROUP" ] && ! printf '%s\n' "${SAVERS[@]}" | grep -qx "$GROUP"; then

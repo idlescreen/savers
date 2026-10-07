@@ -263,6 +263,90 @@
     "storm_update/update_80x24": {
       "median_abs_dev_ns": 4.106524351204845,
       "median_ns": 2036.7993304963213
+    },
+    "ascii_draw/draw_160x48": {
+      "median_abs_dev_ns": 1381.5864529211003,
+      "median_ns": 15998.608460782638
+    },
+    "ascii_draw/draw_210x57": {
+      "median_abs_dev_ns": 5707.324110376133,
+      "median_ns": 26962.911574074074
+    },
+    "ascii_draw/draw_80x24": {
+      "median_abs_dev_ns": 41.7032663696295,
+      "median_ns": 3034.183572627594
+    },
+    "ascii_update/decrypt_160x48": {
+      "median_abs_dev_ns": 62.14469649664515,
+      "median_ns": 7085.563059229927
+    },
+    "ascii_update/decrypt_210x57": {
+      "median_abs_dev_ns": 76.857388949086,
+      "median_ns": 10925.946815221816
+    },
+    "ascii_update/decrypt_80x24": {
+      "median_abs_dev_ns": 5.1834337616931965,
+      "median_ns": 1725.9130346193397
+    },
+    "ascii_update/led_160x48": {
+      "median_abs_dev_ns": 5142.0024442103095,
+      "median_ns": 35891.03279857397
+    },
+    "ascii_update/led_210x57": {
+      "median_abs_dev_ns": 10907.18241021256,
+      "median_ns": 55927.120889641345
+    },
+    "ascii_update/led_80x24": {
+      "median_abs_dev_ns": 191.92606293511764,
+      "median_ns": 8515.935875291063
+    },
+    "ascii_update/matrix_160x48": {
+      "median_abs_dev_ns": 93.14840462482084,
+      "median_ns": 16305.2326997327
+    },
+    "ascii_update/matrix_210x57": {
+      "median_abs_dev_ns": 54.1380310417607,
+      "median_ns": 23461.58773579362
+    },
+    "ascii_update/matrix_80x24": {
+      "median_abs_dev_ns": 19.515121300795496,
+      "median_ns": 4920.805030678688
+    },
+    "ascii_update/scramble_160x48": {
+      "median_abs_dev_ns": 16.653693067907312,
+      "median_ns": 5541.670337445574
+    },
+    "ascii_update/scramble_210x57": {
+      "median_abs_dev_ns": 25.14963688981306,
+      "median_ns": 8316.016741071428
+    },
+    "ascii_update/scramble_80x24": {
+      "median_abs_dev_ns": 4.482488542667318,
+      "median_ns": 1653.1373048480386
+    },
+    "ascii_update/shower_160x48": {
+      "median_abs_dev_ns": 189.0102607095438,
+      "median_ns": 5543.57962948025
+    },
+    "ascii_update/shower_210x57": {
+      "median_abs_dev_ns": 1162.4586495983197,
+      "median_ns": 12880.384503638536
+    },
+    "ascii_update/shower_80x24": {
+      "median_abs_dev_ns": 482.7546489831268,
+      "median_ns": 2202.0183015046296
+    },
+    "ascii_update/wave_160x48": {
+      "median_abs_dev_ns": 74.58309943999767,
+      "median_ns": 37121.081737849774
+    },
+    "ascii_update/wave_210x57": {
+      "median_abs_dev_ns": 378.10045683576715,
+      "median_ns": 57289.47219885378
+    },
+    "ascii_update/wave_80x24": {
+      "median_abs_dev_ns": 12.39842959725839,
+      "median_ns": 9652.779423915918
     }
   },
   "captured_at": "2026-10-05",

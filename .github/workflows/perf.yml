@@ -27,7 +27,7 @@ jobs:
       # Every saver is T1, so the gate covers all of them. Keep this
       # list in sync with the `SAVERS` array in
       # scripts/refresh-baseline.sh and benchmark targets.
-      SAVERS: "aurora beams bursts chaos cosmos glyphs gnats hearth radar ripple storm"
+      SAVERS: "ascii aurora beams bursts chaos cosmos glyphs gnats hearth radar ripple storm"
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       - name: Checkout runtime engine (path deps)
