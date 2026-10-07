@@ -23,10 +23,14 @@ fn truncate_to_width(text: &str, max_cols: usize) -> String {
 }
 
 fn build_text_lines(logo_text: &str, kernel: &str, max_cols: usize) -> Vec<String> {
-    vec![
-        truncate_to_width(logo_text, max_cols),
-        truncate_to_width(kernel, max_cols),
-    ]
+    if kernel.is_empty() || kernel == "unknown" || kernel == "export" {
+        vec![truncate_to_width(logo_text, max_cols)]
+    } else {
+        vec![
+            truncate_to_width(logo_text, max_cols),
+            truncate_to_width(kernel, max_cols),
+        ]
+    }
 }
 
 pub fn rebuild_logo_pixels(eff: &mut Cosmos, cols: usize, rows: usize) {
@@ -100,5 +104,12 @@ mod tests {
         assert_eq!(lines.len(), 2);
         assert_eq!(lines[0], "Pop!_OS 22.04");
         assert_eq!(lines[1], "6.17.9-generic");
+    }
+
+    #[test]
+    fn build_text_lines_omits_unknown_kernel() {
+        let lines = build_text_lines("IDLESCREEN", "unknown", 40);
+        assert_eq!(lines.len(), 1);
+        assert_eq!(lines[0], "IDLESCREEN");
     }
 }

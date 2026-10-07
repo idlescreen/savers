@@ -1,6 +1,6 @@
 {
  "repo": "savers",
- "rev": "c273d0a",
+ "rev": "3034cb6",
  "dirty": true,
  "pages": [
   {
@@ -96,7 +96,7 @@
   },
   {
    "path": "./ascii/src/ascii/load_art.rs",
-   "lines": 112,
+   "lines": 110,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 2
@@ -377,14 +377,14 @@
   {
    "path": "./build-support/src/lib.rs",
    "lines": 71,
-   "bin_bytes": 3791,
+   "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
   },
   {
    "path": "./build-support/src/resource.rs",
    "lines": 81,
-   "bin_bytes": 3275,
+   "bin_bytes": null,
    "heat_pct": null,
    "reach": 1
   },
@@ -649,7 +649,7 @@
   },
   {
    "path": "./cosmos/src/cosmos/physics/logo.rs",
-   "lines": 104,
+   "lines": 115,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 1
@@ -1126,7 +1126,7 @@
   {
    "path": "./meta/src/lib.rs",
    "lines": 28,
-   "bin_bytes": 6,
+   "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
   },
@@ -1489,7 +1489,7 @@
   },
   {
    "path": "./wasm-demo/src/factory.rs",
-   "lines": 55,
+   "lines": 56,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 3
@@ -1503,14 +1503,14 @@
   },
   {
    "path": "./wasm-demo/src/lib.rs",
-   "lines": 111,
+   "lines": 124,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
   },
   {
    "path": "./wasm-demo/src/params.rs",
-   "lines": 85,
+   "lines": 88,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 3
@@ -1523,5 +1523,5 @@
    "reach": 0
   }
  ],
- "notes": "reach counts referencing files (shared file names qualified by ancestor dir); bin_bytes from newest workspace dev rlib per crate via nm (inlining approx, bins re-link the same code; shims excluded, foreign paths never attributed);"
+ "notes": "reach counts referencing files (shared file names qualified by ancestor dir);"
 }

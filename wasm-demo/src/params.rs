@@ -76,10 +76,13 @@ pub unsafe extern "C" fn saver_set_param(
         return false;
     };
 
+    if k == "text" || k == "logo_text" {
+        idle_api::set_env("IDLE_LOGO_TEXT", v);
+    }
     if let Some(env_k) = idle_api::saver_param_env_key(k) {
         idle_api::set_env(&env_k, v);
         true
     } else {
-        false
+        k == "text" || k == "logo_text"
     }
 }

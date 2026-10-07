@@ -91,7 +91,7 @@ pub fn draw_fx(
         cell.bold = e.heat > 0.75;
     }
 
-    let caption = if kernel.is_empty() {
+    let caption = if kernel.is_empty() || kernel == "unknown" || kernel == "export" {
         logo_text.to_string()
     } else {
         format!("{}  ·  {}", logo_text, kernel)
