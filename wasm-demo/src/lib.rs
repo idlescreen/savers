@@ -54,6 +54,19 @@ pub unsafe extern "C" fn saver_new_named(
     }
 }
 
+/// Reserves `len` bytes in linear memory for the caller to write a saver name
+/// into, and returns the offset. Pass it to [`saver_new_named`].
+///
+/// JavaScript has no way to hand a wasm module a string without copying it
+/// into linear memory first, so these two exports exist purely for that.
+#[unsafe(no_mangle)]
+pub extern "C" fn saver_alloc(len: usize) -> *mut u8 {
+    let mut buf: Vec<u8> = Vec::with_capacity(len);
+    let ptr = buf.as_mut_ptr();
+    std::mem::forget(buf); // Leaked deliberately: freed by module teardown.
+    ptr
+}
+
 /// Advances the saver by `dt_ms` milliseconds, redraws the grid, and
 /// returns a pointer to the packed cell buffer (valid until next call).
 ///

@@ -13,6 +13,7 @@ crate-type = ["cdylib", "rlib"]
 
 [package.metadata.cargo-machete]
 ignored = [
+    "ascii",
     "aurora",
     "beams",
     "bursts",
@@ -27,6 +28,7 @@ ignored = [
 ]
 
 [dependencies]
+ascii = { path = "../ascii", features = ["bundled"] }
 aurora = { path = "../aurora", features = ["bundled"] }
 beams = { path = "../beams", features = ["bundled"] }
 bursts = { path = "../bursts", features = ["bundled"] }

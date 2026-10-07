@@ -8,6 +8,7 @@ use idle_api::ScreensaverInstance;
 /// Instantiates a screensaver instance by its canonical organizing name.
 pub fn create_saver_by_name(name: &str) -> Option<Box<ScreensaverInstance>> {
     let raw = match name {
+        "ascii" => screensaver_ascii::create_screensaver(),
         "aurora" => screensaver_aurora::create_screensaver(),
         "beams" => screensaver_beams::create_screensaver(),
         "bursts" => screensaver_bursts::create_screensaver(),
