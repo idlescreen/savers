@@ -10,20 +10,17 @@
 
 use crate::runner::{param, render_logo_block};
 
-/// Word shown when `[saver] ascii.text` is unset.
+/// `[saver] ascii.text`, falling back to the shared wordmark.
 ///
-/// Matches `SystemInfo::logo_text`, so this saver and the eleven that render
-/// the shared wordmark all show the same thing. Kept as a local constant
-/// rather than read from the host so a saver never depends on a callback that
-/// a plugin build cannot observe — `logo_text` defaults identically either way.
-const DEFAULT_TEXT: &str = "IDLESCREEN";
-
-/// `[saver] ascii.text`, falling back to [`DEFAULT_TEXT`].
+/// This used to hardcode its own string while the other eleven savers read
+/// `SystemInfo::logo_text`, so one machine showed different words depending on
+/// which saver you happened to land on. There is one wordmark now; every saver
+/// resolves it the same way.
 pub fn resolve_text() -> String {
     param("text")
         .map(|t| t.trim().to_string())
         .filter(|t| !t.is_empty())
-        .unwrap_or_else(|| DEFAULT_TEXT.to_string())
+        .unwrap_or_else(crate::runner::wordmark)
 }
 
 /// Optional second line beneath the art block.
