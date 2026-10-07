@@ -27,7 +27,9 @@ pub fn resolve_text() -> String {
 
 /// Optional second line beneath the art block.
 pub fn resolve_sub_text() -> Option<String> {
-    param("sub").map(|s| s.trim().to_string()).filter(|s| !s.is_empty())
+    param("sub")
+        .map(|s| s.trim().to_string())
+        .filter(|s| !s.is_empty())
 }
 
 /// Render the resolved text, sized to fit a `cols`-wide grid.
@@ -101,6 +103,10 @@ mod art_tests {
     fn impossible_width_yields_empty_art_rather_than_a_panic() {
         // A single block glyph is 5 columns wide, so a 2-column grid can
         // never show art. That must degrade to blank, not loop or panic.
-        assert!(build_lines("Something", None, 2).iter().all(|l| l.trim().is_empty()));
+        assert!(
+            build_lines("Something", None, 2)
+                .iter()
+                .all(|l| l.trim().is_empty())
+        );
     }
 }

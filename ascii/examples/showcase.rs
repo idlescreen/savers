@@ -34,7 +34,11 @@ fn main() {
 
     // `set_env` is the host's own wrapper around the unsafe env write, so the
     // example stays free of `unsafe` blocks.
-    let params = [("effect", effect.as_str()), ("text", text.as_str()), ("ramp", ramp.as_str())];
+    let params = [
+        ("effect", effect.as_str()),
+        ("text", text.as_str()),
+        ("ramp", ramp.as_str()),
+    ];
     for (key, value) in params {
         if let Some(name) = saver_param_env_key(key) {
             set_env(&name, value);
@@ -53,7 +57,11 @@ fn main() {
             continue;
         }
         saver.draw(&mut grid, COLS, ROWS);
-        let _ = writeln!(out, "\x1b[90m── {} ─────────────────────────\x1b[0m", saver.label());
+        let _ = writeln!(
+            out,
+            "\x1b[90m── {} ─────────────────────────\x1b[0m",
+            saver.label()
+        );
         let _ = write!(out, "{}", paint(&grid));
         let _ = out.flush();
         std::thread::sleep(Duration::from_millis(40));

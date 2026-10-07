@@ -15,11 +15,11 @@ pub mod ramp;
 
 mod screensaver_impl;
 
+use crate::runner::{LcgRng, get_system_info, query_current_palette};
 use cell_state::CellState;
 use effect::EffectKind;
 use params::Params;
 use ramp::Ramps;
-use crate::runner::{LcgRng, get_system_info, query_current_palette};
 
 /// Frame delta clamp. A long stall must not teleport the animation.
 const MAX_DT: f32 = 0.1;

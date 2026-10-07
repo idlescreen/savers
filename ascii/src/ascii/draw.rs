@@ -10,12 +10,7 @@
 use super::cell_state::CellState;
 use crate::runner::TerminalCell;
 
-pub fn paint(
-    st: &CellState,
-    grid: &mut [TerminalCell],
-    fg: (u8, u8, u8),
-    bg: (u8, u8, u8),
-) {
+pub fn paint(st: &CellState, grid: &mut [TerminalCell], fg: (u8, u8, u8), bg: (u8, u8, u8)) {
     let n = st.current.len().min(grid.len());
     for (cell, ch) in grid.iter_mut().zip(st.current.iter()) {
         cell.ch = *ch;

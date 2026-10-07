@@ -38,7 +38,11 @@ impl Screensaver for Ascii {
         }
 
         // Power-adaptive: slow the animation on battery rather than blank.
-        let rate = if self.on_battery { BATTERY_SLOWDOWN } else { 1.0 };
+        let rate = if self.on_battery {
+            BATTERY_SLOWDOWN
+        } else {
+            1.0
+        };
         let step = step * rate;
 
         if !self.pinned {

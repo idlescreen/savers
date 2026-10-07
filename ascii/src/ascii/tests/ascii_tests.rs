@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 IdleScreen
 
+use super::super::Ascii;
 use super::super::cell_state::CellState;
 use super::super::effect::{self, EffectKind};
 use super::super::load_art;
 use super::super::ramp::Ramps;
-use super::super::Ascii;
 use crate::runner::{LcgRng, Screensaver, TerminalCell};
 use std::time::Duration;
 
@@ -145,7 +145,10 @@ fn long_configured_text_still_fits_the_grid() {
     let mut st = CellState::new();
     st.resize(80, 24);
     st.load(&lines);
-    assert!(st.inked_cells() > 0, "blank grid for overlong configured text");
+    assert!(
+        st.inked_cells() > 0,
+        "blank grid for overlong configured text"
+    );
 }
 
 #[test]
