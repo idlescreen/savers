@@ -12,10 +12,11 @@ use crate::runner::{param, render_logo_block};
 
 /// Word shown when `[saver] ascii.text` is unset.
 ///
-/// Deliberately not the session's logo text: that source yields OS pretty
-/// names like "Fedora Linux 44 (Server Edition)", which block-renders to
-/// ~195 columns and does not fit a normal grid.
-const DEFAULT_TEXT: &str = "IDLE";
+/// Matches `SystemInfo::logo_text`, so this saver and the eleven that render
+/// the shared wordmark all show the same thing. Kept as a local constant
+/// rather than read from the host so a saver never depends on a callback that
+/// a plugin build cannot observe — `logo_text` defaults identically either way.
+const DEFAULT_TEXT: &str = "IDLESCREEN";
 
 /// `[saver] ascii.text`, falling back to [`DEFAULT_TEXT`].
 pub fn resolve_text() -> String {
