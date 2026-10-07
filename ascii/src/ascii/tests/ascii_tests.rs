@@ -129,7 +129,7 @@ fn default_art_renders_at_terminal_grid_sizes() {
     // wide, so `CellState::load` rejected it and the saver drew a blank screen
     // on every grid narrower than that — i.e. most real terminals.
     for &(cols, rows) in &[(80usize, 24usize), (120, 40), (160, 48)] {
-        let lines = load_art::resolve_lines(cols);
+        let lines = load_art::resolve_lines(cols, rows);
         assert!(!lines.is_empty(), "no art resolved at {cols}x{rows}");
         let mut st = CellState::new();
         st.resize(cols, rows);

@@ -89,7 +89,7 @@ impl Ascii {
 
     /// Resolve the art into the grid, restarting the current effect.
     pub fn reload_art(&mut self) {
-        let lines = load_art::resolve_lines(self.cells.cols);
+        let lines = load_art::resolve_lines(self.cells.cols, self.cells.rows);
         self.cells.load(&lines);
     }
 

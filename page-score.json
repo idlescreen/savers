@@ -1,6 +1,6 @@
 {
  "repo": "savers",
- "rev": "3034cb6",
+ "rev": "1bf4bbb",
  "dirty": true,
  "pages": [
   {
@@ -96,7 +96,7 @@
   },
   {
    "path": "./ascii/src/ascii/load_art.rs",
-   "lines": 110,
+   "lines": 163,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 2

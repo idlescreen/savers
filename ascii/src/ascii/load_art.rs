@@ -30,10 +30,42 @@ pub fn resolve_sub_text() -> Option<String> {
         .filter(|s| !s.is_empty())
 }
 
-/// Render the resolved text, sized to fit a `cols`-wide grid.
-pub fn resolve_lines(cols: usize) -> Vec<String> {
+/// Render the resolved text or custom art, sized to fit a `cols`×`rows` grid.
+pub fn resolve_lines(cols: usize, rows: usize) -> Vec<String> {
     let sub = resolve_sub_text();
+    if param("text").is_none() {
+        if let Some(art) = crate::runner::logo() {
+            if let Some(lines) = parse_art(art, sub.as_deref(), cols, rows) {
+                return lines;
+            }
+        }
+    }
     build_lines(&resolve_text(), sub.as_deref(), cols)
+}
+
+/// Pure custom art parser, validating dimensions against the grid.
+pub fn parse_art(art: &str, sub: Option<&str>, cols: usize, rows: usize) -> Option<Vec<String>> {
+    let mut lines: Vec<String> = art.lines().map(|l| l.trim_end().to_string()).collect();
+    while lines.first().is_some_and(|l| l.is_empty()) {
+        lines.remove(0);
+    }
+    while lines.last().is_some_and(|l| l.is_empty()) {
+        lines.pop();
+    }
+    if lines.is_empty() {
+        return None;
+    }
+    if let Some(s) = sub {
+        lines.push(String::new());
+        lines.push(s.to_string());
+    }
+    let width = lines.iter().map(|l| l.chars().count()).max().unwrap_or(0);
+    let height = lines.len();
+    if width > 0 && width <= cols && height <= rows {
+        Some(lines)
+    } else {
+        None
+    }
 }
 
 /// Pure art builder, split out so it is testable without touching the
@@ -106,5 +138,26 @@ mod art_tests {
                 .iter()
                 .all(|l| l.trim().is_empty())
         );
+    }
+
+    #[test]
+    fn parse_art_strips_padding_and_validates_bounds() {
+        let art = "\n  ASCII\n  LOGO \n\n";
+        let parsed = super::parse_art(art, None, 10, 5);
+        assert!(parsed.is_some());
+        let lines = parsed.unwrap();
+        assert_eq!(lines.len(), 2);
+        assert_eq!(lines[0], "  ASCII");
+        assert_eq!(lines[1], "  LOGO");
+
+        // Fails when grid too small
+        assert!(super::parse_art(art, None, 5, 5).is_none());
+        assert!(super::parse_art(art, None, 10, 1).is_none());
+
+        // Includes subtext when provided
+        let with_sub = super::parse_art(art, Some("SUB"), 10, 5).unwrap();
+        assert_eq!(with_sub.len(), 4);
+        assert_eq!(with_sub[2], "");
+        assert_eq!(with_sub[3], "SUB");
     }
 }
