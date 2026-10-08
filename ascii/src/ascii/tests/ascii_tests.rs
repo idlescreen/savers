@@ -196,8 +196,13 @@ fn effect_dwells_on_settled_frame_before_restarting() {
 fn oversized_art_falls_back_without_blanking() {
     let mut saver = Ascii::new();
     saver.init(20, 10);
+    assert!(!saver.art_text.trim().is_empty());
+    assert!(saver.cells.inked_cells() > 0);
+    saver.pin_effect(EffectKind::Decrypt);
     let mut grid = vec![TerminalCell::default(); 20 * 10];
-    saver.update(Duration::from_millis(16), 20, 10);
-    saver.draw(&mut grid, 20, 10);
+    for _ in 0..30 {
+        saver.update(Duration::from_millis(16), 20, 10);
+        saver.draw(&mut grid, 20, 10);
+    }
     assert!(grid.iter().any(|c| c.ch != ' '));
 }
