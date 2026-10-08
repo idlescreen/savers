@@ -58,7 +58,7 @@ impl Screensaver for Ascii {
         self.last_rows = rows;
         self.cells.resize(cols, rows);
         self.reload_art();
-        self.dwell_left = self.effect.dwell();
+        self.dwell_left = self.dwell_time();
         self.start_engine_session();
     }
 
@@ -71,7 +71,7 @@ impl Screensaver for Ascii {
             self.last_rows = rows;
             self.cells.resize(cols, rows);
             self.reload_art();
-            self.dwell_left = self.effect.dwell();
+            self.dwell_left = self.dwell_time();
             self.start_engine_session();
         }
 
@@ -83,12 +83,15 @@ impl Screensaver for Ascii {
         };
         let step = step * rate;
 
-        if !self.pinned {
-            self.dwell_left -= step;
-            if self.dwell_left <= 0.0 {
+        self.dwell_left -= step;
+        if self.dwell_left <= 0.0 {
+            if !self.pinned {
                 self.cycle_effect();
-                return;
+            } else {
+                self.dwell_left = self.dwell_time();
+                self.start_engine_session();
             }
+            return;
         }
 
         if let Some(ref mut session) = self.engine {
@@ -98,11 +101,9 @@ impl Screensaver for Ascii {
                     self.current_frame.push_str(&frame);
                 }
                 None => {
-                    if !self.pinned {
-                        self.cycle_effect();
-                    } else {
-                        self.start_engine_session();
-                    }
+                    // Animation complete: drop the engine session and dwell on
+                    // the settled frame until dwell_left expires.
+                    self.engine = None;
                 }
             }
         }
@@ -119,7 +120,6 @@ impl Screensaver for Ascii {
             grid.fill(TerminalCell::default());
         }
     }
-
 
     fn update_frame_time(&mut self, _dt: Duration) {
         let sys = get_system_info();

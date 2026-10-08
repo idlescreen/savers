@@ -18,6 +18,8 @@ pub struct Params {
     pub effect: Option<EffectKind>,
     pub ramp: String,
     pub speed: f32,
+    /// Custom effect dwell time in seconds (overriding effect default).
+    pub cycle_secs: Option<f32>,
     /// Explicit `[saver] ascii.fg`; `None` follows the theme accent.
     pub fg: Option<(u8, u8, u8)>,
 }
@@ -28,6 +30,7 @@ impl Default for Params {
             effect: None,
             ramp: super::ramp::Ramps::default_name().to_string(),
             speed: SPEED_DEFAULT,
+            cycle_secs: None,
             fg: None,
         }
     }
@@ -50,12 +53,15 @@ impl Params {
             .unwrap_or(SPEED_DEFAULT)
             .clamp(SPEED_MIN, SPEED_MAX);
 
+        let cycle_secs = param_f32("cycle_secs").filter(|&s| s > 0.0);
+
         let fg = param("fg").as_deref().and_then(parse_hex);
 
         Self {
             effect,
             ramp,
             speed,
+            cycle_secs,
             fg,
         }
     }
@@ -75,7 +81,7 @@ pub fn parse_hex(raw: &str) -> Option<(u8, u8, u8)> {
 
 #[cfg(test)]
 mod params_tests {
-    use super::parse_hex;
+    use super::*;
 
     #[test]
     fn parses_six_digit_hex_with_and_without_hash() {
@@ -88,5 +94,11 @@ mod params_tests {
         assert_eq!(parse_hex("#fff"), None);
         assert_eq!(parse_hex("gggggg"), None);
         assert_eq!(parse_hex(""), None);
+    }
+
+    #[test]
+    fn default_params_has_no_cycle_secs() {
+        let p = Params::default();
+        assert!(p.cycle_secs.is_none());
     }
 }

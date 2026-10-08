@@ -61,6 +61,7 @@ impl Ascii {
         let effect = params
             .effect
             .unwrap_or_else(|| effect::pick_random(&mut rng));
+        let dwell_left = params.cycle_secs.unwrap_or_else(|| effect.dwell());
 
         Self {
             rng,
@@ -69,7 +70,7 @@ impl Ascii {
             params,
             effect,
             pinned,
-            dwell_left: effect.dwell(),
+            dwell_left,
             fg: (248, 248, 242),
             on_battery: get_system_info().power_status.contains("Battery"),
             last_cols: 0,
@@ -79,6 +80,11 @@ impl Ascii {
             engine: None,
         }
         .with_theme_fg()
+    }
+
+    /// Effective dwell duration in seconds for the active effect.
+    pub fn dwell_time(&self) -> f32 {
+        self.params.cycle_secs.unwrap_or_else(|| self.effect.dwell())
     }
 
     /// Adopt the session's accent colour unless `[saver] ascii.fg` overrides it.
@@ -122,7 +128,7 @@ impl Ascii {
     /// Swap to a new effect and restart its progress from the top.
     pub fn cycle_effect(&mut self) {
         self.effect = effect::pick_random(&mut self.rng);
-        self.dwell_left = self.effect.dwell();
+        self.dwell_left = self.dwell_time();
         self.cells.settled.fill(0.0);
         self.cells.progress = 0.0;
         self.start_engine_session();
@@ -147,7 +153,7 @@ impl Ascii {
     pub fn pin_effect(&mut self, kind: EffectKind) {
         self.effect = kind;
         self.pinned = true;
-        self.dwell_left = kind.dwell();
+        self.dwell_left = self.dwell_time();
         self.cells.settled.fill(0.0);
         self.cells.progress = 0.0;
         self.start_engine_session();

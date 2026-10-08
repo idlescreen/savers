@@ -1,7 +1,7 @@
 {
  "repo": "savers",
- "rev": "1b150d9",
- "dirty": true,
+ "rev": "3431c7c",
+ "dirty": false,
  "pages": [
   {
    "path": "./ascii/benches/tick.rs",
@@ -33,7 +33,7 @@
   },
   {
    "path": "./ascii/src/ascii/draw.rs",
-   "lines": 229,
+   "lines": 246,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 1
@@ -47,21 +47,21 @@
   },
   {
    "path": "./ascii/src/ascii/load_art.rs",
-   "lines": 179,
+   "lines": 211,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 2
   },
   {
    "path": "./ascii/src/ascii/mod.rs",
-   "lines": 159,
+   "lines": 165,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
   },
   {
    "path": "./ascii/src/ascii/params.rs",
-   "lines": 92,
+   "lines": 104,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 1
@@ -82,7 +82,7 @@
   },
   {
    "path": "./ascii/src/ascii/tests/ascii_tests.rs",
-   "lines": 164,
+   "lines": 203,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0

@@ -66,9 +66,11 @@ pub fn paint_frame(
                 while i < bytes.len() && (bytes[i] < b'@' || bytes[i] > b'~') {
                     i += 1;
                 }
-                if i < bytes.len() && bytes[i] == b'm' {
-                    let seq = &bytes[start..i];
-                    parse_sgr(seq, &mut fg, &mut bg, &mut bold, default_fg, default_bg);
+                if i < bytes.len() {
+                    if bytes[i] == b'm' {
+                        let seq = &bytes[start..i];
+                        parse_sgr(seq, &mut fg, &mut bg, &mut bold, default_fg, default_bg);
+                    }
                     i += 1;
                 }
             } else if i < bytes.len() {
@@ -126,6 +128,10 @@ fn parse_sgr(
             }
             b"1" => *bold = true,
             b"22" => *bold = false,
+            [b'3', d @ b'0'..=b'7'] => *fg = xterm_to_rgb(d - b'0'),
+            [b'9', d @ b'0'..=b'7'] => *fg = xterm_to_rgb(8 + (d - b'0')),
+            [b'4', d @ b'0'..=b'7'] => *bg = xterm_to_rgb(d - b'0'),
+            [b'1', b'0', d @ b'0'..=b'7'] => *bg = xterm_to_rgb(8 + (d - b'0')),
             b"38" => match parts.next() {
                 Some(b"2") => {
                     let r = parts.next().and_then(parse_u8).unwrap_or(default_fg.0);
@@ -225,5 +231,16 @@ mod paint_tests {
         assert!(!grid[2].bold);
 
         assert_eq!(grid[3].ch, 'Z');
+    }
+
+    #[test]
+    fn paint_frame_parses_standard_ansi_colors_and_swallows_csi() {
+        let frame = "\x1b[2J\x1b[31mA\x1b[92mB\x1b[0m";
+        let mut grid = vec![TerminalCell::default(); 2];
+        paint_frame(frame, &mut grid, 2, 1, (10, 10, 10), (0, 0, 0));
+        assert_eq!(grid[0].ch, 'A');
+        assert_eq!(grid[0].fg, xterm_to_rgb(1));
+        assert_eq!(grid[1].ch, 'B');
+        assert_eq!(grid[1].fg, xterm_to_rgb(10));
     }
 }

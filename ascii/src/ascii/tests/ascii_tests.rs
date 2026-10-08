@@ -55,13 +55,14 @@ fn render_is_deterministic_for_a_fixed_seed() {
         saver.pin_effect(EffectKind::Decrypt);
         saver.pinned = false;
         let mut grid = vec![TerminalCell::default(); COLS * ROWS];
-        for _ in 0..60 {
+        for _ in 0..600 {
             saver.update(Duration::from_millis(16), COLS, ROWS);
             saver.draw(&mut grid, COLS, ROWS);
         }
         grid.iter().map(|c| c.ch).collect::<Vec<char>>()
     };
     assert_eq!(render(1234), render(1234));
+    assert!(render(1234).contains(&'█'));
 }
 
 #[test]
@@ -81,7 +82,7 @@ fn resize_rebuilds_the_grid_and_art() {
     saver.update(Duration::from_millis(16), wide, tall);
     let mut smaller = vec![TerminalCell::default(); wide * tall];
     saver.draw(&mut smaller, wide, tall);
-    assert_eq!(smaller.len(), wide * tall);
+    assert_eq!(saver.cells.target.len(), wide * tall);
 }
 
 #[test]
@@ -94,6 +95,18 @@ fn default_art_renders_at_terminal_grid_sizes() {
         st.load(&lines);
         assert!(st.inked_cells() > 0, "blank grid at {cols}x{rows}");
     }
+}
+
+#[test]
+fn long_configured_text_still_fits_the_grid() {
+    let lines = load_art::build_lines("Fedora Linux 44 (Server Edition)", None, 80);
+    let mut st = CellState::new();
+    st.resize(80, 24);
+    st.load(&lines);
+    assert!(
+        st.inked_cells() > 0,
+        "blank grid for overlong configured text"
+    );
 }
 
 #[test]
@@ -161,4 +174,30 @@ fn all_37_effects_can_build_and_render_frames() {
             let _ = effect.next_frame(&mut ctx);
         }
     }
+}
+
+#[test]
+fn effect_dwells_on_settled_frame_before_restarting() {
+    let mut saver = Ascii::new();
+    saver.params.cycle_secs = Some(5.0);
+    saver.init(COLS, ROWS);
+    saver.pin_effect(EffectKind::Wipe);
+    let mut grid = vec![TerminalCell::default(); COLS * ROWS];
+    for _ in 0..160 {
+        saver.update(Duration::from_millis(16), COLS, ROWS);
+        saver.draw(&mut grid, COLS, ROWS);
+    }
+    assert!(saver.engine.is_none());
+    assert!(!saver.current_frame.is_empty());
+    assert!(grid.iter().any(|c| c.ch != ' '));
+}
+
+#[test]
+fn oversized_art_falls_back_without_blanking() {
+    let mut saver = Ascii::new();
+    saver.init(20, 10);
+    let mut grid = vec![TerminalCell::default(); 20 * 10];
+    saver.update(Duration::from_millis(16), 20, 10);
+    saver.draw(&mut grid, 20, 10);
+    assert!(grid.iter().any(|c| c.ch != ' '));
 }
