@@ -32,7 +32,7 @@ use screensaver_ascii::bench_exports::{Ascii, EffectKind};
 use screensaver_ascii::runner::{Screensaver, TerminalCell};
 
 const GRIDS: &[(usize, usize)] = &[(80, 24), (160, 48), (210, 57)];
-const EFFECTS: [EffectKind; 6] = EffectKind::ALL;
+const EFFECTS: &[EffectKind] = &EffectKind::ALL;
 
 fn make_warm_ascii(cols: usize, rows: usize, kind: EffectKind) -> Ascii {
     let mut effect = Ascii::new();
@@ -51,7 +51,7 @@ fn bench_update(c: &mut Criterion) {
     group.measurement_time(Duration::from_secs(3));
     group.warm_up_time(Duration::from_secs(1));
 
-    for kind in EFFECTS {
+    for &kind in EFFECTS {
         for &(cols, rows) in GRIDS {
             let mut effect = make_warm_ascii(cols, rows, kind);
             let label = format!("{}_{cols}x{rows}", kind.name());

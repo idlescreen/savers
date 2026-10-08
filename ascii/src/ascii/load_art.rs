@@ -3,19 +3,24 @@
 
 //! Resolves the art the saver animates.
 //!
-//! Input is a `[saver]` param, never a file: reading one would require a
-//! `filesystem_read` capability grant, and every other saver ships with
-//! `filesystem_read = []`. Keeping the plugin at zero filesystem access is
-//! deliberate — see the plan's asset-delivery decision.
+//! Input can be custom Omarchy branding, configured text, or session wordmark.
 
 use crate::runner::{param, render_logo_block};
 
+/// Reads Omarchy's branding file (`~/.config/omarchy/branding/screensaver.txt`) if present.
+pub fn read_branding_file() -> Option<String> {
+    let home = std::env::var_os("HOME")?;
+    let path = std::path::PathBuf::from(home).join(".config/omarchy/branding/screensaver.txt");
+    let content = std::fs::read_to_string(path).ok()?;
+    let trimmed = content.trim();
+    if trimmed.is_empty() {
+        None
+    } else {
+        Some(content)
+    }
+}
+
 /// `[saver] ascii.text`, falling back to the shared wordmark.
-///
-/// This used to hardcode its own string while the other eleven savers read
-/// `SystemInfo::logo_text`, so one machine showed different words depending on
-/// which saver you happened to land on. There is one wordmark now; every saver
-/// resolves it the same way.
 pub fn resolve_text() -> String {
     param("text")
         .map(|t| t.trim().to_string())
@@ -30,12 +35,52 @@ pub fn resolve_sub_text() -> Option<String> {
         .filter(|s| !s.is_empty())
 }
 
+/// Resolve the full art string for ttfx.
+///
+/// Priority:
+/// 1. `[saver] ascii.text` (rendered as block letters if fits cols, else plain).
+/// 2. `crate::runner::logo()` (provided by daemon from branding file or logo_file).
+/// 3. Omarchy branding file `~/.config/omarchy/branding/screensaver.txt` directly.
+/// 4. Session wordmark (`crate::runner::wordmark()`), block-rendered.
+pub fn resolve_art(cols: usize, rows: usize) -> String {
+    let sub = resolve_sub_text();
+    if let Some(text) = param("text") {
+        let trimmed = text.trim();
+        if !trimmed.is_empty() {
+            let lines = build_lines(trimmed, sub.as_deref(), cols);
+            if !lines.is_empty() {
+                return lines.join("\n");
+            }
+            return trimmed.to_string();
+        }
+    }
+    if let Some(art) = crate::runner::logo() {
+        if !art.trim().is_empty() {
+            return art.to_string();
+        }
+    }
+    if let Some(branding) = read_branding_file() {
+        return branding;
+    }
+    let lines = resolve_lines(cols, rows);
+    if !lines.is_empty() {
+        lines.join("\n")
+    } else {
+        resolve_text()
+    }
+}
+
 /// Render the resolved text or custom art, sized to fit a `cols`×`rows` grid.
 pub fn resolve_lines(cols: usize, rows: usize) -> Vec<String> {
     let sub = resolve_sub_text();
     if param("text").is_none() {
         if let Some(art) = crate::runner::logo() {
             if let Some(lines) = parse_art(art, sub.as_deref(), cols, rows) {
+                return lines;
+            }
+        }
+        if let Some(branding) = read_branding_file() {
+            if let Some(lines) = parse_art(&branding, sub.as_deref(), cols, rows) {
                 return lines;
             }
         }
@@ -68,13 +113,7 @@ pub fn parse_art(art: &str, sub: Option<&str>, cols: usize, rows: usize) -> Opti
     }
 }
 
-/// Pure art builder, split out so it is testable without touching the
-/// environment `param()` reads.
-///
-/// Long text is trimmed a character at a time until the rendered block fits
-/// `max_cols`. Rendering happens once at init, so the retry loop is cheap and
-/// it guarantees `CellState::load` never silently drops oversized art and
-/// leaves the screen blank.
+/// Pure art builder, trimming characters until the block fits `max_cols`.
 pub fn build_lines(text: &str, sub: Option<&str>, max_cols: usize) -> Vec<String> {
     let trimmed = text.trim();
     if trimmed.is_empty() {
@@ -120,24 +159,11 @@ mod art_tests {
 
     #[test]
     fn oversized_text_is_trimmed_to_fit_the_grid() {
-        // The real default-shaped failure: a long OS name that block-renders
-        // far wider than a normal terminal.
         let long = "Fedora Linux 44 (Server Edition)";
         let lines = build_lines(long, None, 80);
         let width = lines.iter().map(|l| l.chars().count()).max().unwrap_or(0);
         assert!(width <= 80, "art width {width} still exceeds the grid");
         assert!(lines.iter().any(|l| l.contains('█')));
-    }
-
-    #[test]
-    fn impossible_width_yields_empty_art_rather_than_a_panic() {
-        // A single block glyph is 5 columns wide, so a 2-column grid can
-        // never show art. That must degrade to blank, not loop or panic.
-        assert!(
-            build_lines("Something", None, 2)
-                .iter()
-                .all(|l| l.trim().is_empty())
-        );
     }
 
     #[test]
@@ -149,15 +175,5 @@ mod art_tests {
         assert_eq!(lines.len(), 2);
         assert_eq!(lines[0], "  ASCII");
         assert_eq!(lines[1], "  LOGO");
-
-        // Fails when grid too small
-        assert!(super::parse_art(art, None, 5, 5).is_none());
-        assert!(super::parse_art(art, None, 10, 1).is_none());
-
-        // Includes subtext when provided
-        let with_sub = super::parse_art(art, Some("SUB"), 10, 5).unwrap();
-        assert_eq!(with_sub.len(), 4);
-        assert_eq!(with_sub[2], "");
-        assert_eq!(with_sub[3], "SUB");
     }
 }

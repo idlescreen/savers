@@ -8,12 +8,11 @@
 pub mod cell_state;
 pub mod draw;
 pub mod effect;
-pub mod effects;
 pub mod load_art;
 pub mod params;
 pub mod ramp;
 
-mod screensaver_impl;
+pub(crate) mod screensaver_impl;
 
 use crate::runner::{LcgRng, get_system_info, query_current_palette};
 use cell_state::CellState;
@@ -30,6 +29,7 @@ const BATTERY_SLOWDOWN: f32 = 0.55;
 pub struct Ascii {
     pub(crate) rng: LcgRng,
     pub(crate) cells: CellState,
+    #[allow(dead_code)]
     pub(crate) ramp: Vec<char>,
     pub(crate) params: Params,
     pub(crate) effect: EffectKind,
@@ -40,6 +40,9 @@ pub struct Ascii {
     pub(crate) on_battery: bool,
     pub(crate) last_cols: usize,
     pub(crate) last_rows: usize,
+    pub(crate) art_text: String,
+    pub(crate) current_frame: String,
+    pub(crate) engine: Option<screensaver_impl::EngineSession>,
 }
 
 impl Default for Ascii {
@@ -54,9 +57,6 @@ impl Ascii {
         let ramps = Ramps::load();
         let ramp = ramps.pick(&params.ramp).to_vec();
         let pinned = params.effect.is_some();
-        // Seed the rolling RNG first and use it for the opening pick too.
-        // Two RNGs would make the initial effect seed-independent, breaking
-        // the `deterministic_seed` guarantee headless render relies on.
         let mut rng = LcgRng::from_env_or_random();
         let effect = params
             .effect
@@ -74,6 +74,9 @@ impl Ascii {
             on_battery: get_system_info().power_status.contains("Battery"),
             last_cols: 0,
             last_rows: 0,
+            art_text: String::new(),
+            current_frame: String::new(),
+            engine: None,
         }
         .with_theme_fg()
     }
@@ -89,8 +92,31 @@ impl Ascii {
 
     /// Resolve the art into the grid, restarting the current effect.
     pub fn reload_art(&mut self) {
-        let lines = load_art::resolve_lines(self.cells.cols, self.cells.rows);
+        self.art_text = load_art::resolve_art(self.last_cols, self.last_rows);
+        let lines = load_art::resolve_lines(self.last_cols, self.last_rows);
         self.cells.load(&lines);
+    }
+
+    /// Start or restart the underlying ttfx animation session.
+    pub(crate) fn start_engine_session(&mut self) {
+        if self.last_cols == 0 || self.last_rows == 0 || self.art_text.trim().is_empty() {
+            self.engine = None;
+            return;
+        }
+        let seed = self.rng.next_u64();
+        self.engine = screensaver_impl::EngineSession::new(
+            &self.art_text,
+            self.effect,
+            self.last_cols,
+            self.last_rows,
+            seed,
+        );
+        if let Some(ref mut session) = self.engine {
+            if let Some(frame) = session.next_frame() {
+                self.current_frame.clear();
+                self.current_frame.push_str(&frame);
+            }
+        }
     }
 
     /// Swap to a new effect and restart its progress from the top.
@@ -99,6 +125,7 @@ impl Ascii {
         self.dwell_left = self.effect.dwell();
         self.cells.settled.fill(0.0);
         self.cells.progress = 0.0;
+        self.start_engine_session();
     }
 
     /// Exposed for benches and tests that need a settled, representative state.
@@ -107,6 +134,7 @@ impl Ascii {
         self.last_rows = rows;
         self.cells.resize(cols, rows);
         self.reload_art();
+        self.start_engine_session();
     }
 
     /// Short description of the live effect, for diagnostics and previews.
@@ -116,15 +144,13 @@ impl Ascii {
     }
 
     /// Pin the active effect, stopping `random` rotation.
-    ///
-    /// Needed for benchmarkable numbers: without it each `new()` measures a
-    /// different effect and results are not comparable across grid sizes.
     pub fn pin_effect(&mut self, kind: EffectKind) {
         self.effect = kind;
         self.pinned = true;
         self.dwell_left = kind.dwell();
         self.cells.settled.fill(0.0);
         self.cells.progress = 0.0;
+        self.start_engine_session();
     }
 }
 

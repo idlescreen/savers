@@ -1,6 +1,6 @@
 {
  "repo": "savers",
- "rev": "1bf4bbb",
+ "rev": "1b150d9",
  "dirty": true,
  "pages": [
   {
@@ -29,81 +29,32 @@
    "lines": 166,
    "bin_bytes": null,
    "heat_pct": null,
-   "reach": 10
+   "reach": 3
   },
   {
    "path": "./ascii/src/ascii/draw.rs",
-   "lines": 46,
+   "lines": 229,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 1
   },
   {
    "path": "./ascii/src/ascii/effect.rs",
-   "lines": 116,
+   "lines": 199,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 5
   },
   {
-   "path": "./ascii/src/ascii/effects/decrypt.rs",
-   "lines": 39,
-   "bin_bytes": null,
-   "heat_pct": null,
-   "reach": 1
-  },
-  {
-   "path": "./ascii/src/ascii/effects/led.rs",
-   "lines": 42,
-   "bin_bytes": null,
-   "heat_pct": null,
-   "reach": 1
-  },
-  {
-   "path": "./ascii/src/ascii/effects/matrix.rs",
-   "lines": 38,
-   "bin_bytes": null,
-   "heat_pct": null,
-   "reach": 1
-  },
-  {
-   "path": "./ascii/src/ascii/effects/mod.rs",
-   "lines": 15,
-   "bin_bytes": null,
-   "heat_pct": null,
-   "reach": 0
-  },
-  {
-   "path": "./ascii/src/ascii/effects/scramble.rs",
-   "lines": 33,
-   "bin_bytes": null,
-   "heat_pct": null,
-   "reach": 1
-  },
-  {
-   "path": "./ascii/src/ascii/effects/shower.rs",
-   "lines": 39,
-   "bin_bytes": null,
-   "heat_pct": null,
-   "reach": 1
-  },
-  {
-   "path": "./ascii/src/ascii/effects/wave.rs",
-   "lines": 35,
-   "bin_bytes": null,
-   "heat_pct": null,
-   "reach": 2
-  },
-  {
    "path": "./ascii/src/ascii/load_art.rs",
-   "lines": 163,
+   "lines": 179,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 2
   },
   {
    "path": "./ascii/src/ascii/mod.rs",
-   "lines": 133,
+   "lines": 159,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
@@ -120,18 +71,18 @@
    "lines": 108,
    "bin_bytes": null,
    "heat_pct": null,
-   "reach": 3
+   "reach": 2
   },
   {
    "path": "./ascii/src/ascii/screensaver_impl.rs",
-   "lines": 81,
+   "lines": 132,
    "bin_bytes": null,
    "heat_pct": null,
-   "reach": 0
+   "reach": 1
   },
   {
    "path": "./ascii/src/ascii/tests/ascii_tests.rs",
-   "lines": 162,
+   "lines": 164,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
@@ -519,7 +470,7 @@
    "lines": 101,
    "bin_bytes": null,
    "heat_pct": null,
-   "reach": 1
+   "reach": 0
   },
   {
    "path": "./chaos/src/chaos/draw/mod.rs",

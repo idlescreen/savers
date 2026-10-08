@@ -16,6 +16,9 @@ crate-type = ["cdylib", "rlib"]
 
 [dependencies]
 idle-api.workspace = true
+ttfx = { git = "https://github.com/omacom-io/ttfx" }
+clap = "4"
+
 
 [build-dependencies]
 build-support.workspace = true

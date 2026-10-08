@@ -38,6 +38,7 @@ assets = []
 
 [package.metadata.generate-rpm.requires]
 idle-daemon = "*"
+idle-saver-ascii = "*"
 idle-saver-aurora = "*"
 idle-saver-beams = "*"
 idle-saver-bursts = "*"
