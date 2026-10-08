@@ -1,7 +1,7 @@
 {
  "repo": "savers",
- "rev": "ecd8b7c",
- "dirty": false,
+ "rev": "5a7cca1",
+ "dirty": true,
  "pages": [
   {
    "path": "./ascii/benches/tick.rs",
@@ -33,7 +33,7 @@
   },
   {
    "path": "./ascii/src/ascii/draw.rs",
-   "lines": 246,
+   "lines": 252,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 1
@@ -54,24 +54,24 @@
   },
   {
    "path": "./ascii/src/ascii/mod.rs",
-   "lines": 165,
+   "lines": 159,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
   },
   {
    "path": "./ascii/src/ascii/params.rs",
-   "lines": 104,
+   "lines": 105,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 1
   },
   {
    "path": "./ascii/src/ascii/ramp.rs",
-   "lines": 108,
+   "lines": 110,
    "bin_bytes": null,
    "heat_pct": null,
-   "reach": 2
+   "reach": 1
   },
   {
    "path": "./ascii/src/ascii/screensaver_impl.rs",
