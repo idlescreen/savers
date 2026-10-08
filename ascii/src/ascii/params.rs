@@ -16,6 +16,7 @@ const SPEED_MAX: f32 = 4.0;
 pub struct Params {
     /// `None` means `random`: cycle through every effect.
     pub effect: Option<EffectKind>,
+    #[allow(dead_code)]
     pub ramp: String,
     pub speed: f32,
     /// Custom effect dwell time in seconds (overriding effect default).

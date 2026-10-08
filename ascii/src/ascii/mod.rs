@@ -18,7 +18,6 @@ use crate::runner::{LcgRng, get_system_info, query_current_palette};
 use cell_state::CellState;
 use effect::EffectKind;
 use params::Params;
-use ramp::Ramps;
 
 /// Frame delta clamp. A long stall must not teleport the animation.
 const MAX_DT: f32 = 0.1;
@@ -29,8 +28,6 @@ const BATTERY_SLOWDOWN: f32 = 0.55;
 pub struct Ascii {
     pub(crate) rng: LcgRng,
     pub(crate) cells: CellState,
-    #[allow(dead_code)]
-    pub(crate) ramp: Vec<char>,
     pub(crate) params: Params,
     pub(crate) effect: EffectKind,
     /// True when `[saver] ascii.effect` pins one effect instead of rotating.
@@ -54,8 +51,6 @@ impl Default for Ascii {
 impl Ascii {
     pub fn new() -> Self {
         let params = Params::read();
-        let ramps = Ramps::load();
-        let ramp = ramps.pick(&params.ramp).to_vec();
         let pinned = params.effect.is_some();
         let mut rng = LcgRng::from_env_or_random();
         let effect = params
@@ -66,7 +61,6 @@ impl Ascii {
         Self {
             rng,
             cells: CellState::new(),
-            ramp,
             params,
             effect,
             pinned,

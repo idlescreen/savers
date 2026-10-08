@@ -52,9 +52,6 @@ pub fn paint_frame(
         if bytes[i] == b'\n' {
             y += 1;
             x = 0;
-            bold = false;
-            fg = default_fg;
-            bg = default_bg;
             i += 1;
             continue;
         }
@@ -242,5 +239,14 @@ mod paint_tests {
         assert_eq!(grid[0].fg, xterm_to_rgb(1));
         assert_eq!(grid[1].ch, 'B');
         assert_eq!(grid[1].fg, xterm_to_rgb(10));
+    }
+
+    #[test]
+    fn paint_frame_preserves_ansi_state_across_newlines() {
+        let frame = "\x1b[31mA\nB\x1b[0m";
+        let mut grid = vec![TerminalCell::default(); 4];
+        paint_frame(frame, &mut grid, 2, 2, (10, 10, 10), (0, 0, 0));
+        assert_eq!(grid[0].fg, xterm_to_rgb(1));
+        assert_eq!(grid[2].fg, xterm_to_rgb(1));
     }
 }

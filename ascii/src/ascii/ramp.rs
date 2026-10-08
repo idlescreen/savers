@@ -13,6 +13,7 @@ static RAMP_TABLE: &str = include_str!("../../assets/ramps.txt");
 /// Fallback used when a named ramp is absent from the table.
 const DEFAULT_NAME: &str = "blocks";
 
+#[allow(dead_code)]
 pub struct Ramps {
     blocks: Vec<char>,
     matrix: Vec<char>,
@@ -70,6 +71,7 @@ impl Ramps {
 
     /// Look up a ramp by `[saver] ascii.ramp` value, falling back to the
     /// default ramp for unknown names.
+    #[allow(dead_code)]
     pub fn pick(&self, name: &str) -> &[char] {
         match name {
             "matrix" => &self.matrix,
