@@ -1,6 +1,6 @@
 {
  "repo": "savers",
- "rev": "eba46bb",
+ "rev": "fb6d035",
  "dirty": true,
  "pages": [
   {
@@ -89,7 +89,7 @@
   },
   {
    "path": "./ascii/src/ascii/tests/ascii_tests.rs",
-   "lines": 253,
+   "lines": 254,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0

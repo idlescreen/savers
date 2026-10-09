@@ -236,9 +236,10 @@ fn screensaver_randomizes_targets_without_immediate_repeats() {
 #[test]
 fn smooth_transition_and_resize_without_panics() {
     let mut saver = Ascii::new();
-    saver.params.cycle_secs = Some(0.2);
+    saver.params.cycle_secs = Some(5.0);
     saver.init(COLS, ROWS);
-    step(&mut saver, 10);
+    saver.pin_effect(EffectKind::Wipe);
+    step(&mut saver, 160);
     saver.begin_transition();
     assert!(saver.transition_active);
     let mut grid = vec![TerminalCell::default(); COLS * ROWS];
