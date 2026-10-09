@@ -59,8 +59,11 @@ impl Screensaver for Ascii {
         self.cells.resize(cols, rows);
         self.frame_grid.resize(cols * rows, TerminalCell::default());
         self.frame_grid.fill(TerminalCell::default());
+        self.transition_from_grid.clear();
+        self.transition_active = false;
+        self.transition_left = 0.0;
         self.playlist = super::effect::EffectPlaylist::new_with_last(Some(self.effect));
-        self.brand_target = super::load_art::BrandTarget::Os;
+        self.brand_target = super::load_art::BrandTarget::random_excluding(&mut self.rng, None);
         self.reload_art();
         self.dwell_left = self.dwell_time();
         self.start_engine_session();
@@ -76,6 +79,9 @@ impl Screensaver for Ascii {
             self.cells.resize(cols, rows);
             self.frame_grid.resize(cols * rows, TerminalCell::default());
             self.frame_grid.fill(TerminalCell::default());
+            self.transition_from_grid.clear();
+            self.transition_active = false;
+            self.transition_left = 0.0;
             self.reload_art();
             self.dwell_left = self.dwell_time();
             self.start_engine_session();
@@ -89,13 +95,17 @@ impl Screensaver for Ascii {
         };
         let step = step * rate;
 
-        self.dwell_left -= step;
-        if self.dwell_left <= 0.0 {
-            if !self.pinned {
-                self.cycle_effect();
-            } else {
-                self.cycle_target();
+        if self.transition_active {
+            self.transition_left -= step;
+            if self.transition_left <= 0.0 {
+                self.transition_active = false;
+                self.transition_from_grid.clear();
             }
+        }
+
+        self.dwell_left -= step;
+        if self.dwell_left <= 0.0 && !self.transition_active {
+            self.begin_transition();
             return;
         }
 
@@ -125,7 +135,29 @@ impl Screensaver for Ascii {
     fn draw(&self, grid: &mut [TerminalCell], cols: usize, rows: usize) {
         if self.art_text.trim().is_empty() {
             grid.fill(TerminalCell::default());
-        } else if !self.frame_grid.is_empty() {
+            return;
+        }
+        if self.transition_active
+            && !self.transition_from_grid.is_empty()
+            && self.transition_from_grid.len() == grid.len()
+            && self.frame_grid.len() == grid.len()
+        {
+            let t = if self.transition_duration > 0.0 {
+                (1.0 - (self.transition_left / self.transition_duration)).clamp(0.0, 1.0)
+            } else {
+                1.0
+            };
+            draw::paint_transition(
+                &self.transition_from_grid,
+                &self.frame_grid,
+                grid,
+                t,
+                cols,
+                rows,
+            );
+            return;
+        }
+        if !self.frame_grid.is_empty() {
             let n = self.frame_grid.len().min(grid.len());
             grid[..n].copy_from_slice(&self.frame_grid[..n]);
             if grid.len() > n {

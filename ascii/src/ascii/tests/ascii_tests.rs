@@ -222,25 +222,32 @@ fn playlist_rotates_all_37_effects_without_immediate_repeats() {
 }
 
 #[test]
-fn screensaver_rotates_os_de_kernel() {
+fn screensaver_randomizes_targets_without_immediate_repeats() {
     let mut saver = Ascii::new();
-    saver.params.cycle_secs = Some(1.0);
     saver.init(COLS, ROWS);
-    assert_eq!(saver.brand_target, load_art::BrandTarget::Os);
+    let mut last = saver.brand_target;
+    for _ in 0..50 {
+        saver.cycle_effect();
+        assert_ne!(saver.brand_target, last);
+        last = saver.brand_target;
+    }
+}
 
-    // Experience 0 (OS) dwell completes -> cycles to DE
-    step(&mut saver, 70);
-    assert_eq!(saver.brand_target, load_art::BrandTarget::De);
+#[test]
+fn smooth_transition_and_resize_without_panics() {
+    let mut saver = Ascii::new();
+    saver.params.cycle_secs = Some(0.2);
+    saver.init(COLS, ROWS);
+    step(&mut saver, 10);
+    saver.begin_transition();
+    assert!(saver.transition_active);
+    let mut grid = vec![TerminalCell::default(); COLS * ROWS];
+    saver.draw(&mut grid, COLS, ROWS);
+    assert!(grid.iter().any(|c| c.ch != ' '));
 
-    // Experience 1 (DE) dwell completes -> cycles to Kernel
-    step(&mut saver, 70);
-    assert_eq!(saver.brand_target, load_art::BrandTarget::Kernel);
-
-    // Experience 2 (Kernel) dwell completes -> cycles to OS
-    step(&mut saver, 70);
-    assert_eq!(saver.brand_target, load_art::BrandTarget::Os);
-
-    // Experience 3 (OS) dwell completes -> cycles to DE
-    step(&mut saver, 70);
-    assert_eq!(saver.brand_target, load_art::BrandTarget::De);
+    // Resize during active transition must not panic or distort
+    saver.update(Duration::from_millis(16), 100, 30);
+    let mut new_grid = vec![TerminalCell::default(); 100 * 30];
+    saver.draw(&mut new_grid, 100, 30);
+    assert_eq!(new_grid.len(), 3000);
 }

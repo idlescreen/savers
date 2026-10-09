@@ -8,6 +8,7 @@
 use crate::runner::{param, render_logo_block};
 
 /// Reads Omarchy's branding file (`~/.config/omarchy/branding/screensaver.txt`) if present.
+#[allow(dead_code)]
 pub fn read_branding_file() -> Option<String> {
     let home = std::env::var_os("HOME")?;
     let path = std::path::PathBuf::from(home).join(".config/omarchy/branding/screensaver.txt");
@@ -29,6 +30,28 @@ pub enum BrandTarget {
 }
 
 impl BrandTarget {
+    pub fn random_excluding(rng: &mut crate::runner::LcgRng, exclude: Option<BrandTarget>) -> Self {
+        match exclude {
+            Some(BrandTarget::Os) => match (rng.next_u64() >> 33) & 1 {
+                0 => BrandTarget::De,
+                _ => BrandTarget::Kernel,
+            },
+            Some(BrandTarget::De) => match (rng.next_u64() >> 33) & 1 {
+                0 => BrandTarget::Os,
+                _ => BrandTarget::Kernel,
+            },
+            Some(BrandTarget::Kernel) => match (rng.next_u64() >> 33) & 1 {
+                0 => BrandTarget::Os,
+                _ => BrandTarget::De,
+            },
+            None => match (rng.next_u64() >> 33) % 3 {
+                0 => BrandTarget::Os,
+                1 => BrandTarget::De,
+                _ => BrandTarget::Kernel,
+            },
+        }
+    }
+
     pub fn next(self) -> Self {
         match self {
             BrandTarget::Os => BrandTarget::De,
@@ -163,23 +186,11 @@ pub fn resolve_art(cols: usize, rows: usize) -> String {
 }
 
 /// Render the target text or custom art, sized to fit a `cols`×`rows` grid.
-pub fn resolve_lines_for_target(target: BrandTarget, cols: usize, rows: usize) -> Vec<String> {
+pub fn resolve_lines_for_target(target: BrandTarget, cols: usize, _rows: usize) -> Vec<String> {
     let sub = resolve_sub_text();
     if let Some(custom) = custom_text() {
         let lines = build_lines(&custom, sub.as_deref(), cols);
         if !lines.is_empty() {
-            return lines;
-        }
-    } else {
-        if let Some(lines) =
-            crate::runner::logo().and_then(|art| parse_art(art, sub.as_deref(), cols, rows))
-        {
-            return lines;
-        }
-        if let Some(lines) = read_branding_file()
-            .as_deref()
-            .and_then(|art| parse_art(art, sub.as_deref(), cols, rows))
-        {
             return lines;
         }
     }
@@ -193,6 +204,7 @@ pub fn resolve_lines(cols: usize, rows: usize) -> Vec<String> {
 }
 
 /// Pure custom art parser, validating dimensions against the grid.
+#[allow(dead_code)]
 pub fn parse_art(art: &str, sub: Option<&str>, cols: usize, rows: usize) -> Option<Vec<String>> {
     let mut lines: Vec<String> = art.lines().map(|l| l.trim_end().to_string()).collect();
     while lines.first().is_some_and(|l| l.is_empty()) {

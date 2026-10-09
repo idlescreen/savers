@@ -10,14 +10,14 @@ use crate::runner::TerminalCell;
 pub fn paint(st: &CellState, grid: &mut [TerminalCell], fg: (u8, u8, u8), bg: (u8, u8, u8)) {
     let n = st.current.len().min(grid.len());
     for (cell, ch) in grid.iter_mut().zip(st.current.iter()) {
-        cell.ch = *ch;
-        cell.fg = fg;
-        cell.bg = bg;
-        cell.bold = false;
+        *cell = TerminalCell {
+            ch: *ch,
+            fg,
+            bg,
+            bold: false,
+        };
     }
-    for cell in grid.iter_mut().skip(n) {
-        *cell = TerminalCell::default();
-    }
+    grid[n..].fill(TerminalCell::default());
 }
 
 /// Parses an ANSI-formatted ttfx frame string directly into the grid.
@@ -40,11 +40,8 @@ pub fn paint_frame(
     if cols == 0 || rows == 0 {
         return;
     }
-    let mut x = 0usize;
-    let mut y = 0usize;
-    let mut bold = false;
-    let mut fg = default_fg;
-    let mut bg = default_bg;
+    let (mut x, mut y, mut bold) = (0usize, 0usize, false);
+    let (mut fg, mut bg) = (default_fg, default_bg);
 
     let bytes = frame.as_bytes();
     let mut i = 0;
@@ -130,34 +127,25 @@ fn parse_sgr(
             [b'9', d @ b'0'..=b'7'] => *fg = xterm_to_rgb(8 + (d - b'0')),
             [b'4', d @ b'0'..=b'7'] => *bg = xterm_to_rgb(d - b'0'),
             [b'1', b'0', d @ b'0'..=b'7'] => *bg = xterm_to_rgb(8 + (d - b'0')),
-            b"38" => match parts.next() {
-                Some(b"2") => {
-                    let r = parts.next().and_then(parse_u8).unwrap_or(default_fg.0);
-                    let g = parts.next().and_then(parse_u8).unwrap_or(default_fg.1);
-                    let b = parts.next().and_then(parse_u8).unwrap_or(default_fg.2);
-                    *fg = (r, g, b);
-                }
-                Some(b"5") => {
-                    if let Some(code) = parts.next().and_then(parse_u8) {
-                        *fg = xterm_to_rgb(code);
+            b"38" | b"48" => {
+                let is_fg = part == b"38";
+                let def = if is_fg { default_fg } else { default_bg };
+                let target = if is_fg { &mut *fg } else { &mut *bg };
+                match parts.next() {
+                    Some(b"2") => {
+                        let r = parts.next().and_then(parse_u8).unwrap_or(def.0);
+                        let g = parts.next().and_then(parse_u8).unwrap_or(def.1);
+                        let b = parts.next().and_then(parse_u8).unwrap_or(def.2);
+                        *target = (r, g, b);
                     }
-                }
-                _ => {}
-            },
-            b"48" => match parts.next() {
-                Some(b"2") => {
-                    let r = parts.next().and_then(parse_u8).unwrap_or(default_bg.0);
-                    let g = parts.next().and_then(parse_u8).unwrap_or(default_bg.1);
-                    let b = parts.next().and_then(parse_u8).unwrap_or(default_bg.2);
-                    *bg = (r, g, b);
-                }
-                Some(b"5") => {
-                    if let Some(code) = parts.next().and_then(parse_u8) {
-                        *bg = xterm_to_rgb(code);
+                    Some(b"5") => {
+                        if let Some(code) = parts.next().and_then(parse_u8) {
+                            *target = xterm_to_rgb(code);
+                        }
                     }
+                    _ => {}
                 }
-                _ => {}
-            },
+            }
             b"39" => *fg = default_fg,
             b"49" => *bg = default_bg,
             _ => {}
@@ -166,20 +154,10 @@ fn parse_sgr(
 }
 
 fn parse_u8(bytes: &[u8]) -> Option<u8> {
-    if bytes.is_empty() || bytes.len() > 3 {
-        return None;
-    }
-    let mut val = 0u16;
-    for &b in bytes {
-        if !b.is_ascii_digit() {
-            return None;
-        }
-        val = val * 10 + (b - b'0') as u16;
-    }
-    if val <= 255 { Some(val as u8) } else { None }
+    std::str::from_utf8(bytes).ok()?.parse().ok()
 }
 
-fn xterm_to_rgb(code: u8) -> (u8, u8, u8) {
+pub(crate) fn xterm_to_rgb(code: u8) -> (u8, u8, u8) {
     static TBL: std::sync::OnceLock<[(u8, u8, u8); 256]> = std::sync::OnceLock::new();
     TBL.get_or_init(|| {
         let mut t = [(255, 255, 255); 256];
@@ -196,59 +174,80 @@ fn xterm_to_rgb(code: u8) -> (u8, u8, u8) {
     })[code as usize]
 }
 
-#[cfg(test)]
-mod paint_tests {
-    use super::*;
-    use crate::ascii::cell_state::CellState;
-
-    #[test]
-    fn paints_art_and_blanks_the_tail() {
-        let mut st = CellState::new();
-        st.resize(3, 1);
-        st.load(&["ABC".to_string()]);
-        let mut grid = vec![TerminalCell::default(); 5];
-        paint(&st, &mut grid, (1, 2, 3), (0, 0, 0));
-
-        assert_eq!(grid[0].ch, 'A');
-        assert_eq!(grid[0].fg, (1, 2, 3));
-        assert_eq!(grid[2].ch, 'C');
-        assert_eq!(grid[3].ch, ' ');
+/// Smoothly blends the outgoing frame and incoming frame over progress `t` in `[0.0, 1.0]`.
+///
+/// Implements a continuous, seamless crossfade and graceful dissolve:
+/// - Eliminates all hard cuts, screen blanking, pops, and flashes.
+/// - Outgoing settled text gracefully fades in luminance and dissolves.
+/// - Incoming effect animation ramps in brightness and enters cleanly.
+/// - Zero heap allocation, zero panics, bounds-checked.
+pub fn paint_transition(
+    from: &[TerminalCell],
+    to: &[TerminalCell],
+    out: &mut [TerminalCell],
+    t: f32,
+    cols: usize,
+    rows: usize,
+) {
+    let t = t.clamp(0.0, 1.0);
+    let total = cols * rows;
+    let n = total.min(from.len()).min(to.len()).min(out.len());
+    if n == 0 {
+        return;
     }
 
-    #[test]
-    fn paint_frame_parses_ansi_colors_and_bold() {
-        let frame = "\x1b[1m\x1b[38;2;255;100;50mX\x1b[0m Y\nZ";
-        let mut grid = vec![TerminalCell::default(); 6];
-        paint_frame(frame, &mut grid, 3, 2, (10, 10, 10), (0, 0, 0));
+    let inv_t = 1.0 - t;
+    let out_factor = (inv_t * 256.0) as u16;
+    let in_factor = (t * 256.0) as u16;
+    let t_byte = (t * 255.0) as u8;
+    let inv_t_byte = 255 - t_byte;
 
-        assert_eq!(grid[0].ch, 'X');
-        assert_eq!(grid[0].fg, (255, 100, 50));
-        assert!(grid[0].bold);
+    for y in 0..rows {
+        let row_offset = y * cols;
+        for x in 0..cols {
+            let idx = row_offset + x;
+            if idx >= n {
+                break;
+            }
+            let (from_cell, to_cell) = (from[idx], to[idx]);
+            let (from_empty, to_empty) = (from_cell.ch == ' ', to_cell.ch == ' ');
+            let thresh = ((x.wrapping_mul(137) ^ y.wrapping_mul(149) ^ ((x + y).wrapping_mul(31)))
+                & 0xFF) as u8;
 
-        assert_eq!(grid[1].ch, ' ');
-        assert_eq!(grid[2].ch, 'Y');
-        assert!(!grid[2].bold);
+            let pick_to = t >= 1.0
+                || (t > 0.0
+                    && match (from_empty, to_empty) {
+                        (false, true) => inv_t_byte <= thresh && inv_t <= 0.25,
+                        (true, false) => t_byte > thresh || t > 0.4,
+                        (false, false) => t_byte > thresh,
+                        (true, true) => false,
+                    });
+            let factor = if pick_to { in_factor } else { out_factor };
 
-        assert_eq!(grid[3].ch, 'Z');
+            let src = if pick_to { to_cell } else { from_cell };
+            out[idx] = if src.ch == ' ' {
+                TerminalCell::default()
+            } else {
+                TerminalCell {
+                    ch: src.ch,
+                    fg: scale_rgb(src.fg, factor),
+                    bg: src.bg,
+                    bold: src.bold,
+                }
+            };
+        }
     }
 
-    #[test]
-    fn paint_frame_parses_standard_ansi_colors_and_swallows_csi() {
-        let frame = "\x1b[2J\x1b[31mA\x1b[92mB\x1b[0m";
-        let mut grid = vec![TerminalCell::default(); 2];
-        paint_frame(frame, &mut grid, 2, 1, (10, 10, 10), (0, 0, 0));
-        assert_eq!(grid[0].ch, 'A');
-        assert_eq!(grid[0].fg, xterm_to_rgb(1));
-        assert_eq!(grid[1].ch, 'B');
-        assert_eq!(grid[1].fg, xterm_to_rgb(10));
+    if out.len() > n {
+        out[n..].fill(TerminalCell::default());
     }
+}
 
-    #[test]
-    fn paint_frame_preserves_ansi_state_across_newlines() {
-        let frame = "\x1b[31mA\nB\x1b[0m";
-        let mut grid = vec![TerminalCell::default(); 4];
-        paint_frame(frame, &mut grid, 2, 2, (10, 10, 10), (0, 0, 0));
-        assert_eq!(grid[0].fg, xterm_to_rgb(1));
-        assert_eq!(grid[2].fg, xterm_to_rgb(1));
-    }
+#[inline(always)]
+fn scale_rgb(c: (u8, u8, u8), factor_256: u16) -> (u8, u8, u8) {
+    (
+        ((c.0 as u16 * factor_256) >> 8) as u8,
+        ((c.1 as u16 * factor_256) >> 8) as u8,
+        ((c.2 as u16 * factor_256) >> 8) as u8,
+    )
 }

@@ -25,6 +25,9 @@ const MAX_DT: f32 = 0.1;
 /// `AGENTS.md`.
 const BATTERY_SLOWDOWN: f32 = 0.55;
 
+/// Duration of the smooth visual transition in seconds between completed text and the incoming effect.
+pub const TRANSITION_SECS: f32 = 0.7;
+
 pub struct Ascii {
     pub(crate) rng: LcgRng,
     pub(crate) playlist: effect::EffectPlaylist,
@@ -43,6 +46,10 @@ pub struct Ascii {
     pub(crate) engine: Option<screensaver_impl::EngineSession>,
     pub(crate) brand_target: load_art::BrandTarget,
     pub(crate) frame_grid: Vec<crate::runner::TerminalCell>,
+    pub(crate) transition_active: bool,
+    pub(crate) transition_left: f32,
+    pub(crate) transition_duration: f32,
+    pub(crate) transition_from_grid: Vec<crate::runner::TerminalCell>,
 }
 
 impl Default for Ascii {
@@ -61,6 +68,7 @@ impl Ascii {
             .effect
             .unwrap_or_else(|| playlist.next_effect(&mut rng));
         let dwell_left = params.cycle_secs.unwrap_or_else(|| effect.dwell());
+        let brand_target = load_art::BrandTarget::random_excluding(&mut rng, None);
 
         Self {
             rng,
@@ -77,8 +85,12 @@ impl Ascii {
             art_text: String::new(),
             current_frame: String::new(),
             engine: None,
-            brand_target: load_art::BrandTarget::Os,
+            brand_target,
             frame_grid: Vec::new(),
+            transition_active: false,
+            transition_left: 0.0,
+            transition_duration: TRANSITION_SECS,
+            transition_from_grid: Vec::new(),
         }
         .with_theme_fg()
     }
@@ -141,9 +153,28 @@ impl Ascii {
         }
     }
 
-    /// Swap to a new effect, advance brand target (OS -> DE -> Kernel -> OS), and restart progress.
+    /// Smoothly transitions from the current settled frame into the next randomized target and effect.
+    pub fn begin_transition(&mut self) {
+        if self.frame_grid.is_empty() {
+            self.cycle_effect();
+            return;
+        }
+        self.transition_from_grid = self.frame_grid.clone();
+        let dur = TRANSITION_SECS.min(self.dwell_time() * 0.4);
+        self.transition_duration = dur;
+        self.transition_left = dur;
+        self.transition_active = true;
+        if !self.pinned {
+            self.cycle_effect();
+        } else {
+            self.cycle_target();
+        }
+    }
+
+    /// Advance brand target randomly without immediate repeats, pick next effect, and restart progress.
     pub fn cycle_effect(&mut self) {
-        self.brand_target = self.brand_target.next();
+        self.brand_target =
+            load_art::BrandTarget::random_excluding(&mut self.rng, Some(self.brand_target));
         self.reload_art();
         self.effect = self.playlist.next_effect(&mut self.rng);
         self.dwell_left = self.dwell_time();
@@ -152,9 +183,10 @@ impl Ascii {
         self.start_engine_session();
     }
 
-    /// Advance brand target (OS -> DE -> Kernel -> OS) while keeping a pinned effect.
+    /// Advance brand target randomly without immediate repeats while keeping a pinned effect.
     pub fn cycle_target(&mut self) {
-        self.brand_target = self.brand_target.next();
+        self.brand_target =
+            load_art::BrandTarget::random_excluding(&mut self.rng, Some(self.brand_target));
         self.reload_art();
         self.dwell_left = self.dwell_time();
         self.cells.settled.fill(0.0);

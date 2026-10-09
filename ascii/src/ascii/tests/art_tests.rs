@@ -72,6 +72,26 @@ fn brand_target_toggle_matches_next() {
 }
 
 #[test]
+fn brand_target_random_excluding_never_immediately_repeats() {
+    let mut rng = crate::runner::LcgRng::new(42);
+    let mut current = BrandTarget::random_excluding(&mut rng, None);
+    let mut counts = [0usize; 3];
+    for _ in 0..300 {
+        let next = BrandTarget::random_excluding(&mut rng, Some(current));
+        assert_ne!(next, current, "adjacent targets must never repeat");
+        match next {
+            BrandTarget::Os => counts[0] += 1,
+            BrandTarget::De => counts[1] += 1,
+            BrandTarget::Kernel => counts[2] += 1,
+        }
+        current = next;
+    }
+    for count in counts {
+        assert!(count >= 50, "target distribution too low: {count}");
+    }
+}
+
+#[test]
 fn resolve_target_text_returns_non_empty_for_all_targets() {
     assert!(!resolve_target_text(BrandTarget::Os).is_empty());
     assert!(!resolve_target_text(BrandTarget::De).is_empty());

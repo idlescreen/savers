@@ -1,6 +1,6 @@
 {
  "repo": "savers",
- "rev": "3b881d8",
+ "rev": "eba46bb",
  "dirty": true,
  "pages": [
   {
@@ -29,14 +29,14 @@
    "lines": 166,
    "bin_bytes": null,
    "heat_pct": null,
-   "reach": 3
+   "reach": 4
   },
   {
    "path": "./ascii/src/ascii/draw.rs",
-   "lines": 254,
+   "lines": 253,
    "bin_bytes": null,
    "heat_pct": null,
-   "reach": 2
+   "reach": 3
   },
   {
    "path": "./ascii/src/ascii/effect.rs",
@@ -47,14 +47,14 @@
   },
   {
    "path": "./ascii/src/ascii/load_art.rs",
-   "lines": 239,
+   "lines": 251,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 4
   },
   {
    "path": "./ascii/src/ascii/mod.rs",
-   "lines": 196,
+   "lines": 228,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
@@ -75,28 +75,35 @@
   },
   {
    "path": "./ascii/src/ascii/screensaver_impl.rs",
-   "lines": 151,
+   "lines": 183,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 1
   },
   {
    "path": "./ascii/src/ascii/tests/art_tests.rs",
-   "lines": 102,
+   "lines": 122,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
   },
   {
    "path": "./ascii/src/ascii/tests/ascii_tests.rs",
-   "lines": 246,
+   "lines": 253,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
   },
   {
    "path": "./ascii/src/ascii/tests/mod.rs",
-   "lines": 17,
+   "lines": 21,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
+  {
+   "path": "./ascii/src/ascii/tests/paint_tests.rs",
+   "lines": 94,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
