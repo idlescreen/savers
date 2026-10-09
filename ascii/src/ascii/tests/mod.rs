@@ -19,3 +19,6 @@ mod art_tests;
 
 #[path = "paint_tests.rs"]
 mod paint_tests;
+
+#[path = "transition_tests.rs"]
+mod transition_tests;

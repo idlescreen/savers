@@ -50,6 +50,7 @@ pub struct Ascii {
     pub(crate) transition_left: f32,
     pub(crate) transition_duration: f32,
     pub(crate) transition_from_grid: Vec<crate::runner::TerminalCell>,
+    pub(crate) anim_left: f32,
 }
 
 impl Default for Ascii {
@@ -91,6 +92,7 @@ impl Ascii {
             transition_left: 0.0,
             transition_duration: TRANSITION_SECS,
             transition_from_grid: Vec::new(),
+            anim_left: 20.0,
         }
         .with_theme_fg()
     }
@@ -128,6 +130,7 @@ impl Ascii {
             self.engine = None;
             return;
         }
+        self.anim_left = (self.dwell_time() * 2.5).clamp(15.0, 30.0);
         let seed = self.rng.next_u64();
         self.engine = screensaver_impl::EngineSession::new(
             &self.art_text,

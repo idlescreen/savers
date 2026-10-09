@@ -103,14 +103,14 @@ impl Screensaver for Ascii {
             }
         }
 
-        self.dwell_left -= step;
-        if self.dwell_left <= 0.0 && !self.transition_active {
-            self.begin_transition();
-            return;
-        }
-
         if let Some(ref mut session) = self.engine {
-            match session.next_frame() {
+            self.anim_left -= step;
+            let frame = if self.anim_left > 0.0 {
+                session.next_frame()
+            } else {
+                None
+            };
+            match frame {
                 Some(frame) => {
                     self.current_frame.clear();
                     self.current_frame.push_str(&frame);
@@ -127,7 +127,13 @@ impl Screensaver for Ascii {
                     // Animation complete: drop the engine session and dwell on
                     // the settled frame until dwell_left expires.
                     self.engine = None;
+                    self.dwell_left = self.dwell_time();
                 }
+            }
+        } else {
+            self.dwell_left -= step;
+            if self.dwell_left <= 0.0 && !self.transition_active {
+                self.begin_transition();
             }
         }
     }
