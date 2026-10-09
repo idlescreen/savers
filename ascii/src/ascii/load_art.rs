@@ -20,9 +20,10 @@ pub fn read_branding_file() -> Option<String> {
     }
 }
 
-/// `[saver] ascii.text`, falling back to the shared wordmark.
+/// `[saver] ascii.text` or `brand.text`, falling back to the shared wordmark.
 pub fn resolve_text() -> String {
     param("ascii.text")
+        .or_else(|| param("brand.text"))
         .or_else(|| param("text"))
         .map(|t| t.trim().to_string())
         .filter(|t| !t.is_empty())
@@ -90,7 +91,10 @@ pub fn resolve_art(cols: usize, rows: usize) -> String {
 /// Render the resolved text or custom art, sized to fit a `cols`×`rows` grid.
 pub fn resolve_lines(cols: usize, rows: usize) -> Vec<String> {
     let sub = resolve_sub_text();
-    if let Some(text) = param("ascii.text").or_else(|| param("text")) {
+    if let Some(text) = param("ascii.text")
+        .or_else(|| param("brand.text"))
+        .or_else(|| param("text"))
+    {
         let trimmed = text.trim();
         if !trimmed.is_empty() {
             let lines = build_lines(trimmed, sub.as_deref(), cols);

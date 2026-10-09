@@ -1,0 +1,31 @@
+# IdleScreen plugin manifest — schema v1
+# https://idlescreen.github.io/schemas/idleplugin-v1.toml
+# Sibling to libscreensaver_brand.so per DECISION-MANIFEST-01 (Option A).
+
+schema_version = 1
+plugin_id      = "io.idlescreen.saver.Brand"
+plugin_version = "1.0.0"
+api_version    = 1
+
+[entry]
+runtime = "native"
+library = "libscreensaver_brand.so"
+
+[capabilities]
+network          = false
+audio_capture    = false
+audio_output     = false
+filesystem_read  = []
+filesystem_write = []
+
+[sandbox]
+profile = "minimal"
+
+[dependencies]
+native = ["libc6"]
+wasm   = []
+
+[headless_render]
+default_fps        = 60
+deterministic_seed = true
+gpu_optional       = true

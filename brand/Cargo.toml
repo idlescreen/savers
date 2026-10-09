@@ -1,0 +1,58 @@
+[package]
+authors.workspace = true
+repository.workspace = true
+license.workspace = true
+name = "brand"
+version.workspace = true
+edition.workspace = true
+description = "Dedicated brand screensaver with dynamic OS/DE detection and ttfx effects"
+publish = false
+autobins = false
+
+[lib]
+name = "screensaver_brand"
+path = "src/lib.rs"
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+idle-api.workspace = true
+screensaver_ascii = { package = "ascii", path = "../ascii", default-features = false, features = ["bundled"] }
+clap = "4"
+
+[build-dependencies]
+build-support.workspace = true
+
+[package.metadata.deb]
+name = "idle-saver-brand"
+maintainer = "idlescreen <jerydleuck@gmail.com>"
+extended-description = "Dedicated brand screensaver with dynamic OS/DE detection and ttfx effects. Official IdleScreen screensaver plugin."
+depends = "libc6"
+section = "utils"
+priority = "optional"
+assets = [
+    ["target/release/libscreensaver_brand.so", "usr/libexec/idle/screensavers/libscreensaver_brand.so", "644"],
+    ["libscreensaver_brand.idleplugin.toml", "usr/libexec/idle/screensavers/libscreensaver_brand.idleplugin.toml", "644"]
+]
+
+[package.metadata.generate-rpm]
+name = "idle-saver-brand"
+release = "1"
+arch = "x86_64"
+summary = "Dedicated brand screensaver with dynamic OS/DE detection and ttfx effects"
+description = "Dedicated brand screensaver with dynamic OS/DE detection and ttfx effects"
+license = "Apache-2.0"
+assets = [
+    { source = "target/release/libscreensaver_brand.so", dest = "/usr/libexec/idle/screensavers/libscreensaver_brand.so", mode = "644", user = "root", group = "root" },
+    { source = "libscreensaver_brand.idleplugin.toml", dest = "/usr/libexec/idle/screensavers/libscreensaver_brand.idleplugin.toml", mode = "644", user = "root", group = "root" }
+]
+
+[package.metadata.generate-rpm.requires]
+idle-daemon = "*"
+
+[package.metadata.generate-rpm.provides]
+
+[package.metadata.generate-rpm.obsoletes]
+
+[features]
+default = []
+bundled = []
