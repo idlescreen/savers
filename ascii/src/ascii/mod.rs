@@ -27,6 +27,7 @@ const BATTERY_SLOWDOWN: f32 = 0.55;
 
 pub struct Ascii {
     pub(crate) rng: LcgRng,
+    pub(crate) playlist: effect::EffectPlaylist,
     pub(crate) cells: CellState,
     pub(crate) params: Params,
     pub(crate) effect: EffectKind,
@@ -40,6 +41,8 @@ pub struct Ascii {
     pub(crate) art_text: String,
     pub(crate) current_frame: String,
     pub(crate) engine: Option<screensaver_impl::EngineSession>,
+    pub(crate) brand_target: load_art::BrandTarget,
+    pub(crate) start_dwell: bool,
 }
 
 impl Default for Ascii {
@@ -53,13 +56,20 @@ impl Ascii {
         let params = Params::read();
         let pinned = params.effect.is_some();
         let mut rng = LcgRng::from_env_or_random();
+        let mut playlist = effect::EffectPlaylist::new();
         let effect = params
             .effect
-            .unwrap_or_else(|| effect::pick_random(&mut rng));
-        let dwell_left = params.cycle_secs.unwrap_or_else(|| effect.dwell());
+            .unwrap_or_else(|| playlist.next_effect(&mut rng));
+        let start_dwell = !pinned && load_art::custom_text().is_none();
+        let dwell_left = if start_dwell {
+            params.cycle_secs.unwrap_or(2.0)
+        } else {
+            params.cycle_secs.unwrap_or_else(|| effect.dwell())
+        };
 
         Self {
             rng,
+            playlist,
             cells: CellState::new(),
             params,
             effect,
@@ -72,6 +82,8 @@ impl Ascii {
             art_text: String::new(),
             current_frame: String::new(),
             engine: None,
+            brand_target: load_art::BrandTarget::Os,
+            start_dwell,
         }
         .with_theme_fg()
     }
@@ -94,8 +106,10 @@ impl Ascii {
 
     /// Resolve the art into the grid, restarting the current effect.
     pub fn reload_art(&mut self) {
-        self.art_text = load_art::resolve_art(self.last_cols, self.last_rows);
-        let lines = load_art::resolve_lines(self.last_cols, self.last_rows);
+        self.art_text =
+            load_art::resolve_art_for_target(self.brand_target, self.last_cols, self.last_rows);
+        let lines =
+            load_art::resolve_lines_for_target(self.brand_target, self.last_cols, self.last_rows);
         self.cells.load(&lines);
     }
 
@@ -123,9 +137,21 @@ impl Ascii {
         }
     }
 
-    /// Swap to a new effect and restart its progress from the top.
+    /// Swap to a new effect, alternate brand target (OS <-> DE), and restart progress.
     pub fn cycle_effect(&mut self) {
-        self.effect = effect::pick_random(&mut self.rng);
+        self.brand_target = self.brand_target.toggle();
+        self.reload_art();
+        self.effect = self.playlist.next_effect(&mut self.rng);
+        self.dwell_left = self.dwell_time();
+        self.cells.settled.fill(0.0);
+        self.cells.progress = 0.0;
+        self.start_engine_session();
+    }
+
+    /// Alternate brand target (OS <-> DE) while keeping a pinned effect.
+    pub fn cycle_target(&mut self) {
+        self.brand_target = self.brand_target.toggle();
+        self.reload_art();
         self.dwell_left = self.dwell_time();
         self.cells.settled.fill(0.0);
         self.cells.progress = 0.0;
@@ -136,6 +162,7 @@ impl Ascii {
     pub fn prepare_for_bench(&mut self, cols: usize, rows: usize) {
         self.last_cols = cols;
         self.last_rows = rows;
+        self.start_dwell = false;
         self.cells.resize(cols, rows);
         self.reload_art();
         self.start_engine_session();
@@ -151,9 +178,11 @@ impl Ascii {
     pub fn pin_effect(&mut self, kind: EffectKind) {
         self.effect = kind;
         self.pinned = true;
+        self.start_dwell = false;
         self.dwell_left = self.dwell_time();
         self.cells.settled.fill(0.0);
         self.cells.progress = 0.0;
+        self.playlist.set_last(kind);
         self.start_engine_session();
     }
 }

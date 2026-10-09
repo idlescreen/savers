@@ -1,6 +1,6 @@
 {
  "repo": "savers",
- "rev": "e005a8f",
+ "rev": "5e029d3",
  "dirty": true,
  "pages": [
   {
@@ -40,21 +40,21 @@
   },
   {
    "path": "./ascii/src/ascii/effect.rs",
-   "lines": 199,
+   "lines": 251,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 5
   },
   {
    "path": "./ascii/src/ascii/load_art.rs",
-   "lines": 214,
+   "lines": 251,
    "bin_bytes": null,
    "heat_pct": null,
-   "reach": 2
+   "reach": 3
   },
   {
    "path": "./ascii/src/ascii/mod.rs",
-   "lines": 163,
+   "lines": 192,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
@@ -75,14 +75,14 @@
   },
   {
    "path": "./ascii/src/ascii/screensaver_impl.rs",
-   "lines": 132,
+   "lines": 151,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 1
   },
   {
    "path": "./ascii/src/ascii/tests/ascii_tests.rs",
-   "lines": 201,
+   "lines": 243,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0

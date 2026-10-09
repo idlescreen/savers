@@ -20,14 +20,48 @@ pub fn read_branding_file() -> Option<String> {
     }
 }
 
-/// `[saver] ascii.text` or `brand.text`, falling back to the shared wordmark.
-pub fn resolve_text() -> String {
+/// The alternating brand targets for rotation.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum BrandTarget {
+    Os,
+    De,
+}
+
+impl BrandTarget {
+    pub fn toggle(self) -> Self {
+        match self {
+            BrandTarget::Os => BrandTarget::De,
+            BrandTarget::De => BrandTarget::Os,
+        }
+    }
+}
+
+/// Explicit user text override from `[saver] ascii.text` or aliases.
+pub fn custom_text() -> Option<String> {
     param("ascii.text")
         .or_else(|| param("brand.text"))
         .or_else(|| param("text"))
+        .or_else(|| crate::runner::env_var_first(&["IDLE_LOGO_TEXT"]))
         .map(|t| t.trim().to_string())
         .filter(|t| !t.is_empty())
-        .unwrap_or_else(crate::runner::wordmark)
+}
+
+/// Resolves text for the specified brand target (`Os` or `De`), respecting user overrides.
+pub fn resolve_target_text(target: BrandTarget) -> String {
+    if let Some(custom) = custom_text() {
+        return custom;
+    }
+    match target {
+        BrandTarget::Os => crate::runner::detect_host_os().unwrap_or_else(|| "Linux".into()),
+        BrandTarget::De => {
+            crate::runner::detect_desktop_environment().unwrap_or_else(|| "IDLESCREEN".into())
+        }
+    }
+}
+
+#[allow(dead_code)]
+pub fn resolve_text() -> String {
+    resolve_target_text(BrandTarget::Os)
 }
 
 /// Optional second line beneath the art block.
@@ -72,32 +106,29 @@ pub fn visible_width(s: &str) -> usize {
     count
 }
 
-/// Resolve the full art string for ttfx.
-///
-/// Priority:
-/// 1. `[saver] ascii.text` (rendered as block letters fitted to cols).
-/// 2. `crate::runner::logo()` (provided by daemon from branding file or logo_file).
-/// 3. Omarchy branding file `~/.config/omarchy/branding/screensaver.txt` directly.
-/// 4. Session wordmark (`crate::runner::wordmark()`), block-rendered.
-pub fn resolve_art(cols: usize, rows: usize) -> String {
-    let lines = resolve_lines(cols, rows);
+/// Resolve the full art string for ttfx targeting the specified brand.
+pub fn resolve_art_for_target(target: BrandTarget, cols: usize, rows: usize) -> String {
+    let lines = resolve_lines_for_target(target, cols, rows);
     if !lines.is_empty() {
         lines.join("\n")
     } else {
-        resolve_text()
+        resolve_target_text(target)
     }
 }
 
-/// Render the resolved text or custom art, sized to fit a `cols`×`rows` grid.
-pub fn resolve_lines(cols: usize, rows: usize) -> Vec<String> {
+/// Resolve the full art string for ttfx.
+#[allow(dead_code)]
+pub fn resolve_art(cols: usize, rows: usize) -> String {
+    resolve_art_for_target(BrandTarget::Os, cols, rows)
+}
+
+/// Render the target text or custom art, sized to fit a `cols`×`rows` grid.
+pub fn resolve_lines_for_target(target: BrandTarget, cols: usize, rows: usize) -> Vec<String> {
     let sub = resolve_sub_text();
-    if let Some(text) = param("ascii.text").or_else(|| param("text")) {
-        let trimmed = text.trim();
-        if !trimmed.is_empty() {
-            let lines = build_lines(trimmed, sub.as_deref(), cols);
-            if !lines.is_empty() {
-                return lines;
-            }
+    if let Some(custom) = custom_text() {
+        let lines = build_lines(&custom, sub.as_deref(), cols);
+        if !lines.is_empty() {
+            return lines;
         }
     } else {
         if let Some(lines) =
@@ -112,7 +143,13 @@ pub fn resolve_lines(cols: usize, rows: usize) -> Vec<String> {
             return lines;
         }
     }
-    build_lines(&resolve_text(), sub.as_deref(), cols)
+    build_lines(&resolve_target_text(target), sub.as_deref(), cols)
+}
+
+/// Render the resolved text or custom art, sized to fit a `cols`×`rows` grid.
+#[allow(dead_code)]
+pub fn resolve_lines(cols: usize, rows: usize) -> Vec<String> {
+    resolve_lines_for_target(BrandTarget::Os, cols, rows)
 }
 
 /// Pure custom art parser, validating dimensions against the grid.

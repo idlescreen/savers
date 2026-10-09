@@ -199,3 +199,45 @@ fn oversized_art_falls_back_without_blanking() {
     }
     assert!(grid.iter().any(|c| c.ch != ' '));
 }
+
+#[test]
+fn playlist_rotates_all_37_effects_without_immediate_repeats() {
+    let mut rng = LcgRng::new(42);
+    let mut playlist = super::super::effect::EffectPlaylist::new();
+    let mut last = None;
+    for _ in 0..50 {
+        let mut cycle = Vec::with_capacity(37);
+        for _ in 0..37 {
+            let eff = playlist.next_effect(&mut rng);
+            if let Some(prev) = last {
+                assert_ne!(eff, prev, "no immediate repeat across cycles");
+            }
+            last = Some(eff);
+            cycle.push(eff);
+        }
+        cycle.sort_by_key(|e| e.name());
+        cycle.dedup();
+        assert_eq!(cycle.len(), 37, "all 37 effects must play in each cycle");
+    }
+}
+
+#[test]
+fn screensaver_alternates_between_os_and_de() {
+    let mut saver = Ascii::new();
+    saver.init(COLS, ROWS);
+    assert_eq!(saver.brand_target, load_art::BrandTarget::Os);
+    assert!(saver.start_dwell);
+
+    // Let start_dwell elapse -> transitions to DE
+    step(&mut saver, 150);
+    assert!(!saver.start_dwell);
+    assert_eq!(saver.brand_target, load_art::BrandTarget::De);
+
+    // Naturally step until Experience 0 dwell completes -> cycles to OS
+    step(&mut saver, 750);
+    assert_eq!(saver.brand_target, load_art::BrandTarget::Os);
+
+    // Naturally step until Experience 1 dwell completes -> cycles to DE
+    step(&mut saver, 750);
+    assert_eq!(saver.brand_target, load_art::BrandTarget::De);
+}

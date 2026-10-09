@@ -180,12 +180,7 @@ impl EffectKind {
     /// Seconds this effect holds before random mode cycles to the next.
     pub fn dwell(&self) -> f32 {
         match self {
-            EffectKind::Decrypt => 8.0,
-            EffectKind::Matrix => 10.0,
-            EffectKind::Scattered => 10.0,
-            EffectKind::Waves => 10.0,
-            EffectKind::Sweep => 8.0,
-            EffectKind::Rain => 10.0,
+            EffectKind::Decrypt | EffectKind::Sweep => 8.0,
             EffectKind::Fireworks => 9.0,
             EffectKind::Thunderstorm => 11.0,
             _ => 10.0,
@@ -193,7 +188,64 @@ impl EffectKind {
     }
 }
 
-/// Draw an effect at random from [`EffectKind::ALL`].
-pub fn pick_random(rng: &mut LcgRng) -> EffectKind {
-    EffectKind::ALL[rng.next_usize(EffectKind::ALL.len())]
+/// Shuffled playlist of all 37 effects ensuring randomized rotation without
+/// immediate repeats across cycle boundaries.
+#[derive(Clone, Debug)]
+pub struct EffectPlaylist {
+    order: [EffectKind; 37],
+    cursor: usize,
+    last: Option<EffectKind>,
+}
+
+impl Default for EffectPlaylist {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+impl EffectPlaylist {
+    pub fn new() -> Self {
+        Self::new_with_last(None)
+    }
+
+    pub fn new_with_last(last: Option<EffectKind>) -> Self {
+        Self {
+            order: EffectKind::ALL,
+            cursor: 37,
+            last,
+        }
+    }
+
+    pub fn set_last(&mut self, last: EffectKind) {
+        self.last = Some(last);
+    }
+
+    /// Advances to the next effect in the randomized sequence.
+    /// Reshuffles when all 37 effects have been displayed.
+    pub fn next_effect(&mut self, rng: &mut LcgRng) -> EffectKind {
+        if self.cursor >= self.order.len() {
+            let last_effect = self.last;
+            self.shuffle(rng);
+            if let Some(last) = last_effect
+                && self.order[0] == last
+                && self.order.len() > 1
+            {
+                let swap_idx = 1 + rng.next_usize(self.order.len() - 1);
+                self.order.swap(0, swap_idx);
+            }
+            self.cursor = 0;
+        }
+        let effect = self.order[self.cursor];
+        self.cursor += 1;
+        self.last = Some(effect);
+        effect
+    }
+
+    /// Fisher-Yates shuffle.
+    fn shuffle(&mut self, rng: &mut LcgRng) {
+        for i in (1..self.order.len()).rev() {
+            let j = rng.next_usize(i + 1);
+            self.order.swap(i, j);
+        }
+    }
 }

@@ -57,9 +57,19 @@ impl Screensaver for Ascii {
         self.last_cols = cols;
         self.last_rows = rows;
         self.cells.resize(cols, rows);
+        self.playlist = super::effect::EffectPlaylist::new_with_last(Some(self.effect));
+        self.brand_target = super::load_art::BrandTarget::Os;
         self.reload_art();
-        self.dwell_left = self.dwell_time();
-        self.start_engine_session();
+        if self.pinned || super::load_art::custom_text().is_some() {
+            self.start_dwell = false;
+            self.dwell_left = self.dwell_time();
+            self.start_engine_session();
+        } else {
+            self.start_dwell = true;
+            self.dwell_left = self.params.cycle_secs.unwrap_or(2.0);
+            self.engine = None;
+            self.current_frame.clear();
+        }
     }
 
     fn update(&mut self, dt: Duration, cols: usize, rows: usize) {
@@ -71,8 +81,12 @@ impl Screensaver for Ascii {
             self.last_rows = rows;
             self.cells.resize(cols, rows);
             self.reload_art();
-            self.dwell_left = self.dwell_time();
-            self.start_engine_session();
+            if self.start_dwell {
+                self.dwell_left = self.params.cycle_secs.unwrap_or(2.0);
+            } else {
+                self.dwell_left = self.dwell_time();
+                self.start_engine_session();
+            }
         }
 
         // Power-adaptive: slow the animation on battery rather than blank.
@@ -85,11 +99,16 @@ impl Screensaver for Ascii {
 
         self.dwell_left -= step;
         if self.dwell_left <= 0.0 {
-            if !self.pinned {
-                self.cycle_effect();
-            } else {
+            if self.start_dwell {
+                self.start_dwell = false;
+                self.brand_target = super::load_art::BrandTarget::De;
+                self.reload_art();
                 self.dwell_left = self.dwell_time();
                 self.start_engine_session();
+            } else if !self.pinned {
+                self.cycle_effect();
+            } else {
+                self.cycle_target();
             }
             return;
         }
