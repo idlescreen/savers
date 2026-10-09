@@ -52,23 +52,49 @@ pub fn custom_text() -> Option<String> {
         .filter(|t| !t.is_empty())
 }
 
+/// Cleans raw Host OS text (e.g. "Fedora Linux 44 (Server Edition)") into clean brand text (e.g. "Fedora Linux").
+pub fn clean_os_name(raw: &str) -> String {
+    let s = raw.split(" (").next().unwrap_or(raw).trim();
+    if let Some(pos) = s.rfind(' ') {
+        let suffix = &s[pos + 1..];
+        if suffix.chars().all(|c| c.is_ascii_digit() || c == '.') && !s[..pos].trim().is_empty() {
+            return s[..pos].trim().to_string();
+        }
+    }
+    s.to_string()
+}
+
+/// Cleans raw kernel version string (e.g. "7.2.9-200.fc44.x86_64") into clean release text (e.g. "Linux 7.2.9").
+pub fn clean_kernel_version(raw: &str) -> String {
+    let trimmed = raw.trim();
+    let stripped = trimmed
+        .strip_prefix("Linux ")
+        .or_else(|| trimmed.strip_prefix("linux "))
+        .unwrap_or(trimmed);
+    let ver = stripped.split('-').next().unwrap_or(stripped).trim();
+    if ver.is_empty() || ver == "unknown" {
+        "Linux".to_string()
+    } else {
+        format!("Linux {ver}")
+    }
+}
+
 /// Resolves text for the specified brand target (`Os`, `De`, or `Kernel`), respecting user overrides.
 pub fn resolve_target_text(target: BrandTarget) -> String {
     if let Some(custom) = custom_text() {
         return custom;
     }
     match target {
-        BrandTarget::Os => crate::runner::detect_host_os().unwrap_or_else(|| "Linux".into()),
+        BrandTarget::Os => {
+            let os = crate::runner::detect_host_os().unwrap_or_else(|| "Linux".into());
+            clean_os_name(&os)
+        }
         BrandTarget::De => {
             crate::runner::detect_desktop_environment().unwrap_or_else(|| "IDLESCREEN".into())
         }
         BrandTarget::Kernel => {
             let k = crate::runner::detect_kernel().unwrap_or_else(|| "Linux".into());
-            if k.starts_with("Linux") || k.starts_with("linux") {
-                k
-            } else {
-                format!("Linux {k}")
-            }
+            clean_kernel_version(&k)
         }
     }
 }

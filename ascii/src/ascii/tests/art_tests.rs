@@ -2,7 +2,8 @@
 // Copyright 2026 IdleScreen
 
 use crate::ascii::load_art::{
-    BrandTarget, build_lines, parse_art, resolve_target_text, visible_width,
+    BrandTarget, build_lines, clean_kernel_version, clean_os_name, parse_art, resolve_target_text,
+    visible_width,
 };
 
 #[test]
@@ -77,4 +78,25 @@ fn resolve_target_text_returns_non_empty_for_all_targets() {
     let kernel_text = resolve_target_text(BrandTarget::Kernel);
     assert!(!kernel_text.is_empty());
     assert!(kernel_text.contains("Linux") || kernel_text.chars().any(|c| c.is_ascii_digit()));
+}
+
+#[test]
+fn clean_os_name_simplifies_distro_editions() {
+    assert_eq!(
+        clean_os_name("Fedora Linux 44 (Server Edition)"),
+        "Fedora Linux"
+    );
+    assert_eq!(clean_os_name("Fedora Linux"), "Fedora Linux");
+    assert_eq!(clean_os_name("Arch Linux"), "Arch Linux");
+    assert_eq!(clean_os_name("Fedora"), "Fedora");
+}
+
+#[test]
+fn clean_kernel_version_formats_clean_release_without_build_noise() {
+    assert_eq!(clean_kernel_version("7.2.9-200.fc44.x86_64"), "Linux 7.2.9");
+    assert_eq!(clean_kernel_version("6.13.2-arch1-1"), "Linux 6.13.2");
+    assert_eq!(clean_kernel_version("6.8.0-45-generic"), "Linux 6.8.0");
+    assert_eq!(clean_kernel_version("Linux 6.13"), "Linux 6.13");
+    assert_eq!(clean_kernel_version("unknown"), "Linux");
+    assert_eq!(clean_kernel_version(""), "Linux");
 }
