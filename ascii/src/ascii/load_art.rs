@@ -103,15 +103,16 @@ pub fn resolve_lines(cols: usize, rows: usize) -> Vec<String> {
             }
         }
     } else {
-        if let Some(art) = crate::runner::logo() {
-            if let Some(lines) = parse_art(art, sub.as_deref(), cols, rows) {
-                return lines;
-            }
+        if let Some(lines) =
+            crate::runner::logo().and_then(|art| parse_art(art, sub.as_deref(), cols, rows))
+        {
+            return lines;
         }
-        if let Some(branding) = read_branding_file() {
-            if let Some(lines) = parse_art(&branding, sub.as_deref(), cols, rows) {
-                return lines;
-            }
+        if let Some(lines) = read_branding_file()
+            .as_deref()
+            .and_then(|art| parse_art(art, sub.as_deref(), cols, rows))
+        {
+            return lines;
         }
     }
     build_lines(&resolve_text(), sub.as_deref(), cols)

@@ -113,11 +113,13 @@ impl Ascii {
             self.last_rows,
             seed,
         );
-        if let Some(ref mut session) = self.engine {
-            if let Some(frame) = session.next_frame() {
-                self.current_frame.clear();
-                self.current_frame.push_str(&frame);
-            }
+        if let Some(frame) = self
+            .engine
+            .as_mut()
+            .and_then(|session| session.next_frame())
+        {
+            self.current_frame.clear();
+            self.current_frame.push_str(&frame);
         }
     }
 

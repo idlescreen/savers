@@ -86,16 +86,17 @@ pub fn paint_frame(
             4
         };
         let end = (i + len).min(bytes.len());
-        if let Ok(s) = std::str::from_utf8(&bytes[i..end]) {
-            if let Some(ch) = s.chars().next() {
-                if x < cols && y < rows {
-                    let idx = y * cols + x;
-                    if idx < grid.len() {
-                        grid[idx] = TerminalCell { ch, fg, bg, bold };
-                    }
+        if let Some(ch) = std::str::from_utf8(&bytes[i..end])
+            .ok()
+            .and_then(|s| s.chars().next())
+        {
+            if x < cols && y < rows {
+                let idx = y * cols + x;
+                if idx < grid.len() {
+                    grid[idx] = TerminalCell { ch, fg, bg, bold };
                 }
-                x += 1;
             }
+            x += 1;
         }
         i = end;
     }
