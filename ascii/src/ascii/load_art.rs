@@ -91,10 +91,7 @@ pub fn resolve_art(cols: usize, rows: usize) -> String {
 /// Render the resolved text or custom art, sized to fit a `cols`×`rows` grid.
 pub fn resolve_lines(cols: usize, rows: usize) -> Vec<String> {
     let sub = resolve_sub_text();
-    if let Some(text) = param("ascii.text")
-        .or_else(|| param("brand.text"))
-        .or_else(|| param("text"))
-    {
+    if let Some(text) = param("ascii.text").or_else(|| param("text")) {
         let trimmed = text.trim();
         if !trimmed.is_empty() {
             let lines = build_lines(trimmed, sub.as_deref(), cols);

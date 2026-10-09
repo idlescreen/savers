@@ -5,7 +5,6 @@ members = [
     "aurora",
     "meta",
     "beams",
-    "brand",
     "build-support",
     "bursts",
     "chaos",
