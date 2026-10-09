@@ -57,19 +57,13 @@ impl Screensaver for Ascii {
         self.last_cols = cols;
         self.last_rows = rows;
         self.cells.resize(cols, rows);
+        self.frame_grid.resize(cols * rows, TerminalCell::default());
+        self.frame_grid.fill(TerminalCell::default());
         self.playlist = super::effect::EffectPlaylist::new_with_last(Some(self.effect));
         self.brand_target = super::load_art::BrandTarget::Os;
         self.reload_art();
-        if self.pinned || super::load_art::custom_text().is_some() {
-            self.start_dwell = false;
-            self.dwell_left = self.dwell_time();
-            self.start_engine_session();
-        } else {
-            self.start_dwell = true;
-            self.dwell_left = self.params.cycle_secs.unwrap_or(2.0);
-            self.engine = None;
-            self.current_frame.clear();
-        }
+        self.dwell_left = self.dwell_time();
+        self.start_engine_session();
     }
 
     fn update(&mut self, dt: Duration, cols: usize, rows: usize) {
@@ -80,13 +74,11 @@ impl Screensaver for Ascii {
             self.last_cols = cols;
             self.last_rows = rows;
             self.cells.resize(cols, rows);
+            self.frame_grid.resize(cols * rows, TerminalCell::default());
+            self.frame_grid.fill(TerminalCell::default());
             self.reload_art();
-            if self.start_dwell {
-                self.dwell_left = self.params.cycle_secs.unwrap_or(2.0);
-            } else {
-                self.dwell_left = self.dwell_time();
-                self.start_engine_session();
-            }
+            self.dwell_left = self.dwell_time();
+            self.start_engine_session();
         }
 
         // Power-adaptive: slow the animation on battery rather than blank.
@@ -99,13 +91,7 @@ impl Screensaver for Ascii {
 
         self.dwell_left -= step;
         if self.dwell_left <= 0.0 {
-            if self.start_dwell {
-                self.start_dwell = false;
-                self.brand_target = self.brand_target.next();
-                self.reload_art();
-                self.dwell_left = self.dwell_time();
-                self.start_engine_session();
-            } else if !self.pinned {
+            if !self.pinned {
                 self.cycle_effect();
             } else {
                 self.cycle_target();
@@ -118,6 +104,14 @@ impl Screensaver for Ascii {
                 Some(frame) => {
                     self.current_frame.clear();
                     self.current_frame.push_str(&frame);
+                    draw::paint_frame(
+                        &self.current_frame,
+                        &mut self.frame_grid,
+                        cols,
+                        rows,
+                        self.fg,
+                        (0, 0, 0),
+                    );
                 }
                 None => {
                     // Animation complete: drop the engine session and dwell on
@@ -131,6 +125,12 @@ impl Screensaver for Ascii {
     fn draw(&self, grid: &mut [TerminalCell], cols: usize, rows: usize) {
         if self.art_text.trim().is_empty() {
             grid.fill(TerminalCell::default());
+        } else if !self.frame_grid.is_empty() {
+            let n = self.frame_grid.len().min(grid.len());
+            grid[..n].copy_from_slice(&self.frame_grid[..n]);
+            if grid.len() > n {
+                grid[n..].fill(TerminalCell::default());
+            }
         } else if !self.current_frame.is_empty() {
             draw::paint_frame(&self.current_frame, grid, cols, rows, self.fg, (0, 0, 0));
         } else if self.cells.inked_cells() > 0 {

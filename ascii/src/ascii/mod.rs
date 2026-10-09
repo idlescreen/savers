@@ -42,7 +42,7 @@ pub struct Ascii {
     pub(crate) current_frame: String,
     pub(crate) engine: Option<screensaver_impl::EngineSession>,
     pub(crate) brand_target: load_art::BrandTarget,
-    pub(crate) start_dwell: bool,
+    pub(crate) frame_grid: Vec<crate::runner::TerminalCell>,
 }
 
 impl Default for Ascii {
@@ -60,12 +60,7 @@ impl Ascii {
         let effect = params
             .effect
             .unwrap_or_else(|| playlist.next_effect(&mut rng));
-        let start_dwell = !pinned && load_art::custom_text().is_none();
-        let dwell_left = if start_dwell {
-            params.cycle_secs.unwrap_or(2.0)
-        } else {
-            params.cycle_secs.unwrap_or_else(|| effect.dwell())
-        };
+        let dwell_left = params.cycle_secs.unwrap_or_else(|| effect.dwell());
 
         Self {
             rng,
@@ -83,7 +78,7 @@ impl Ascii {
             current_frame: String::new(),
             engine: None,
             brand_target: load_art::BrandTarget::Os,
-            start_dwell,
+            frame_grid: Vec::new(),
         }
         .with_theme_fg()
     }
@@ -115,6 +110,8 @@ impl Ascii {
 
     /// Start or restart the underlying ttfx animation session.
     pub(crate) fn start_engine_session(&mut self) {
+        self.current_frame.clear();
+        self.frame_grid.fill(crate::runner::TerminalCell::default());
         if self.last_cols == 0 || self.last_rows == 0 || self.art_text.trim().is_empty() {
             self.engine = None;
             return;
@@ -132,8 +129,15 @@ impl Ascii {
             .as_mut()
             .and_then(|session| session.next_frame())
         {
-            self.current_frame.clear();
             self.current_frame.push_str(&frame);
+            draw::paint_frame(
+                &self.current_frame,
+                &mut self.frame_grid,
+                self.last_cols,
+                self.last_rows,
+                self.fg,
+                (0, 0, 0),
+            );
         }
     }
 
@@ -162,7 +166,8 @@ impl Ascii {
     pub fn prepare_for_bench(&mut self, cols: usize, rows: usize) {
         self.last_cols = cols;
         self.last_rows = rows;
-        self.start_dwell = false;
+        self.frame_grid
+            .resize(cols * rows, crate::runner::TerminalCell::default());
         self.cells.resize(cols, rows);
         self.reload_art();
         self.start_engine_session();
@@ -178,7 +183,6 @@ impl Ascii {
     pub fn pin_effect(&mut self, kind: EffectKind) {
         self.effect = kind;
         self.pinned = true;
-        self.start_dwell = false;
         self.dwell_left = self.dwell_time();
         self.cells.settled.fill(0.0);
         self.cells.progress = 0.0;

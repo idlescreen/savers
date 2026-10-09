@@ -32,7 +32,7 @@ exclude = ["runtime"]
 #
 # That guard is right and stays. A repo that releases must move the
 # version its shipped artifacts are named after.
-version = "2.4.12"
+version = "2.4.13"
 edition = "2024"
 authors = ["idlescreen developers"]
 license = "Apache-2.0"

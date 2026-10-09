@@ -180,15 +180,20 @@ fn parse_u8(bytes: &[u8]) -> Option<u8> {
 }
 
 fn xterm_to_rgb(code: u8) -> (u8, u8, u8) {
-    let hex = ttfx::utils::hexterm::xterm_to_hex(code);
-    if hex.len() == 6 {
-        let r = u8::from_str_radix(&hex[0..2], 16).unwrap_or(0);
-        let g = u8::from_str_radix(&hex[2..4], 16).unwrap_or(0);
-        let b = u8::from_str_radix(&hex[4..6], 16).unwrap_or(0);
-        (r, g, b)
-    } else {
-        (255, 255, 255)
-    }
+    static TBL: std::sync::OnceLock<[(u8, u8, u8); 256]> = std::sync::OnceLock::new();
+    TBL.get_or_init(|| {
+        let mut t = [(255, 255, 255); 256];
+        for (i, slot) in t.iter_mut().enumerate() {
+            let hex = ttfx::utils::hexterm::xterm_to_hex(i as u8);
+            if hex.len() == 6 {
+                let r = u8::from_str_radix(&hex[0..2], 16).unwrap_or(0);
+                let g = u8::from_str_radix(&hex[2..4], 16).unwrap_or(0);
+                let b = u8::from_str_radix(&hex[4..6], 16).unwrap_or(0);
+                *slot = (r, g, b);
+            }
+        }
+        t
+    })[code as usize]
 }
 
 #[cfg(test)]

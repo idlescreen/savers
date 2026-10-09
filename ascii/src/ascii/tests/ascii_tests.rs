@@ -224,24 +224,23 @@ fn playlist_rotates_all_37_effects_without_immediate_repeats() {
 #[test]
 fn screensaver_rotates_os_de_kernel() {
     let mut saver = Ascii::new();
+    saver.params.cycle_secs = Some(1.0);
     saver.init(COLS, ROWS);
     assert_eq!(saver.brand_target, load_art::BrandTarget::Os);
-    assert!(saver.start_dwell);
 
-    // Let start_dwell elapse -> transitions to DE
-    step(&mut saver, 150);
-    assert!(!saver.start_dwell);
+    // Experience 0 (OS) dwell completes -> cycles to DE
+    step(&mut saver, 70);
     assert_eq!(saver.brand_target, load_art::BrandTarget::De);
 
-    // Naturally step until Experience 0 dwell completes -> cycles to Kernel
-    step(&mut saver, 750);
+    // Experience 1 (DE) dwell completes -> cycles to Kernel
+    step(&mut saver, 70);
     assert_eq!(saver.brand_target, load_art::BrandTarget::Kernel);
 
-    // Naturally step until Experience 1 dwell completes -> cycles to OS
-    step(&mut saver, 750);
+    // Experience 2 (Kernel) dwell completes -> cycles to OS
+    step(&mut saver, 70);
     assert_eq!(saver.brand_target, load_art::BrandTarget::Os);
 
-    // Naturally step until Experience 2 dwell completes -> cycles to DE
-    step(&mut saver, 750);
+    // Experience 3 (OS) dwell completes -> cycles to DE
+    step(&mut saver, 70);
     assert_eq!(saver.brand_target, load_art::BrandTarget::De);
 }
