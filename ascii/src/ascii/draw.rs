@@ -175,11 +175,7 @@ fn parse_u8(bytes: &[u8]) -> Option<u8> {
         }
         val = val * 10 + (b - b'0') as u16;
     }
-    if val <= 255 {
-        Some(val as u8)
-    } else {
-        None
-    }
+    if val <= 255 { Some(val as u8) } else { None }
 }
 
 fn xterm_to_rgb(code: u8) -> (u8, u8, u8) {

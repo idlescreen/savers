@@ -78,7 +78,9 @@ impl Ascii {
 
     /// Effective dwell duration in seconds for the active effect.
     pub fn dwell_time(&self) -> f32 {
-        self.params.cycle_secs.unwrap_or_else(|| self.effect.dwell())
+        self.params
+            .cycle_secs
+            .unwrap_or_else(|| self.effect.dwell())
     }
 
     /// Adopt the session's accent colour unless `[saver] ascii.fg` overrides it.

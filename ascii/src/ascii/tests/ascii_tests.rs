@@ -125,19 +125,21 @@ fn zero_sized_grid_does_not_panic() {
     assert!(grid.is_empty());
 }
 
+#[rustfmt::skip]
+const ALL_37_NAMES: &[&str] = &[
+    "beams", "binarypath", "blackhole", "bouncyballs", "bubbles", "burn",
+    "colorshift", "crumble", "decrypt", "errorcorrect", "expand", "fireworks",
+    "highlight", "laseretch", "matrix", "middleout", "orbittingvolley",
+    "overflow", "pour", "print", "rain", "randomsequence", "rings",
+    "scattered", "slice", "slide", "smoke", "spotlights", "spray",
+    "swarm", "sweep", "synthgrid", "thunderstorm", "unstable", "vhstape",
+    "waves", "wipe",
+];
+
 #[test]
 fn all_37_effects_can_be_parsed() {
-    let names = [
-        "beams", "binarypath", "blackhole", "bouncyballs", "bubbles", "burn",
-        "colorshift", "crumble", "decrypt", "errorcorrect", "expand", "fireworks",
-        "highlight", "laseretch", "matrix", "middleout", "orbittingvolley",
-        "overflow", "pour", "print", "rain", "randomsequence", "rings",
-        "scattered", "slice", "slide", "smoke", "spotlights", "spray",
-        "swarm", "sweep", "synthgrid", "thunderstorm", "unstable", "vhstape",
-        "waves", "wipe",
-    ];
-    assert_eq!(names.len(), 37);
-    for name in names {
+    assert_eq!(ALL_37_NAMES.len(), 37);
+    for name in ALL_37_NAMES {
         let cli = ttfx::cli::Cli::try_parse_from(["ttfx", name]).unwrap();
         assert!(cli.effect.is_some(), "failed to parse effect: {name}");
         let kind = EffectKind::parse(name);
@@ -147,17 +149,8 @@ fn all_37_effects_can_be_parsed() {
 
 #[test]
 fn all_37_effects_can_build_and_render_frames() {
-    let names = [
-        "beams", "binarypath", "blackhole", "bouncyballs", "bubbles", "burn",
-        "colorshift", "crumble", "decrypt", "errorcorrect", "expand", "fireworks",
-        "highlight", "laseretch", "matrix", "middleout", "orbittingvolley",
-        "overflow", "pour", "print", "rain", "randomsequence", "rings",
-        "scattered", "slice", "slide", "smoke", "spotlights", "spray",
-        "swarm", "sweep", "synthgrid", "thunderstorm", "unstable", "vhstape",
-        "waves", "wipe",
-    ];
     let art_data = "OMARCHY\nSCREENSAVER";
-    for name in names {
+    for name in ALL_37_NAMES {
         let cli = ttfx::cli::Cli::try_parse_from(["ttfx", name]).unwrap();
         let mut config = cli.terminal_config();
         let cmd = cli.effect.unwrap();

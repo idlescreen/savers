@@ -1,6 +1,6 @@
 {
  "repo": "savers",
- "rev": "743ac4a",
+ "rev": "31938d7",
  "dirty": true,
  "pages": [
   {
@@ -33,7 +33,7 @@
   },
   {
    "path": "./ascii/src/ascii/draw.rs",
-   "lines": 252,
+   "lines": 248,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 1
@@ -54,7 +54,7 @@
   },
   {
    "path": "./ascii/src/ascii/mod.rs",
-   "lines": 159,
+   "lines": 161,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
@@ -82,7 +82,7 @@
   },
   {
    "path": "./ascii/src/ascii/tests/ascii_tests.rs",
-   "lines": 208,
+   "lines": 201,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0
