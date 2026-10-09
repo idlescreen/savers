@@ -1,7 +1,7 @@
 {
  "repo": "savers",
- "rev": "1022842",
- "dirty": true,
+ "rev": "c89fffa",
+ "dirty": false,
  "pages": [
   {
    "path": "./ascii/benches/tick.rs",
