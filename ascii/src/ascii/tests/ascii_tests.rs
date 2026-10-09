@@ -222,7 +222,7 @@ fn playlist_rotates_all_37_effects_without_immediate_repeats() {
 }
 
 #[test]
-fn screensaver_alternates_between_os_and_de() {
+fn screensaver_rotates_os_de_kernel() {
     let mut saver = Ascii::new();
     saver.init(COLS, ROWS);
     assert_eq!(saver.brand_target, load_art::BrandTarget::Os);
@@ -233,11 +233,15 @@ fn screensaver_alternates_between_os_and_de() {
     assert!(!saver.start_dwell);
     assert_eq!(saver.brand_target, load_art::BrandTarget::De);
 
-    // Naturally step until Experience 0 dwell completes -> cycles to OS
+    // Naturally step until Experience 0 dwell completes -> cycles to Kernel
+    step(&mut saver, 750);
+    assert_eq!(saver.brand_target, load_art::BrandTarget::Kernel);
+
+    // Naturally step until Experience 1 dwell completes -> cycles to OS
     step(&mut saver, 750);
     assert_eq!(saver.brand_target, load_art::BrandTarget::Os);
 
-    // Naturally step until Experience 1 dwell completes -> cycles to DE
+    // Naturally step until Experience 2 dwell completes -> cycles to DE
     step(&mut saver, 750);
     assert_eq!(saver.brand_target, load_art::BrandTarget::De);
 }

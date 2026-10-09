@@ -101,7 +101,7 @@ impl Screensaver for Ascii {
         if self.dwell_left <= 0.0 {
             if self.start_dwell {
                 self.start_dwell = false;
-                self.brand_target = super::load_art::BrandTarget::De;
+                self.brand_target = self.brand_target.next();
                 self.reload_art();
                 self.dwell_left = self.dwell_time();
                 self.start_engine_session();

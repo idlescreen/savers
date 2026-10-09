@@ -75,7 +75,14 @@ jobs:
             gh api "repos/idlescreen/packages/contents/apt/pool/main/$2" \
               --jq .name >/dev/null 2>&1
           }
-          ver() { grep -m1 '^version' "$1/Cargo.toml" | cut -d'"' -f2; }
+          ver() {
+            local v
+            v=$(grep -m1 '^version' "$1/Cargo.toml" | cut -d'"' -f2)
+            if [ "$v" = "version.workspace = true" ] || [ -z "$v" ]; then
+              v=$(grep -m1 '^version' Cargo.toml | cut -d'"' -f2)
+            fi
+            echo "$v"
+          }
           members=""
           for manifest in */libscreensaver_*.idleplugin.toml; do
             member="${manifest%%/*}"

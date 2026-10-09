@@ -137,9 +137,9 @@ impl Ascii {
         }
     }
 
-    /// Swap to a new effect, alternate brand target (OS <-> DE), and restart progress.
+    /// Swap to a new effect, advance brand target (OS -> DE -> Kernel -> OS), and restart progress.
     pub fn cycle_effect(&mut self) {
-        self.brand_target = self.brand_target.toggle();
+        self.brand_target = self.brand_target.next();
         self.reload_art();
         self.effect = self.playlist.next_effect(&mut self.rng);
         self.dwell_left = self.dwell_time();
@@ -148,9 +148,9 @@ impl Ascii {
         self.start_engine_session();
     }
 
-    /// Alternate brand target (OS <-> DE) while keeping a pinned effect.
+    /// Advance brand target (OS -> DE -> Kernel -> OS) while keeping a pinned effect.
     pub fn cycle_target(&mut self) {
-        self.brand_target = self.brand_target.toggle();
+        self.brand_target = self.brand_target.next();
         self.reload_art();
         self.dwell_left = self.dwell_time();
         self.cells.settled.fill(0.0);

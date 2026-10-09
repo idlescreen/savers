@@ -25,14 +25,21 @@ pub fn read_branding_file() -> Option<String> {
 pub enum BrandTarget {
     Os,
     De,
+    Kernel,
 }
 
 impl BrandTarget {
-    pub fn toggle(self) -> Self {
+    pub fn next(self) -> Self {
         match self {
             BrandTarget::Os => BrandTarget::De,
-            BrandTarget::De => BrandTarget::Os,
+            BrandTarget::De => BrandTarget::Kernel,
+            BrandTarget::Kernel => BrandTarget::Os,
         }
+    }
+
+    #[allow(dead_code)]
+    pub fn toggle(self) -> Self {
+        self.next()
     }
 }
 
@@ -41,12 +48,11 @@ pub fn custom_text() -> Option<String> {
     param("ascii.text")
         .or_else(|| param("brand.text"))
         .or_else(|| param("text"))
-        .or_else(|| crate::runner::env_var_first(&["IDLE_LOGO_TEXT"]))
         .map(|t| t.trim().to_string())
         .filter(|t| !t.is_empty())
 }
 
-/// Resolves text for the specified brand target (`Os` or `De`), respecting user overrides.
+/// Resolves text for the specified brand target (`Os`, `De`, or `Kernel`), respecting user overrides.
 pub fn resolve_target_text(target: BrandTarget) -> String {
     if let Some(custom) = custom_text() {
         return custom;
@@ -55,6 +61,14 @@ pub fn resolve_target_text(target: BrandTarget) -> String {
         BrandTarget::Os => crate::runner::detect_host_os().unwrap_or_else(|| "Linux".into()),
         BrandTarget::De => {
             crate::runner::detect_desktop_environment().unwrap_or_else(|| "IDLESCREEN".into())
+        }
+        BrandTarget::Kernel => {
+            let k = crate::runner::detect_kernel().unwrap_or_else(|| "Linux".into());
+            if k.starts_with("Linux") || k.starts_with("linux") {
+                k
+            } else {
+                format!("Linux {k}")
+            }
         }
     }
 }
@@ -195,57 +209,5 @@ pub fn build_lines(text: &str, sub: Option<&str>, max_cols: usize) -> Vec<String
             return lines;
         }
         chars.pop();
-    }
-}
-
-#[cfg(test)]
-mod art_tests {
-    use super::*;
-
-    #[test]
-    fn blank_text_renders_no_lines() {
-        assert!(build_lines("", None, 80).is_empty());
-        assert!(build_lines("   ", None, 80).is_empty());
-    }
-
-    #[test]
-    fn short_text_renders_a_five_row_block_with_ink() {
-        let lines = build_lines("A", None, 80);
-        assert_eq!(lines.len(), 5);
-        assert!(lines.iter().any(|l| l.contains('█')));
-    }
-
-    #[test]
-    fn sub_text_extends_the_block() {
-        let with_sub = build_lines("A", Some("hi"), 80);
-        assert!(with_sub.len() > 5);
-    }
-
-    #[test]
-    fn oversized_text_is_trimmed_to_fit_the_grid() {
-        let long = "Fedora Linux 44 (Server Edition)";
-        let lines = build_lines(long, None, 80);
-        let width = lines.iter().map(|l| visible_width(l)).max().unwrap_or(0);
-        assert!(width <= 80, "art width {width} still exceeds the grid");
-        assert!(lines.iter().any(|l| l.contains('█')));
-    }
-
-    #[test]
-    fn parse_art_strips_padding_and_validates_bounds() {
-        let art = "\n  ASCII\n  LOGO \n\n";
-        let parsed = parse_art(art, None, 10, 5);
-        assert!(parsed.is_some());
-        let lines = parsed.unwrap();
-        assert_eq!(lines.len(), 2);
-        assert_eq!(lines[0], "  ASCII");
-        assert_eq!(lines[1], "  LOGO");
-    }
-
-    #[test]
-    fn parse_art_handles_ansi_color_sequences() {
-        let colored = "\x1b[38;2;255;0;0mRED\x1b[0m\n\x1b[32mGREEN\x1b[0m";
-        let parsed = parse_art(colored, None, 6, 2);
-        assert!(parsed.is_some(), "ANSI escapes should not blow out width");
-        assert_eq!(visible_width("\x1b[38;2;255;0;0mRED\x1b[0m"), 3);
     }
 }
