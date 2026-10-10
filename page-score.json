@@ -1,6 +1,6 @@
 {
  "repo": "savers",
- "rev": "f648acc",
+ "rev": "be27d88",
  "dirty": true,
  "pages": [
   {
@@ -33,7 +33,7 @@
   },
   {
    "path": "./ascii/src/ascii/draw.rs",
-   "lines": 253,
+   "lines": 246,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 3

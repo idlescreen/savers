@@ -162,7 +162,7 @@ impl Ascii {
             self.cycle_effect();
             return;
         }
-        self.transition_from_grid = self.frame_grid.clone();
+        self.transition_from_grid.clone_from(&self.frame_grid);
         let dur = TRANSITION_SECS.min(self.dwell_time() * 0.4);
         self.transition_duration = dur;
         self.transition_left = dur;

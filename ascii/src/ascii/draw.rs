@@ -200,7 +200,6 @@ pub fn paint_transition(
     let out_factor = (inv_t * 256.0) as u16;
     let in_factor = (t * 256.0) as u16;
     let t_byte = (t * 255.0) as u8;
-    let inv_t_byte = 255 - t_byte;
 
     for y in 0..rows {
         let row_offset = y * cols;
@@ -210,20 +209,14 @@ pub fn paint_transition(
                 break;
             }
             let (from_cell, to_cell) = (from[idx], to[idx]);
-            let (from_empty, to_empty) = (from_cell.ch == ' ', to_cell.ch == ' ');
             let thresh = ((x.wrapping_mul(137) ^ y.wrapping_mul(149) ^ ((x + y).wrapping_mul(31)))
                 & 0xFF) as u8;
-
-            let pick_to = t >= 1.0
-                || (t > 0.0
-                    && match (from_empty, to_empty) {
-                        (false, true) => inv_t_byte <= thresh && inv_t <= 0.25,
-                        (true, false) => t_byte > thresh || t > 0.4,
-                        (false, false) => t_byte > thresh,
-                        (true, true) => false,
-                    });
-            let factor = if pick_to { in_factor } else { out_factor };
-
+            let pick_to = t >= 1.0 || (t > 0.0 && t_byte > thresh);
+            let factor = if pick_to {
+                180 + ((in_factor * 76) >> 8)
+            } else {
+                180 + ((out_factor * 76) >> 8)
+            };
             let src = if pick_to { to_cell } else { from_cell };
             out[idx] = if src.ch == ' ' {
                 TerminalCell::default()
